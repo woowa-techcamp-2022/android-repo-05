@@ -11,6 +11,7 @@ class MainTabButton @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyle: Int = com.google.android.material.R.attr.materialButtonStyle
 ) : MaterialButton(context, attrs, defStyle) {
     init {
+        setPadding(8,16,8,16)
         backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.navy))
         isClickable = true
         isCheckable = true
