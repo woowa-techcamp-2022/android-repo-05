@@ -9,3 +9,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 }
+
+enum class MainTabType(val itemId : Int) {
+    ISSUE(R.id.tabButton_issue),
+    NOTIFICATION(R.id.tabButton_notification)
+}
