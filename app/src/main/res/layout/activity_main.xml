@@ -1,18 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
+    </data>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        tools:context=".MainActivity">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/mainAppBarLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:elevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/mainAppBar"
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                android:background="@color/background"
+                android:paddingEnd="12dp"
+                app:buttonGravity="center_vertical"
+                app:contentInsetStart="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:menu="@menu/home_toolbar_menu"
+                app:title="@string/main_toolbar_title"
+                app:titleTextAppearance="@style/MainActivity.appbar"
+                app:titleTextColor="@color/white" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <com.example.android_repo_05.customview.MainTabButton
+            android:id="@+id/tabButton_issue"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/issue"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@id/tabButton_notification"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mainAppBarLayout" />
+
+        <com.example.android_repo_05.customview.MainTabButton
+            android:id="@+id/tabButton_notification"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="24dp"
+            android:text="@string/notification"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tabButton_issue"
+            app:layout_constraintTop_toTopOf="@id/tabButton_issue" />
+
+        <FrameLayout
+            android:id="@+id/main_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="14dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tabButton_issue">
+        </FrameLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
