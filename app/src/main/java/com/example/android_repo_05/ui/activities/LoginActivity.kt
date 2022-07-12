@@ -1,17 +1,27 @@
 package com.example.android_repo_05.ui.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import com.example.android_repo_05.R
 import com.example.android_repo_05.databinding.ActivityLoginBinding
+import com.example.android_repo_05.model.ResponseState
 import com.example.android_repo_05.others.Utils
+import com.example.android_repo_05.repositories.GithubApiRepository
+import com.example.android_repo_05.viewmodels.LoginViewModel
+import com.example.android_repo_05.viewmodels.LoginViewModelFactory
+import com.google.android.material.snackbar.Snackbar
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
+    private val loginViewModel by lazy {
+        ViewModelProvider(
+            this,
+            LoginViewModelFactory(GithubApiRepository.getInstance())
+        )[LoginViewModel::class.java]
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +30,7 @@ class LoginActivity : AppCompatActivity() {
 
         initView()
         checkAccessCode()
+        setObserver()
     }
 
     private fun initView() {
@@ -45,8 +56,24 @@ class LoginActivity : AppCompatActivity() {
        access code를 획득하고 accessToken 획득 작업을 실행함
      */
     private fun checkAccessCode() {
-        intent?.data?.getQueryParameter("code")?.run {
-            Toast.makeText(this@LoginActivity, this, Toast.LENGTH_SHORT).show()
+        intent?.data?.getQueryParameter("code")?.let { code ->
+            loginViewModel.getAccessTokenFromRemote(code)
+        }
+    }
+
+    private fun setObserver() {
+        loginViewModel.loginResponse.observe(this) { responseState ->
+            when (responseState) {
+                is ResponseState.Success -> {
+                    Snackbar.make(this, binding.root, "login success", Snackbar.LENGTH_SHORT).show()
+                }
+                is ResponseState.Error -> {
+                    Snackbar.make(this, binding.root, "login failed", Snackbar.LENGTH_SHORT).show()
+                }
+                is ResponseState.Loading -> {
+                    Snackbar.make(this, binding.root, "loading...", Snackbar.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 }
