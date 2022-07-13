@@ -12,6 +12,8 @@
         <entry key="app/src/main/res/drawable/main_tab_spacing.xml" value="0.1675" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.2765625" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_profile.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/activity_search.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/fragment_issue.xml" value="0.32447916666666665" />
         <entry key="app/src/main/res/layout/fragment_notification.xml" value="0.32447916666666665" />
         <entry key="app/src/main/res/menu/home_toolbar_menu.xml" value="0.5" />
