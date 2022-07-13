@@ -3,9 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -38,28 +35,32 @@
                 app:titleTextColor="@color/white" />
         </com.google.android.material.appbar.AppBarLayout>
 
-        <com.example.android_repo_05.customview.MainTabButton
-            android:id="@+id/tabButton_issue"
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/tabButton_group"
+            android:layout_width="match_parent"
             android:layout_height="32dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/issue"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toStartOf="@id/tabButton_notification"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/mainAppBarLayout" />
+            android:layout_marginHorizontal="24dp"
+            app:layout_constraintTop_toBottomOf="@id/mainAppBarLayout">
 
-        <com.example.android_repo_05.customview.MainTabButton
-            android:id="@+id/tabButton_notification"
-            android:layout_width="0dp"
-            android:layout_height="32dp"
-            android:layout_marginEnd="24dp"
-            android:text="@string/notification"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tabButton_issue"
-            app:layout_constraintTop_toTopOf="@id/tabButton_issue" />
+            <com.example.android_repo_05.customview.MainTabButton
+                android:id="@+id/tabButton_issue"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="16dp"
+                android:text="@string/issue"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/tabButton_notification"/>
+
+            <com.example.android_repo_05.customview.MainTabButton
+                android:id="@+id/tabButton_notification"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="@string/notification"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tabButton_issue"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <FrameLayout
             android:id="@+id/main_container"
@@ -67,7 +68,7 @@
             android:layout_height="0dp"
             android:layout_marginTop="14dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tabButton_issue">
+            app:layout_constraintTop_toBottomOf="@id/tabButton_group">
         </FrameLayout>
 
 

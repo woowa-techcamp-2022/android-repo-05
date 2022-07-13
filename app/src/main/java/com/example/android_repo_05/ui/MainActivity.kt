@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.core.view.children
 import androidx.fragment.app.Fragment
+import com.example.android_repo_05.customview.MainTabButton
 import com.example.android_repo_05.databinding.ActivityMainBinding
 import com.example.android_repo_05.ui.IssueFragment
 import com.example.android_repo_05.ui.NotificationFragment
@@ -22,28 +24,31 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun initViews() {
-        // TODO : 탭이 여러개인 경우에는 일일히 작성을 모두 해주어야 하므로, 확장성이 떨어짐. ViewGroup에서 SingleSelction 할 수 있는 방법 고민해보기
-        binding.tabButtonIssue.setOnClickListener(this)
-        binding.tabButtonNotification.setOnClickListener(this)
+        // 메인 탭 버튼 그룹의 클릭리스너 등록
+        binding.tabButtonGroup.children.forEach { view ->
+            if (view is MainTabButton) {
+                view.setOnClickListener(this)
+            }
+        }
     }
 
     private fun observe() {
         mainViewModel.currentTabFragment.observe(this) {
-            when(it) {
-                MainTabType.ISSUE -> {
-                    binding.tabButtonIssue.isChecked = true
-                    binding.tabButtonNotification.isChecked = false
-                }
-                MainTabType.NOTIFICATION -> {
-                    binding.tabButtonNotification.isChecked = true
-                    binding.tabButtonIssue.isChecked = false
-                }
-            }
+            checkButton(it.id)
             changeFragment(it)
         }
     }
 
+    private fun checkButton(id : Int) {
+        binding.tabButtonGroup.children.forEach { view ->
+            if (view is MainTabButton) {
+                view.isChecked = view.id == id
+            }
+        }
+    }
+
     override fun onClick(view: View) {
+        checkButton(view.id)
         mainViewModel.setCurrentTab(view.id)
     }
 
