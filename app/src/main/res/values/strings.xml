@@ -8,6 +8,6 @@
     <string name="notification">Notification</string>
     <string name="login_app_name">What’s In \nMy GitHub</string>
     <string name="login_login_button">GitHub 로그인</string>
-
-    <string name="login_login_failure">GitHub 로그인 실패!</string>
+    <string name="issue_filter_label">Filter</string>
+    <string name="issue_filter_option">Option</string>
 </resources>
