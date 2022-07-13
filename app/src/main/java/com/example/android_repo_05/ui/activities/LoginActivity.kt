@@ -17,7 +17,7 @@ import com.example.android_repo_05.viewmodels.LoginViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 
 class LoginActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityLoginBinding
+    private val binding by lazy { ActivityLoginBinding.inflate(layoutInflater) }
     private val loginViewModel by lazy {
         ViewModelProvider(
             this,
@@ -28,7 +28,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
+        setContentView(binding.root)
 
         initView()
         checkAccessCode()
