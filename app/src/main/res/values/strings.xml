@@ -2,4 +2,6 @@
     <string name="app_name">Android_repo_05</string>
     <string name="login_app_name">What’s In \nMy GitHub</string>
     <string name="login_login_button">GitHub 로그인</string>
+
+    <string name="login_login_failure">GitHub 로그인 실패!</string>
 </resources>

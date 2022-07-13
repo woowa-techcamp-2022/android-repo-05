@@ -2,6 +2,7 @@ package com.example.android_repo_05.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -72,12 +73,8 @@ class LoginActivity : AppCompatActivity() {
         loginViewModel.loginResponse.observe(this) { responseState ->
             when (responseState) {
                 is ResponseState.Success -> handleLoginSuccess(responseState)
-                is ResponseState.Error -> {
-                    Snackbar.make(this, binding.root, "login failed", Snackbar.LENGTH_SHORT).show()
-                }
-                is ResponseState.Loading -> {
-                    Snackbar.make(this, binding.root, "loading...", Snackbar.LENGTH_SHORT).show()
-                }
+                is ResponseState.Error -> handleLoginFailure()
+                is ResponseState.Loading -> handleLoginLoading()
             }
         }
     }
@@ -90,10 +87,22 @@ class LoginActivity : AppCompatActivity() {
         data store에 저장해야 함
     */
     private fun handleLoginSuccess(state: ResponseState<LoginResponse>) {
+        binding.cpiLogin.visibility = View.INVISIBLE
         state.data?.let { response ->
             if (response.tokenType.isNotBlank()) {
                 loginViewModel.setAccessTokenToDataStore(this, response.accessToken)
             }
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
+    }
+
+    private fun handleLoginFailure() {
+        binding.cpiLogin.visibility = View.INVISIBLE
+        Snackbar.make(binding.root, R.string.login_login_failure, Snackbar.LENGTH_SHORT).show()
+    }
+
+    private fun handleLoginLoading() {
+        binding.cpiLogin.visibility = View.VISIBLE
     }
 }
