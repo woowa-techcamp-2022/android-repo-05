@@ -17,7 +17,7 @@ import com.example.android_repo_05.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
-    private val mainViewModel : MainViewModel by viewModels()
+    private val mainViewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,13 +28,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun initViews() {
         // 메인 탭 버튼 그룹의 클릭리스너 등록
-        binding.tabButtonGroup.children.forEach { view ->
+        binding.tabBtnGroup.children.forEach { view ->
             if (view is MainTabButton) {
                 view.setOnClickListener(this)
             }
         }
-        binding.mainAppBar.setOnMenuItemClickListener { menuItem ->
-            when(menuItem.itemId) {
+        binding.tbMain.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
                 R.id.menu_profile -> startActivity(Intent(this, ProfileActivity::class.java))
                 R.id.menu_search -> startActivity(Intent(this, SearchActivity::class.java))
             }
@@ -49,8 +49,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun checkButton(id : Int) {
-        binding.tabButtonGroup.children.forEach { view ->
+    private fun checkButton(id: Int) {
+        binding.tabBtnGroup.children.forEach { view ->
             if (view is MainTabButton) {
                 view.isChecked = view.id == id
             }
@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun getFragment(mainTabType: MainTabType): Fragment =
-        when(mainTabType) {
+        when (mainTabType) {
             MainTabType.ISSUE -> IssueFragment()
             MainTabType.NOTIFICATION -> NotificationFragment()
         }
@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         var targetFragment = supportFragmentManager.findFragmentByTag(mainTabType.tag)
         if (targetFragment == null) {
             targetFragment = getFragment(mainTabType)
-            transaction.add(R.id.main_container, targetFragment, mainTabType.tag)
+            transaction.add(R.id.l_main_container, targetFragment, mainTabType.tag)
         }
         transaction.show(targetFragment)
         MainTabType.values()
@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
 }
 
-enum class MainTabType(val tag : String, val id : Int) {
-    ISSUE("Issue", R.id.tabButton_issue),
-    NOTIFICATION("Notification", R.id.tabButton_notification)
+enum class MainTabType(val tag: String, val id: Int) {
+    ISSUE("Issue", R.id.tab_btn_issue),
+    NOTIFICATION("Notification", R.id.tab_btn_notification)
 }

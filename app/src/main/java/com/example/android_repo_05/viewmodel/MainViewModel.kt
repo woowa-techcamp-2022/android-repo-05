@@ -12,8 +12,8 @@ class MainViewModel : ViewModel() {
 
     private fun getMainTabType(itemId : Int) : MainTabType =
         when(itemId) {
-            R.id.tabButton_issue -> MainTabType.ISSUE
-            R.id.tabButton_notification -> MainTabType.NOTIFICATION
+            R.id.tab_btn_issue -> MainTabType.ISSUE
+            R.id.tab_btn_notification -> MainTabType.NOTIFICATION
             else -> throw IllegalArgumentException()
         }
 
