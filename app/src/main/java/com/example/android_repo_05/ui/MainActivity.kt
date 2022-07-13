@@ -1,5 +1,6 @@
 package com.example.android_repo_05
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -10,6 +11,8 @@ import com.example.android_repo_05.customview.MainTabButton
 import com.example.android_repo_05.databinding.ActivityMainBinding
 import com.example.android_repo_05.ui.IssueFragment
 import com.example.android_repo_05.ui.NotificationFragment
+import com.example.android_repo_05.ui.ProfileActivity
+import com.example.android_repo_05.ui.SearchActivity
 import com.example.android_repo_05.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -29,6 +32,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             if (view is MainTabButton) {
                 view.setOnClickListener(this)
             }
+        }
+        binding.mainAppBar.setOnMenuItemClickListener { menuItem ->
+            when(menuItem.itemId) {
+                R.id.menu_profile -> startActivity(Intent(this, ProfileActivity::class.java))
+                R.id.menu_search -> startActivity(Intent(this, SearchActivity::class.java))
+            }
+            true
         }
     }
 
