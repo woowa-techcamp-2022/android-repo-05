@@ -35,6 +35,8 @@ class LoginViewModel(private val repository: GithubApiRepository) : ViewModel() 
         repository.getAccessTokenFromDataStore(context).first().let { accessToken ->
             if (accessToken.isNotBlank()) {
                 _loginResponse.postValue(ResponseState.Success(LoginResponse(accessToken, "", "")))
+            } else {
+                _loginResponse.postValue(ResponseState.Error("there is no access token"))
             }
         }
     }

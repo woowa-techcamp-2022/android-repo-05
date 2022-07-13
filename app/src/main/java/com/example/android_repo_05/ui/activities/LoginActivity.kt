@@ -30,17 +30,9 @@ class LoginActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
 
-        checkAccessTokenIsSaved()
         initView()
         checkAccessCode()
         setObserver()
-    }
-
-    /*
-        data store에 저장된 access token 값이 있는지 확인
-     */
-    private fun checkAccessTokenIsSaved() {
-        loginViewModel.getAccessTokenFromDataStore(this)
     }
 
     private fun initView() {
