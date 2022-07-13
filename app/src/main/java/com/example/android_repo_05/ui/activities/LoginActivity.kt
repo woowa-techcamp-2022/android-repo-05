@@ -67,6 +67,7 @@ class LoginActivity : AppCompatActivity() {
             when (responseState) {
                 is ResponseState.Success -> {
                     Snackbar.make(this, binding.root, "login success", Snackbar.LENGTH_SHORT).show()
+                    startActivity(Intent(this, MainActivity::class.java))
                 }
                 is ResponseState.Error -> {
                     Snackbar.make(this, binding.root, "login failed", Snackbar.LENGTH_SHORT).show()
