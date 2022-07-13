@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.android_repo_05.model.LoginResponse
-import com.example.android_repo_05.model.ResponseState
+import com.example.android_repo_05.data.model.LoginResponse
+import com.example.android_repo_05.data.model.ResponseState
 import com.example.android_repo_05.repositories.GithubApiRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

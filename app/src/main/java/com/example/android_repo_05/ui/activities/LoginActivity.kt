@@ -7,7 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.android_repo_05.R
 import com.example.android_repo_05.databinding.ActivityLoginBinding
-import com.example.android_repo_05.model.ResponseState
+import com.example.android_repo_05.data.model.ResponseState
 import com.example.android_repo_05.others.Utils
 import com.example.android_repo_05.repositories.GithubApiRepository
 import com.example.android_repo_05.viewmodels.LoginViewModel

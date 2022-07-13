@@ -1,4 +1,4 @@
-package com.example.android_repo_05.model
+package com.example.android_repo_05.data.model
 
 sealed class ResponseState<T>(
     val data: T? = null,

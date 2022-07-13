@@ -1,7 +1,7 @@
 package com.example.android_repo_05.retrofit
 
 import com.example.android_repo_05.BuildConfig
-import com.example.android_repo_05.model.LoginResponse
+import com.example.android_repo_05.data.model.LoginResponse
 import retrofit2.Response
 import retrofit2.http.*
 
