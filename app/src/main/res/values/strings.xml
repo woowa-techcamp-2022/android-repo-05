@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">Android_repo_05</string>
+
+    <string name="main_toolbar_title">What\'s In My GitHub</string>
+    <string name="main_toolbar_profile">menu_profile</string>
+    <string name="main_toolbar_search">menu_search</string>
+    <string name="issue">Issue</string>
+    <string name="notification">Notification</string>
     <string name="login_app_name">What’s In \nMy GitHub</string>
     <string name="login_login_button">GitHub 로그인</string>
 
