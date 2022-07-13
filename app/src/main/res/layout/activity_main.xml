@@ -6,7 +6,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background"
         tools:context=".MainActivity">
 
         <com.google.android.material.appbar.AppBarLayout
@@ -22,7 +21,7 @@
                 android:id="@+id/tb_main"
                 android:layout_width="match_parent"
                 android:layout_height="74dp"
-                android:background="@color/background"
+                android:background="@color/black"
                 android:paddingEnd="12dp"
                 app:buttonGravity="center_vertical"
                 app:contentInsetStart="24dp"
