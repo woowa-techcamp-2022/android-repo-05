@@ -1,4 +1,4 @@
-package com.example.android_repo_05.viewmodel
+package com.example.android_repo_05.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

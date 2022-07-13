@@ -1,4 +1,4 @@
-package com.example.android_repo_05.customview
+package com.example.android_repo_05.customviews
 
 import android.content.Context
 import android.content.res.ColorStateList

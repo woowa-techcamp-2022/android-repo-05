@@ -7,13 +7,13 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
-import com.example.android_repo_05.customview.MainTabButton
+import com.example.android_repo_05.customviews.MainTabButton
 import com.example.android_repo_05.databinding.ActivityMainBinding
-import com.example.android_repo_05.ui.IssueFragment
-import com.example.android_repo_05.ui.NotificationFragment
-import com.example.android_repo_05.ui.ProfileActivity
-import com.example.android_repo_05.ui.SearchActivity
-import com.example.android_repo_05.viewmodel.MainViewModel
+import com.example.android_repo_05.ui.fragments.IssueFragment
+import com.example.android_repo_05.ui.fragments.NotificationFragment
+import com.example.android_repo_05.ui.activities.ProfileActivity
+import com.example.android_repo_05.ui.activities.SearchActivity
+import com.example.android_repo_05.viewmodels.MainViewModel
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }

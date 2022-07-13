@@ -1,4 +1,4 @@
-package com.example.android_repo_05.ui
+package com.example.android_repo_05.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
