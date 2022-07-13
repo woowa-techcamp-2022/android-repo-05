@@ -3,8 +3,8 @@ package com.example.android_repo_05.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.android_repo_05.MainTabType
 import com.example.android_repo_05.R
+import com.example.android_repo_05.ui.activities.MainTabType
 
 class MainViewModel : ViewModel() {
     private val _currentTabFragment = MutableLiveData(MainTabType.ISSUE)

@@ -44,7 +44,7 @@
             android:name=".ui.activities.ProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.activities.MainActivity"
             android:exported="false"/>
     </application>
 

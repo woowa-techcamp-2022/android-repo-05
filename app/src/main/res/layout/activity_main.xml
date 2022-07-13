@@ -10,11 +10,9 @@
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/l_tb_main"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:elevation="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.appbar.MaterialToolbar
@@ -25,8 +23,6 @@
                 android:paddingEnd="12dp"
                 app:buttonGravity="center_vertical"
                 app:contentInsetStart="24dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:menu="@menu/home_toolbar_menu"
                 app:title="@string/main_toolbar_title"

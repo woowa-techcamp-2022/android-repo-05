@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import com.example.android_repo_05.MainActivity
 import com.example.android_repo_05.R
 import com.example.android_repo_05.databinding.ActivityLoginBinding
 import com.example.android_repo_05.model.ResponseState

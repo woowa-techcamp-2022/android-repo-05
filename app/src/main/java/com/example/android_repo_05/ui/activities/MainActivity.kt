@@ -1,4 +1,4 @@
-package com.example.android_repo_05
+package com.example.android_repo_05.ui.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,12 +7,12 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
+import com.example.android_repo_05.R
 import com.example.android_repo_05.customviews.MainTabButton
 import com.example.android_repo_05.databinding.ActivityMainBinding
 import com.example.android_repo_05.ui.fragments.IssueFragment
 import com.example.android_repo_05.ui.fragments.NotificationFragment
-import com.example.android_repo_05.ui.activities.ProfileActivity
-import com.example.android_repo_05.ui.activities.SearchActivity
+
 import com.example.android_repo_05.viewmodels.MainViewModel
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
