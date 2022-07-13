@@ -59,4 +59,7 @@ dependencies {
     // ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0-alpha01"
     implementation "androidx.fragment:fragment-ktx:1.5.0"
+
+    // dataStore
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
 }
