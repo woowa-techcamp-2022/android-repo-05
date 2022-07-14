@@ -9,5 +9,6 @@ object Utils {
         .appendPath("oauth")
         .appendPath("authorize")
         .appendQueryParameter("client_id", BuildConfig.GITHUB_CLIENT_ID)
+        .appendQueryParameter("scope", "repo,user,notifications")
         .build()
 }

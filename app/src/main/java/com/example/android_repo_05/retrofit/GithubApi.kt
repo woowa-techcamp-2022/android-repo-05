@@ -18,6 +18,6 @@ interface GithubApi {
     ): Response<LoginResponse>
 
     @GET("user")
-    @Headers("Accept: application/json")
+    @Headers("Accept: application/vnd.github+json")
     suspend fun getUserInfo(@Header("Authorization") tokenStr: String): Response<UserInfo>
 }
