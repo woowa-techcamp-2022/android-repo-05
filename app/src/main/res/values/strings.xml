@@ -8,6 +8,19 @@
     <string name="notification">Notification</string>
     <string name="login_app_name">What’s In \nMy GitHub</string>
     <string name="login_login_button">GitHub 로그인</string>
-
     <string name="login_login_failure">GitHub 로그인 실패!</string>
+    <string name="profile_toolbar_title">Profile</string>
+
+    <string name="profile_location_desc">location icon</string>
+    <string name="profile_link_desc">link icon</string>
+    <string name="profile_email_desc">email icon</string>
+    <string name="profile_follow_desc">follow icon</string>
+    <string name="profile_repository_desc">repository icon</string>
+    <string name="profile_starred_desc">starred icon</string>
+
+    <string name="profile_follower">Followers</string>
+    <string name="profile_dot">•</string>
+    <string name="profile_following">Following</string>
+    <string name="profile_repositories">Repositories</string>
+    <string name="profile_starred">Starred</string>
 </resources>
