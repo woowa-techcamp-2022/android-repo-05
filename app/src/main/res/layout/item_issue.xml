@@ -21,7 +21,7 @@
         android:layout_marginStart="11dp"
         android:layout_marginTop="20dp"
         android:textColor="@color/grey"
-        android:textSize="14dp"
+        android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@id/iv_issue_state"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:textColor="@color/white"
-        android:textSize="16dp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@id/tv_user_and_project_name"
         app:layout_constraintTop_toBottomOf="@id/tv_user_and_project_name" />
 
@@ -42,7 +42,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="24dp"
         android:textColor="@color/grey"
-        android:textSize="14dp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -14,8 +14,8 @@
         app:srcCompat="@drawable/ic_variant16" />
 
     <TextView
-        style="@style/IssueFragment.Filter"
         android:id="@+id/tv_issue_spinner"
+        style="@style/IssueFragment.Filter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"

@@ -18,7 +18,7 @@
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/tb_main"
                 android:layout_width="match_parent"
-                android:layout_height="74dp"
+                android:layout_height="72dp"
                 android:background="@color/black"
                 android:paddingEnd="12dp"
                 app:buttonGravity="center_vertical"

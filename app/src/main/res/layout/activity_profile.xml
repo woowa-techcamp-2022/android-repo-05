@@ -1,18 +1,349 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context=".ui.activities.ProfileActivity">
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="profile"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/l_tb_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/tb_profile"
+                style="@style/ActivityAppBarCenterTitleStyle"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                app:navigationIcon="@drawable/ic_arrow_left"
+                app:title="@string/profile_toolbar_title" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/gl_profile_begin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="24dp" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/gl_profile_end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="24dp" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/iv_profile"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="6dp"
+                    android:src="@drawable/ic_user"
+                    app:layout_constraintStart_toEndOf="@id/gl_profile_begin"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shapeAppearanceOverlay="@style/circleShape" />
+
+                <TextView
+                    android:id="@+id/tv_display_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="멋진 삼"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    app:layout_constrainedWidth="true"
+                    app:layout_constraintEnd_toStartOf="@id/gl_profile_end"
+                    app:layout_constraintStart_toEndOf="@id/iv_profile"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_user_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="sam"
+                    android:textColor="@color/grey"
+                    android:textSize="16sp"
+                    app:layout_constrainedWidth="true"
+                    app:layout_constraintEnd_toStartOf="@id/gl_profile_end"
+                    app:layout_constraintStart_toStartOf="@id/tv_display_name"
+                    app:layout_constraintTop_toBottomOf="@id/tv_display_name" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cv_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:cardCornerRadius="7dp"
+                    app:cardElevation="0dp"
+                    app:layout_constrainedWidth="true"
+                    app:layout_constraintEnd_toStartOf="@id/gl_profile_end"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toStartOf="@id/tv_display_name"
+                    app:layout_constraintTop_toBottomOf="@id/tv_user_name">
+
+                    <TextView
+                        android:id="@+id/tv_state"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="8dp"
+                        android:layout_marginVertical="4dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="Android developer"
+                        android:textColor="@color/grey"
+                        android:textSize="14sp" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:id="@+id/dv_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/navy"
+                    app:layout_constraintTop_toBottomOf="@id/iv_profile" />
+
+                <ImageView
+                    android:id="@+id/iv_location"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginTop="16dp"
+                    android:contentDescription="@string/profile_location_desc"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_location"
+                    app:layout_constraintStart_toEndOf="@id/gl_profile_begin"
+                    app:layout_constraintTop_toBottomOf="@id/dv_profile"
+                    app:tint="@color/grey" />
+
+                <TextView
+                    android:id="@+id/tv_location"
+                    style="@style/ProfileInfoTextStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Seoul, Korea"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_location"
+                    app:layout_constraintStart_toEndOf="@id/iv_location"
+                    app:layout_constraintTop_toTopOf="@id/iv_location" />
+
+                <ImageView
+                    android:id="@+id/iv_link"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginTop="16dp"
+                    android:contentDescription="@string/profile_link_desc"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_link"
+                    app:layout_constraintStart_toEndOf="@id/gl_profile_begin"
+                    app:layout_constraintTop_toBottomOf="@id/iv_location"
+                    app:tint="@color/grey" />
+
+                <TextView
+                    android:id="@+id/tv_link"
+                    style="@style/ProfileInfoTextStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="http://medium.com/@sam"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_link"
+                    app:layout_constraintStart_toEndOf="@id/iv_link"
+                    app:layout_constraintTop_toTopOf="@id/iv_link" />
+
+                <ImageView
+                    android:id="@+id/iv_email"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginTop="16dp"
+                    android:contentDescription="@string/profile_location_desc"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_mail"
+                    app:layout_constraintStart_toEndOf="@id/gl_profile_begin"
+                    app:layout_constraintTop_toBottomOf="@id/iv_link"
+                    app:tint="@color/grey" />
+
+                <TextView
+                    android:id="@+id/tv_email"
+                    style="@style/ProfileInfoTextStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="sam@gmail.com"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_email"
+                    app:layout_constraintStart_toEndOf="@id/iv_email"
+                    app:layout_constraintTop_toTopOf="@id/iv_email" />
+
+                <ImageView
+                    android:id="@+id/iv_follow"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginTop="16dp"
+                    android:contentDescription="@string/profile_location_desc"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_user"
+                    app:layout_constraintStart_toEndOf="@id/gl_profile_begin"
+                    app:layout_constraintTop_toBottomOf="@id/iv_email"
+                    app:tint="@color/grey" />
+
+                <TextView
+                    android:id="@+id/tv_follower_counter"
+                    style="@style/ProfileInfoTextStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="59"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_follow"
+                    app:layout_constraintStart_toEndOf="@id/iv_follow"
+                    app:layout_constraintTop_toTopOf="@id/iv_follow" />
+
+                <TextView
+                    android:id="@+id/tv_follower"
+                    style="@style/ProfileInfoTextStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="@string/profile_follower"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_follower_counter"
+                    app:layout_constraintStart_toEndOf="@id/tv_follower_counter"
+                    app:layout_constraintTop_toTopOf="@id/tv_follower_counter" />
+
+                <TextView
+                    android:id="@+id/tv_dot"
+                    style="@style/ProfileInfoTextStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="@string/profile_dot"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_follower"
+                    app:layout_constraintStart_toEndOf="@id/tv_follower"
+                    app:layout_constraintTop_toTopOf="@id/tv_follower" />
+
+                <TextView
+                    android:id="@+id/tv_following_counter"
+                    style="@style/ProfileInfoTextStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="6"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_dot"
+                    app:layout_constraintStart_toEndOf="@id/tv_dot"
+                    app:layout_constraintTop_toTopOf="@id/tv_dot" />
+
+                <TextView
+                    android:id="@+id/tv_following"
+                    style="@style/ProfileInfoTextStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="@string/profile_following"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_following_counter"
+                    app:layout_constraintStart_toEndOf="@id/tv_following_counter"
+                    app:layout_constraintTop_toTopOf="@id/tv_following_counter" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="24dp"
+                    android:padding="16dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/gl_profile_end"
+                    app:layout_constraintStart_toEndOf="@id/gl_profile_begin"
+                    app:layout_constraintTop_toBottomOf="@id/iv_follow"
+                    app:shapeAppearanceOverlay="@style/roundShape">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/iv_repositories"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@color/primary"
+                            android:scaleType="center"
+                            android:src="@drawable/ic_bookmark"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:shapeAppearanceOverlay="@style/roundShape" />
+
+                        <TextView
+                            android:id="@+id/tv_repositories"
+                            style="@style/ProfileInfoTextStyle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="16dp"
+                            android:text="@string/profile_repositories"
+                            app:layout_constraintBottom_toBottomOf="@id/iv_repositories"
+                            app:layout_constraintEnd_toStartOf="@id/tv_repositories_counter"
+                            app:layout_constraintStart_toEndOf="@id/iv_repositories"
+                            app:layout_constraintTop_toTopOf="@id/iv_repositories" />
+
+                        <TextView
+                            android:id="@+id/tv_repositories_counter"
+                            style="@style/ProfileInfoTextStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:text="41"
+                            app:layout_constraintBottom_toBottomOf="@id/iv_repositories"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/iv_repositories" />
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/iv_starred"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="16dp"
+                            android:background="@color/primary"
+                            android:scaleType="center"
+                            android:src="@drawable/ic_star_outline"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/iv_repositories"
+                            app:shapeAppearanceOverlay="@style/roundShape" />
+
+                        <TextView
+                            android:id="@+id/tv_starred"
+                            style="@style/ProfileInfoTextStyle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="16dp"
+                            android:text="@string/profile_starred"
+                            app:layout_constraintBottom_toBottomOf="@id/iv_starred"
+                            app:layout_constraintEnd_toStartOf="@id/tv_starred_counter"
+                            app:layout_constraintStart_toEndOf="@id/iv_starred"
+                            app:layout_constraintTop_toTopOf="@id/iv_starred" />
+
+                        <TextView
+                            android:id="@+id/tv_starred_counter"
+                            style="@style/ProfileInfoTextStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="57"
+                            app:layout_constraintBottom_toBottomOf="@id/iv_starred"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/iv_starred" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
