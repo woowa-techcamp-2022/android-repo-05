@@ -10,4 +10,7 @@
     <string name="login_login_button">GitHub 로그인</string>
     <string name="issue_filter_label">Filter</string>
     <string name="issue_filter_option">Option</string>
+    <string name="issue_spinner_open">Open</string>
+    <string name="issue_spinner_close">Close</string>
+    <string name="issue_spinner_all">All</string>
 </resources>
