@@ -8,6 +8,23 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="IssueFragment"/>
+    <style name="IssueFragment.Filter" parent="TextAppearance.AppCompat">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="IssueFragment.FilterDisabled" parent="TextAppearance.AppCompat">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@color/grey</item>
+    </style>
+    <style name="IssueFragment.FilterMenu" parent="@style/Widget.AppCompat.PopupMenu">
+        <item name="android:popupBackground">@drawable/bg_issue_filter</item>
+        <item name="android:dropDownVerticalOffset">10dp</item>
+        <item name="android:dropDownHorizontalOffset">16dp</item>
+    </style>
+
     <style name="roundShape" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">14dp</item>
