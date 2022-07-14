@@ -39,4 +39,7 @@ class GithubApiRepository {
         context.dataStore.edit { pref ->
             pref[stringPreferencesKey("accessToken")] = accessToken
         }
+
+    suspend fun getUserInfoFromRemote(token: String) =
+        GithubApiInstance.retrofit.getUserInfo("token $token")
 }

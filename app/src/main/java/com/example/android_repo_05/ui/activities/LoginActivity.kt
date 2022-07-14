@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.android_repo_05.R
 import com.example.android_repo_05.data.model.LoginResponse
@@ -13,7 +12,7 @@ import com.example.android_repo_05.databinding.ActivityLoginBinding
 import com.example.android_repo_05.others.Utils
 import com.example.android_repo_05.repositories.GithubApiRepository
 import com.example.android_repo_05.viewmodels.LoginViewModel
-import com.example.android_repo_05.viewmodels.LoginViewModelFactory
+import com.example.android_repo_05.viewmodels.AppViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 
 class LoginActivity : AppCompatActivity() {
@@ -21,7 +20,7 @@ class LoginActivity : AppCompatActivity() {
     private val loginViewModel by lazy {
         ViewModelProvider(
             this,
-            LoginViewModelFactory(GithubApiRepository.getInstance())
+            AppViewModelFactory(GithubApiRepository.getInstance())
         )[LoginViewModel::class.java]
     }
 
