@@ -12,24 +12,31 @@ class IssueFilteringSpinner @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyle: Int = 0
 ) : ConstraintLayout(context, attrs, defStyle) {
 
-    private val binding by lazy {IssueFilteringSpinnerBinding.inflate(LayoutInflater.from(context), this, false) }
+    private val binding by lazy {
+        IssueFilteringSpinnerBinding.inflate(
+            LayoutInflater.from(context),
+            this,
+            false
+        )
+    }
 
     init {
         addView(binding.root)
         getAttrs(attrs)
     }
 
-    private fun getAttrs(attrs : AttributeSet?) {
+    private fun getAttrs(attrs: AttributeSet?) {
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.IssueSpinner)
         setTypedArray(typedArray)
     }
 
     private fun setTypedArray(typedArray: TypedArray) {
-        val spinnerTitle = typedArray.getString(R.styleable.IssueSpinner_spinner_title) ?: context.getString(R.string.issue_spinner_open)
+        val spinnerTitle = typedArray.getString(R.styleable.IssueSpinner_spinner_title)
+            ?: context.getString(R.string.issue_spinner_open)
         setSpinnerTitle(spinnerTitle)
     }
 
-    private fun setSpinnerTitle(title : String) {
+    private fun setSpinnerTitle(title: String) {
         binding.tvIssueSpinner.text = title
     }
 
