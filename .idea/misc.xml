@@ -3,6 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.14547595021863438" />
+        <entry key="app/src/main/res/drawable/bg_issue_filter.xml" value="0.287" />
+        <entry key="app/src/main/res/drawable/gradient_black.xml" value="0.127" />
+        <entry key="app/src/main/res/drawable/ic_arrow_left.xml" value="0.287" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.31567028985507245" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.15896739130434784" />
+        <entry key="app/src/main/res/layout/activity_profile.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/fragment_issue.xml" value="0.3378623188405797" />
+        <entry key="app/src/main/res/layout/issue_filtering_spinner.xml" value="0.3378623188405797" />
+        <entry key="app/src/main/res/layout/item_issue.xml" value="0.3378623188405797" />
+        <entry key="app/src/main/res/layout/item_issue_filter.xml" value="0.3378623188405797" />
+        <entry key="app/src/main/res/menu/issue_filter_popup_menu.xml" value="0.4244791666666667" />
         <entry key="../../../../layout/custom_preview.xml" value="0.11553985872855702" />
         <entry key="app/src/main/res/drawable/bg_issue_filter.xml" value="0.187" />
         <entry key="app/src/main/res/drawable/gradient_black.xml" value="0.127" />

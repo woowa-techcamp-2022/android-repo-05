@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
 Properties properties = new Properties()
@@ -62,9 +63,8 @@ dependencies {
 
     // ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0-alpha01"
-    implementation "androidx.fragment:fragment-ktx:1.5.0"
 
-    // dataStore
+    // DataStore
     implementation "androidx.datastore:datastore-preferences:1.0.0"
     implementation 'androidx.datastore:datastore-core:1.0.0'
 
