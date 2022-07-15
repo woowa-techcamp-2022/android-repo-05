@@ -3,6 +3,7 @@ package com.example.android_repo_05.retrofit
 import com.example.android_repo_05.BuildConfig
 import com.example.android_repo_05.data.model.LoginResponse
 import com.example.android_repo_05.data.model.UserInfo
+import com.example.android_repo_05.data.model.UserProfileResponse
 import com.example.android_repo_05.others.Constants
 import retrofit2.Response
 import retrofit2.http.*
@@ -18,6 +19,11 @@ interface GithubApi {
     ): Response<LoginResponse>
 
     @GET("user")
-    @Headers("Accept: application/vnd.github+json")
-    suspend fun getUserInfo(@Header("Authorization") tokenStr: String): Response<UserInfo>
+    suspend fun getUserInfo(): Response<UserInfo>
+
+    @GET("/issues")
+    suspend fun getIssues(): Response<UserInfo>
+
+    @GET("/user")
+    suspend fun getProfileUrl() : Response<UserProfileResponse>
 }
