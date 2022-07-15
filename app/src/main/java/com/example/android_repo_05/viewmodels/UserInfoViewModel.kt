@@ -15,9 +15,9 @@ class UserInfoViewModel(private val repository: GithubApiRepository) : ViewModel
     private var _userInfo: MutableLiveData<ResponseState<UserInfo>> = MutableLiveData()
     val userInfo: LiveData<ResponseState<UserInfo>> get() = _userInfo
 
-    fun getUserInfoFromRemote(token: String) = viewModelScope.launch(Dispatchers.IO) {
+    fun getUserInfoFromRemote() = viewModelScope.launch(Dispatchers.IO) {
         _userInfo.postValue(ResponseState.Loading())
-        _userInfo.postValue(handleUserInfoResponse(repository.getUserInfoFromRemote(token)))
+        _userInfo.postValue(handleUserInfoResponse(repository.getUserInfoFromRemote()))
     }
 
     private fun handleUserInfoResponse(response: Response<UserInfo>): ResponseState<UserInfo> {
