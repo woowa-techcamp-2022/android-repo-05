@@ -59,7 +59,7 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginTop="6dp"
-                    android:src="@drawable/ic_user"
+                    app:imgUrl="@{userInfoViewModel.userInfo.data.profileImageUrl}"
                     app:layout_constraintStart_toEndOf="@id/gl_profile_begin"
                     app:layout_constraintTop_toTopOf="parent"
                     app:shapeAppearanceOverlay="@style/circleShape" />
