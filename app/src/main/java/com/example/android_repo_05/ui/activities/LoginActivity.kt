@@ -10,8 +10,7 @@ import com.example.android_repo_05.data.model.LoginResponse
 import com.example.android_repo_05.data.model.ResponseState
 import com.example.android_repo_05.databinding.ActivityLoginBinding
 import com.example.android_repo_05.others.Utils
-import com.example.android_repo_05.repositories.GithubApiRepository
-import com.example.android_repo_05.repositories.ProfileImageRepository
+import com.example.android_repo_05.repositories.TokenRepository
 import com.example.android_repo_05.viewmodels.LoginViewModel
 import com.example.android_repo_05.viewmodels.AppViewModelFactory
 import com.google.android.material.snackbar.Snackbar
@@ -21,7 +20,7 @@ class LoginActivity : AppCompatActivity() {
     private val loginViewModel by lazy {
         ViewModelProvider(
             this,
-            AppViewModelFactory(githubApiRepository = GithubApiRepository.getInstance())
+            AppViewModelFactory(githubApiRepository = TokenRepository.getInstance())
         )[LoginViewModel::class.java]
     }
 

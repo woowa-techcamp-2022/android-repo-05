@@ -4,12 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import com.example.android_repo_05.R
 import com.example.android_repo_05.data.model.LoginResponse
 import com.example.android_repo_05.data.model.ResponseState
 import com.example.android_repo_05.databinding.ActivityProfileBinding
-import com.example.android_repo_05.repositories.GithubApiRepository
-import com.example.android_repo_05.repositories.ProfileImageRepository
+import com.example.android_repo_05.repositories.TokenRepository
 import com.example.android_repo_05.viewmodels.AppViewModelFactory
 import com.example.android_repo_05.viewmodels.LoginViewModel
 import com.example.android_repo_05.viewmodels.UserInfoViewModel
@@ -19,13 +17,13 @@ class ProfileActivity : AppCompatActivity() {
     private val loginViewModel by lazy {
         ViewModelProvider(
             this,
-            AppViewModelFactory(githubApiRepository = GithubApiRepository.getInstance())
+            AppViewModelFactory(githubApiRepository = TokenRepository.getInstance())
         )[LoginViewModel::class.java]
     }
     private val userInfoViewModel by lazy {
         ViewModelProvider(
             this,
-            AppViewModelFactory(githubApiRepository = GithubApiRepository.getInstance())
+            AppViewModelFactory(githubApiRepository = TokenRepository.getInstance())
         )[UserInfoViewModel::class.java]
     }
 

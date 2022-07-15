@@ -2,11 +2,11 @@ package com.example.android_repo_05.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.android_repo_05.repositories.GithubApiRepository
 import com.example.android_repo_05.repositories.ProfileImageRepository
+import com.example.android_repo_05.repositories.TokenRepository
 
 class AppViewModelFactory(
-    private val githubApiRepository: GithubApiRepository? = GithubApiRepository.githubApiRepo,
+    private val githubApiRepository: TokenRepository? = TokenRepository.tokenRepo,
     private val profileImageRepository: ProfileImageRepository? = ProfileImageRepository.profileRepo
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

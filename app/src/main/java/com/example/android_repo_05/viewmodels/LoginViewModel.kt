@@ -4,15 +4,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.android_repo_05.base.CustomApplication.Companion.tokenRepository
+import com.example.android_repo_05.base.CustomApplication.Companion.setAccessToken
 import com.example.android_repo_05.data.model.LoginResponse
 import com.example.android_repo_05.data.model.ResponseState
-import com.example.android_repo_05.repositories.GithubApiRepository
+import com.example.android_repo_05.repositories.TokenRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
-class LoginViewModel(private val repository: GithubApiRepository) : ViewModel() {
+class LoginViewModel(private val repository: TokenRepository) : ViewModel() {
     private var _loginResponse: MutableLiveData<ResponseState<LoginResponse>> = MutableLiveData()
     val loginResponse: LiveData<ResponseState<LoginResponse>> get() = _loginResponse
 
@@ -32,6 +32,6 @@ class LoginViewModel(private val repository: GithubApiRepository) : ViewModel() 
 
     fun setAccessTokenToDataStore(accessToken: String) =
         viewModelScope.launch(Dispatchers.IO) {
-            tokenRepository.setAccessToken(accessToken)
+            setAccessToken(accessToken = accessToken)
         }
 }

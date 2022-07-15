@@ -6,12 +6,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.android_repo_05.data.model.ResponseState
 import com.example.android_repo_05.data.model.UserInfo
-import com.example.android_repo_05.repositories.GithubApiRepository
+import com.example.android_repo_05.repositories.TokenRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
-class UserInfoViewModel(private val repository: GithubApiRepository) : ViewModel() {
+class UserInfoViewModel(private val repository: TokenRepository) : ViewModel() {
     private var _userInfo: MutableLiveData<ResponseState<UserInfo>> = MutableLiveData()
     val userInfo: LiveData<ResponseState<UserInfo>> get() = _userInfo
 
