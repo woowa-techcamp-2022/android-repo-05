@@ -10,7 +10,7 @@ import com.example.android_repo_05.data.model.LoginResponse
 import com.example.android_repo_05.data.model.ResponseState
 import com.example.android_repo_05.databinding.ActivityLoginBinding
 import com.example.android_repo_05.others.Utils
-import com.example.android_repo_05.repositories.GithubApiRepository
+import com.example.android_repo_05.repositories.TokenRepository
 import com.example.android_repo_05.viewmodels.LoginViewModel
 import com.example.android_repo_05.viewmodels.AppViewModelFactory
 import com.google.android.material.snackbar.Snackbar
@@ -20,15 +20,13 @@ class LoginActivity : AppCompatActivity() {
     private val loginViewModel by lazy {
         ViewModelProvider(
             this,
-            AppViewModelFactory(GithubApiRepository.getInstance())
+            AppViewModelFactory(githubApiRepository = TokenRepository.getInstance())
         )[LoginViewModel::class.java]
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(binding.root)
-
         initView()
         checkAccessCode()
         setObserver()
@@ -81,7 +79,7 @@ class LoginActivity : AppCompatActivity() {
         binding.cpiLogin.visibility = View.INVISIBLE
         state.data?.let { response ->
             if (response.tokenType.isNotBlank()) {
-                loginViewModel.setAccessTokenToDataStore(this, response.accessToken)
+                loginViewModel.setAccessTokenToDataStore(response.accessToken)
             }
             startActivity(Intent(this, MainActivity::class.java))
             finish()
