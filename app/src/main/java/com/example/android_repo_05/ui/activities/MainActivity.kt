@@ -17,7 +17,6 @@ import com.example.android_repo_05.R
 import com.example.android_repo_05.customviews.MainTabButton
 import com.example.android_repo_05.data.model.ResponseState
 import com.example.android_repo_05.databinding.ActivityMainBinding
-import com.example.android_repo_05.repositories.GithubApiRepository
 import com.example.android_repo_05.repositories.ProfileImageRepository
 import com.example.android_repo_05.ui.fragments.IssueFragment
 import com.example.android_repo_05.ui.fragments.NotificationFragment
