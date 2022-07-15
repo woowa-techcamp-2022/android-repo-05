@@ -33,8 +33,21 @@ class ProfileActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
+        initViews()
+        setBindingProperty()
         setObservers()
         getAccessToken()
+    }
+
+    private fun initViews() {
+        binding.tbProfile.setNavigationOnClickListener {
+            finish()
+        }
+    }
+
+    private fun setBindingProperty() {
+        binding.lifecycleOwner = this
+        binding.userInfoViewModel = userInfoViewModel
     }
 
     private fun setObservers() {
@@ -42,16 +55,17 @@ class ProfileActivity : AppCompatActivity() {
             when (responseState) {
                 is ResponseState.Success -> getUserInfo(responseState.data)
                 is ResponseState.Error -> Toast.makeText(this, "error", Toast.LENGTH_SHORT).show()
-                is ResponseState.Loading -> Toast.makeText(this, "loading", Toast.LENGTH_SHORT).show()
+                is ResponseState.Loading -> Toast.makeText(this, "loading", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
 
         userInfoViewModel.userInfo.observe(this) { responseState ->
-            when (responseState) {
+            /*when (responseState) {
                 is ResponseState.Success -> Toast.makeText(this, responseState.data?.displayName, Toast.LENGTH_SHORT).show()
                 is ResponseState.Error -> Toast.makeText(this, "error", Toast.LENGTH_SHORT).show()
                 is ResponseState.Loading -> Toast.makeText(this, "loading", Toast.LENGTH_SHORT).show()
-            }
+            }*/
         }
     }
 
