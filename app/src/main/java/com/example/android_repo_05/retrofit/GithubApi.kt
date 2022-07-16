@@ -4,6 +4,7 @@ import com.example.android_repo_05.BuildConfig
 import com.example.android_repo_05.data.model.LoginResponse
 import com.example.android_repo_05.data.model.UserInfo
 import com.example.android_repo_05.data.model.UserProfileResponse
+import com.example.android_repo_05.data.model.UserStarred
 import com.example.android_repo_05.others.Constants
 import retrofit2.Response
 import retrofit2.http.*
@@ -25,5 +26,8 @@ interface GithubApi {
     suspend fun getIssues(): Response<UserInfo>
 
     @GET("/user")
-    suspend fun getProfileUrl() : Response<UserProfileResponse>
+    suspend fun getProfileUrl(): Response<UserProfileResponse>
+
+    @GET("user/starred")
+    suspend fun getUserStarred(): Response<List<UserStarred>>
 }

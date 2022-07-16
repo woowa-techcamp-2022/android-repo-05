@@ -348,7 +348,7 @@
                             style="@style/ProfileInfoTextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="57"
+                            android:text="@{Integer.toString(userInfoViewModel.starredCount.data)}"
                             app:layout_constraintBottom_toBottomOf="@id/iv_starred"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="@id/iv_starred" />

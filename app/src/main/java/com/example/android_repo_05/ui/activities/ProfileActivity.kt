@@ -46,10 +46,18 @@ class ProfileActivity : AppCompatActivity() {
                 is ResponseState.Loading -> Toast.makeText(this, "loading", Toast.LENGTH_SHORT).show()
             }*/
         }
+        userInfoViewModel.starredCount.observe(this) { responseState ->
+            /*when (responseState) {
+                is ResponseState.Success -> Toast.makeText(this, responseState.data, Toast.LENGTH_SHORT).show()
+                is ResponseState.Error -> Toast.makeText(this, "error", Toast.LENGTH_SHORT).show()
+                is ResponseState.Loading -> Toast.makeText(this, "loading", Toast.LENGTH_SHORT).show()
+            }*/
+        }
     }
 
     private fun getUserInfo() {
         userInfoViewModel.getUserInfoFromRemote()
+        userInfoViewModel.getUserStarredFromRemote()
     }
 
 }
