@@ -23,33 +23,38 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            style="@style/IssueFragment.IssueItemTextStyle"
             android:id="@+id/tv_user_and_project_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="11dp"
-            android:text="@{issue.repository.full_name}"
+            android:layout_marginEnd="16dp"
+            android:text="@{@string/issue_item_title(issue.repository.repoName, issue.issueNumber)}"
             android:textColor="@color/grey"
             android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/tv_issue_date"
             app:layout_constraintStart_toEndOf="@id/iv_issue_state"
             app:layout_constraintTop_toTopOf="@id/iv_issue_state" />
 
         <TextView
+            style="@style/IssueFragment.IssueItemTextStyle"
             android:id="@+id/tv_issue_title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:text="@{issue.title}"
             android:textColor="@color/white"
             android:textSize="16sp"
-            android:text="@{issue.title}"
+            app:layout_constraintEnd_toEndOf="@+id/tv_issue_date"
             app:layout_constraintStart_toStartOf="@id/tv_user_and_project_name"
             app:layout_constraintTop_toBottomOf="@id/tv_user_and_project_name" />
 
         <TextView
             android:id="@+id/tv_issue_date"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
-            android:text="1일전"
+            android:gravity="end"
             android:textColor="@color/grey"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
