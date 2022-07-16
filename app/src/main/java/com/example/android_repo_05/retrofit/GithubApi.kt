@@ -22,13 +22,13 @@ interface GithubApi {
     @GET("user")
     suspend fun getUserInfo(): Response<UserInfo>
 
-    @GET("/user/issues")
+    @GET("user/issues")
     suspend fun getIssues(
         @Query("page") page : Int,
         @Query("num") num : Int = 10,
         @Query("state") state : String = "all"
     ): ArrayList<IssueResponse>
 
-    @GET("/user")
+    @GET("user")
     suspend fun getProfileUrl() : Response<UserProfileResponse>
 }
