@@ -17,6 +17,7 @@
     <string name="issue_spinner_open">Open</string>
     <string name="issue_spinner_close">Close</string>
     <string name="issue_spinner_all">All</string>
+    <string name="issue_item_title">%s #%d</string>
 
     <string name="profile_toolbar_title">Profile</string>
     <string name="profile_location_desc">location icon</string>
