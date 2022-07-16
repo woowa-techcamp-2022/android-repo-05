@@ -47,11 +47,7 @@ class IssueFragment : BaseFragment<FragmentIssueBinding>(R.layout.fragment_issue
     private fun observe() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                issueViewModel.issueList.combine(issueViewModel.issueFiltering) { issueList, issueFiltering ->
-                    issueList.filter { issue ->
-                        issue.state in issueFiltering.filterList
-                    }
-                }.collectLatest {
+                issueViewModel.filteredList.collectLatest {
                     issueAdapter.submitData(it)
                 }
             }
