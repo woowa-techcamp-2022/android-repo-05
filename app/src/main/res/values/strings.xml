@@ -31,4 +31,6 @@
     <string name="profile_following">Following</string>
     <string name="profile_repositories">Repositories</string>
     <string name="profile_starred">Starred</string>
+
+    <string name="notification_icon_desc">Notification Icon</string>
 </resources>
