@@ -1,8 +1,8 @@
-package com.example.android_repo_05.data.model
+package com.example.android_repo_05.data.models
 
 import com.google.gson.annotations.SerializedName
 
-data class UserInfo(
+data class UserModel(
     @SerializedName("avatar_url")
     val profileImageUrl: String,
     @SerializedName("name")

@@ -4,9 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.example.android_repo_05.databinding.ActivityProfileBinding
-import com.example.android_repo_05.repositories.TokenRepository
-import com.example.android_repo_05.viewmodels.AppViewModelFactory
-import com.example.android_repo_05.viewmodels.UserInfoViewModel
+import com.example.android_repo_05.data.repositories.TokenRepository
+import com.example.android_repo_05.ui.viewmodels.AppViewModelFactory
+import com.example.android_repo_05.ui.viewmodels.UserInfoViewModel
 
 class ProfileActivity : AppCompatActivity() {
     private val binding by lazy { ActivityProfileBinding.inflate(layoutInflater) }
@@ -39,7 +39,7 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun setObservers() {
-        userInfoViewModel.userInfo.observe(this) { responseState ->
+        userInfoViewModel.userModel.observe(this) { responseState ->
             /*when (responseState) {
                 is ResponseState.Success -> Toast.makeText(this, responseState.data?.displayName, Toast.LENGTH_SHORT).show()
                 is ResponseState.Error -> Toast.makeText(this, "error", Toast.LENGTH_SHORT).show()

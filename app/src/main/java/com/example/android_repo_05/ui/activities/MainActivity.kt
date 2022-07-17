@@ -15,13 +15,13 @@ import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.example.android_repo_05.R
 import com.example.android_repo_05.customviews.MainTabButton
-import com.example.android_repo_05.data.model.ResponseState
+import com.example.android_repo_05.data.models.ResponseState
 import com.example.android_repo_05.databinding.ActivityMainBinding
-import com.example.android_repo_05.repositories.ProfileImageRepository
+import com.example.android_repo_05.data.repositories.ProfileImageRepository
 import com.example.android_repo_05.ui.fragments.IssueFragment
 import com.example.android_repo_05.ui.fragments.NotificationFragment
-import com.example.android_repo_05.viewmodels.AppViewModelFactory
-import com.example.android_repo_05.viewmodels.MainViewModel
+import com.example.android_repo_05.ui.viewmodels.AppViewModelFactory
+import com.example.android_repo_05.ui.viewmodels.MainViewModel
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }

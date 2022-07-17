@@ -1,10 +1,10 @@
-package com.example.android_repo_05.viewmodels
+package com.example.android_repo_05.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.android_repo_05.repositories.IssueRepository
-import com.example.android_repo_05.repositories.ProfileImageRepository
-import com.example.android_repo_05.repositories.TokenRepository
+import com.example.android_repo_05.data.repositories.IssueRepository
+import com.example.android_repo_05.data.repositories.ProfileImageRepository
+import com.example.android_repo_05.data.repositories.TokenRepository
 
 class AppViewModelFactory(
     private val githubApiRepository: TokenRepository? = TokenRepository.tokenRepo,

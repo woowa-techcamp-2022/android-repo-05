@@ -1,9 +1,9 @@
-package com.example.android_repo_05.repositories
+package com.example.android_repo_05.data.repositories
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.example.android_repo_05.data.model.IssueResponse
+import com.example.android_repo_05.data.models.IssueResponse
 import com.example.android_repo_05.paging.IssuePagingSource
 import kotlinx.coroutines.flow.Flow
 

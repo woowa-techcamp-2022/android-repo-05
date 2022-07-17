@@ -1,4 +1,4 @@
-package com.example.android_repo_05.repositories
+package com.example.android_repo_05.data.repositories
 
 import com.example.android_repo_05.retrofit.GithubApiInstance
 

@@ -10,16 +10,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.LoadState
-import androidx.paging.filter
 import com.example.android_repo_05.R
 import com.example.android_repo_05.adapters.IssuePagingAdapter
 import com.example.android_repo_05.adapters.IssueSpinnerAdapter
 import com.example.android_repo_05.base.BaseFragment
 import com.example.android_repo_05.databinding.FragmentIssueBinding
-import com.example.android_repo_05.viewmodels.AppViewModelFactory
-import com.example.android_repo_05.viewmodels.IssueViewModel
+import com.example.android_repo_05.ui.viewmodels.AppViewModelFactory
+import com.example.android_repo_05.ui.viewmodels.IssueViewModel
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 
 class IssueFragment : BaseFragment<FragmentIssueBinding>(R.layout.fragment_issue) {
