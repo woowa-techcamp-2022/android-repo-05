@@ -10,15 +10,14 @@ import com.example.android_repo_05.data.models.TokenModel
 import com.example.android_repo_05.data.models.ResponseState
 import com.example.android_repo_05.databinding.ActivityLoginBinding
 import com.example.android_repo_05.others.Utils
-import com.example.android_repo_05.data.repositories.TokenRepository
-import com.example.android_repo_05.ui.viewmodels.LoginViewModel
+import com.example.android_repo_05.ui.viewmodels.TokenViewModel
 import com.example.android_repo_05.ui.viewmodels.AppViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 
 class LoginActivity : AppCompatActivity() {
     private val binding by lazy { ActivityLoginBinding.inflate(layoutInflater) }
-    private val loginViewModel by lazy {
-        ViewModelProvider(this, AppViewModelFactory())[LoginViewModel::class.java]
+    private val tokenViewModel by lazy {
+        ViewModelProvider(this, AppViewModelFactory())[TokenViewModel::class.java]
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,12 +50,12 @@ class LoginActivity : AppCompatActivity() {
      */
     private fun checkAccessCode() {
         intent?.data?.getQueryParameter("code")?.let { code ->
-            loginViewModel.getAccessTokenFromRemote(code)
+            tokenViewModel.getAccessTokenFromRemote(code)
         }
     }
 
     private fun setObserver() {
-        loginViewModel.tokenModel.observe(this) { responseState ->
+        tokenViewModel.tokenModel.observe(this) { responseState ->
             when (responseState) {
                 is ResponseState.Success -> handleLoginSuccess(responseState)
                 is ResponseState.Error -> handleLoginFailure()
@@ -76,7 +75,7 @@ class LoginActivity : AppCompatActivity() {
         binding.cpiLogin.visibility = View.INVISIBLE
         state.data?.let { response ->
             if (response.tokenType.isNotBlank()) {
-                loginViewModel.setAccessTokenToDataStore(response.accessToken)
+                tokenViewModel.setAccessTokenToDataStore(response.accessToken)
             }
             startActivity(Intent(this, MainActivity::class.java))
             finish()

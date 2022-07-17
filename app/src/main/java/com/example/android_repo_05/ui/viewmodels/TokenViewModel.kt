@@ -12,7 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
-class LoginViewModel(private val repository: TokenRepository) : ViewModel() {
+class TokenViewModel(private val repository: TokenRepository) : ViewModel() {
     private var _tokenModel: MutableLiveData<ResponseState<TokenModel>> = MutableLiveData()
     val tokenModel: LiveData<ResponseState<TokenModel>> get() = _tokenModel
 

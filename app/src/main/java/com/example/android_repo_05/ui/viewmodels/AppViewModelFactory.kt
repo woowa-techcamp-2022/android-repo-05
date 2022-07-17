@@ -12,11 +12,11 @@ class AppViewModelFactory(
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
-            modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
-                LoginViewModel(TokenRepository.getInstance()) as T
+            modelClass.isAssignableFrom(TokenViewModel::class.java) -> {
+                TokenViewModel(TokenRepository.getInstance()) as T
             }
-            modelClass.isAssignableFrom(UserInfoViewModel::class.java) -> {
-                UserInfoViewModel(UserRepository.getInstance()) as T
+            modelClass.isAssignableFrom(UserViewModel::class.java) -> {
+                UserViewModel(UserRepository.getInstance()) as T
             }
             modelClass.isAssignableFrom(MainViewModel::class.java) -> {
                 MainViewModel(profileImageRepository!!) as T

@@ -13,7 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
-class UserInfoViewModel(private val repository: UserRepository) : ViewModel() {
+class UserViewModel(private val repository: UserRepository) : ViewModel() {
     private var _userModel: MutableLiveData<ResponseState<UserModel>> = MutableLiveData()
     val userModel: LiveData<ResponseState<UserModel>> get() = _userModel
     private var _starredCount: MutableLiveData<ResponseState<Int>> = MutableLiveData()

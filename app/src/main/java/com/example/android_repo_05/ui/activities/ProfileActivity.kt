@@ -4,14 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.example.android_repo_05.databinding.ActivityProfileBinding
-import com.example.android_repo_05.data.repositories.TokenRepository
 import com.example.android_repo_05.ui.viewmodels.AppViewModelFactory
-import com.example.android_repo_05.ui.viewmodels.UserInfoViewModel
+import com.example.android_repo_05.ui.viewmodels.UserViewModel
 
 class ProfileActivity : AppCompatActivity() {
     private val binding by lazy { ActivityProfileBinding.inflate(layoutInflater) }
-    private val userInfoViewModel by lazy {
-        ViewModelProvider(this, AppViewModelFactory())[UserInfoViewModel::class.java]
+    private val userViewModel by lazy {
+        ViewModelProvider(this, AppViewModelFactory())[UserViewModel::class.java]
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,18 +31,18 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun setBindingProperty() {
         binding.lifecycleOwner = this
-        binding.userInfoViewModel = userInfoViewModel
+        binding.userViewModel = userViewModel
     }
 
     private fun setObservers() {
-        userInfoViewModel.userModel.observe(this) { responseState ->
+        userViewModel.userModel.observe(this) { responseState ->
             /*when (responseState) {
                 is ResponseState.Success -> Toast.makeText(this, responseState.data?.displayName, Toast.LENGTH_SHORT).show()
                 is ResponseState.Error -> Toast.makeText(this, "error", Toast.LENGTH_SHORT).show()
                 is ResponseState.Loading -> Toast.makeText(this, "loading", Toast.LENGTH_SHORT).show()
             }*/
         }
-        userInfoViewModel.starredCount.observe(this) { responseState ->
+        userViewModel.starredCount.observe(this) { responseState ->
             /*when (responseState) {
                 is ResponseState.Success -> Toast.makeText(this, responseState.data, Toast.LENGTH_SHORT).show()
                 is ResponseState.Error -> Toast.makeText(this, "error", Toast.LENGTH_SHORT).show()
@@ -53,8 +52,8 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun getUserInfo() {
-        userInfoViewModel.getUserInfoFromRemote()
-        userInfoViewModel.getUserStarredFromRemote()
+        userViewModel.getUserInfoFromRemote()
+        userViewModel.getUserStarredFromRemote()
     }
 
 }

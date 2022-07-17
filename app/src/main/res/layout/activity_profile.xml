@@ -7,8 +7,8 @@
     <data>
 
         <variable
-            name="userInfoViewModel"
-            type="com.example.android_repo_05.ui.viewmodels.UserInfoViewModel" />
+            name="userViewModel"
+            type="com.example.android_repo_05.ui.viewmodels.UserViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -59,7 +59,7 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginTop="6dp"
-                    app:imgUrl="@{userInfoViewModel.userModel.data.profileImageUrl}"
+                    app:imgUrl="@{userViewModel.userModel.data.profileImageUrl}"
                     app:layout_constraintStart_toEndOf="@id/gl_profile_begin"
                     app:layout_constraintTop_toTopOf="parent"
                     app:shapeAppearanceOverlay="@style/circleShape" />
@@ -72,7 +72,7 @@
                     android:layout_marginTop="8dp"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text="@{userInfoViewModel.userModel.data.displayName}"
+                    android:text="@{userViewModel.userModel.data.displayName}"
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     app:layout_constrainedWidth="true"
@@ -86,7 +86,7 @@
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text="@{userInfoViewModel.userModel.data.userName}"
+                    android:text="@{userViewModel.userModel.data.userName}"
                     android:textColor="@color/grey"
                     android:textSize="16sp"
                     app:layout_constrainedWidth="true"
@@ -115,7 +115,7 @@
                         android:layout_marginVertical="4dp"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        android:text="@{userInfoViewModel.userModel.data.bio}"
+                        android:text="@{userViewModel.userModel.data.bio}"
                         android:textColor="@color/grey"
                         android:textSize="14sp" />
                 </com.google.android.material.card.MaterialCardView>
@@ -146,7 +146,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="@{userInfoViewModel.userModel.data.location}"
+                    android:text="@{userViewModel.userModel.data.location}"
                     app:layout_constraintBottom_toBottomOf="@id/iv_location"
                     app:layout_constraintEnd_toEndOf="@id/gl_profile_end"
                     app:layout_constraintStart_toEndOf="@id/iv_location"
@@ -170,7 +170,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="@{userInfoViewModel.userModel.data.link}"
+                    android:text="@{userViewModel.userModel.data.link}"
                     app:layout_constraintBottom_toBottomOf="@id/iv_link"
                     app:layout_constraintEnd_toEndOf="@id/gl_profile_end"
                     app:layout_constraintStart_toEndOf="@id/iv_link"
@@ -194,7 +194,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="@{userInfoViewModel.userModel.data.email}"
+                    android:text="@{userViewModel.userModel.data.email}"
                     app:layout_constraintBottom_toBottomOf="@id/iv_email"
                     app:layout_constraintEnd_toEndOf="@id/gl_profile_end"
                     app:layout_constraintStart_toEndOf="@id/iv_email"
@@ -218,7 +218,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="@{Integer.toString(userInfoViewModel.userModel.data.followersCount)}"
+                    android:text="@{Integer.toString(userViewModel.userModel.data.followersCount)}"
                     app:layout_constraintBottom_toBottomOf="@id/iv_follow"
                     app:layout_constraintStart_toEndOf="@id/iv_follow"
                     app:layout_constraintTop_toTopOf="@id/iv_follow" />
@@ -251,7 +251,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
-                    android:text="@{Integer.toString(userInfoViewModel.userModel.data.followingCount)}"
+                    android:text="@{Integer.toString(userViewModel.userModel.data.followingCount)}"
                     app:layout_constraintBottom_toBottomOf="@id/tv_dot"
                     app:layout_constraintStart_toEndOf="@id/tv_dot"
                     app:layout_constraintTop_toTopOf="@id/tv_dot" />
@@ -314,7 +314,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
-                            android:text="@{Integer.toString(userInfoViewModel.userModel.data.privateReposCount + userInfoViewModel.userModel.data.publicReposCount)}"
+                            android:text="@{Integer.toString(userViewModel.userModel.data.privateReposCount + userViewModel.userModel.data.publicReposCount)}"
                             app:layout_constraintBottom_toBottomOf="@id/iv_repositories"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="@id/iv_repositories" />
@@ -348,7 +348,7 @@
                             style="@style/ProfileInfoTextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{Integer.toString(userInfoViewModel.starredCount.data)}"
+                            android:text="@{Integer.toString(userViewModel.starredCount.data)}"
                             app:layout_constraintBottom_toBottomOf="@id/iv_starred"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="@id/iv_starred" />
