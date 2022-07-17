@@ -25,4 +25,6 @@ data class UserModel(
     val publicReposCount: Int,
     @SerializedName("total_private_repos")
     val privateReposCount: Int
-)
+) {
+    val totalReposCount: Int get() = publicReposCount + privateReposCount
+}
