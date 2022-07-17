@@ -2,6 +2,7 @@ package com.example.android_repo_05.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.android_repo_05.repositories.IssueRepository
 import com.example.android_repo_05.repositories.ProfileImageRepository
 import com.example.android_repo_05.repositories.TokenRepository
 
@@ -19,6 +20,9 @@ class AppViewModelFactory(
             }
             modelClass.isAssignableFrom(MainViewModel::class.java) -> {
                 MainViewModel(profileImageRepository!!) as T
+            }
+            modelClass.isAssignableFrom(IssueViewModel::class.java) -> {
+                IssueViewModel(IssueRepository.getInstance()) as T
             }
             else -> {
                 super.create(modelClass)
