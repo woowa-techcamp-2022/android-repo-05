@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
     tools:context=".ui.activities.SearchActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -25,7 +24,6 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/l_tf_search"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
@@ -56,9 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="24dp">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/tv_empty_query_title"
