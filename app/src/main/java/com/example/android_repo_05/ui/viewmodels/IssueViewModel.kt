@@ -1,10 +1,10 @@
-package com.example.android_repo_05.viewmodels
+package com.example.android_repo_05.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import androidx.paging.filter
-import com.example.android_repo_05.repositories.IssueRepository
+import com.example.android_repo_05.data.repositories.IssueRepository
 import com.example.android_repo_05.ui.fragments.IssueFiltering
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

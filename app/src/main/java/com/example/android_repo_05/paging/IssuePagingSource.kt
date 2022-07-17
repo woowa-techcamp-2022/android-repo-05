@@ -2,7 +2,7 @@ package com.example.android_repo_05.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.android_repo_05.data.model.IssueResponse
+import com.example.android_repo_05.data.models.IssueResponse
 import com.example.android_repo_05.retrofit.GithubApiInstance.retrofit
 
 private const val STARTING_PAGE_INDEX = 1

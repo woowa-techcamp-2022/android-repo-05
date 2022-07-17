@@ -1,8 +1,8 @@
-package com.example.android_repo_05.data.model
+package com.example.android_repo_05.data.models
 
 import com.google.gson.annotations.SerializedName
 
-data class UserInfo(
+data class UserModel(
     @SerializedName("avatar_url")
     val profileImageUrl: String,
     @SerializedName("name")
@@ -25,4 +25,6 @@ data class UserInfo(
     val publicReposCount: Int,
     @SerializedName("total_private_repos")
     val privateReposCount: Int
-)
+) {
+    val totalReposCount: Int get() = publicReposCount + privateReposCount
+}

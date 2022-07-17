@@ -1,10 +1,10 @@
-package com.example.android_repo_05.viewmodels
+package com.example.android_repo_05.ui.viewmodels
 
 import androidx.lifecycle.*
 import com.example.android_repo_05.R
-import com.example.android_repo_05.data.model.ResponseState
-import com.example.android_repo_05.data.model.UserProfileResponse
-import com.example.android_repo_05.repositories.ProfileImageRepository
+import com.example.android_repo_05.data.models.ResponseState
+import com.example.android_repo_05.data.models.UserProfileResponse
+import com.example.android_repo_05.data.repositories.ProfileImageRepository
 import com.example.android_repo_05.ui.activities.MainTabType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

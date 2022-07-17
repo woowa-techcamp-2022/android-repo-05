@@ -1,8 +1,8 @@
-package com.example.android_repo_05.data.model
+package com.example.android_repo_05.data.models
 
 import com.google.gson.annotations.SerializedName
 
-data class LoginResponse(
+data class TokenModel(
     @SerializedName("access_token")
     val accessToken: String,
     @SerializedName("scope")
