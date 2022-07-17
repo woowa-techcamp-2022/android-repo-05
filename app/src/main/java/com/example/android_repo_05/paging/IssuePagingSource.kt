@@ -14,8 +14,7 @@ class IssuePagingSource : PagingSource<Int, IssueResponse>(){
         // TODO : 네트워크 및 데이터 에러 처리 필요.
         val pageNumber = params.key ?: STARTING_PAGE_INDEX
         val issueList = retrofit.getIssues(
-            page = pageNumber,
-            num = NETWORK_PAGE_SIZE
+            page = pageNumber
         )
         val nextKey = if (issueList.isEmpty()) {
             null
