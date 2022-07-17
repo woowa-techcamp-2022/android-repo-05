@@ -18,10 +18,7 @@ import com.google.android.material.snackbar.Snackbar
 class LoginActivity : AppCompatActivity() {
     private val binding by lazy { ActivityLoginBinding.inflate(layoutInflater) }
     private val loginViewModel by lazy {
-        ViewModelProvider(
-            this,
-            AppViewModelFactory(githubApiRepository = TokenRepository.getInstance())
-        )[LoginViewModel::class.java]
+        ViewModelProvider(this, AppViewModelFactory())[LoginViewModel::class.java]
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -5,7 +5,8 @@ import com.example.android_repo_05.retrofit.GithubApiInstance
 
 class TokenRepository {
     companion object {
-        var tokenRepo: TokenRepository? = null
+        private var tokenRepo: TokenRepository? = null
+
         fun getInstance(): TokenRepository {
             return tokenRepo ?: synchronized(this) {
                 tokenRepo ?: TokenRepository().also { tokenRepo = it }

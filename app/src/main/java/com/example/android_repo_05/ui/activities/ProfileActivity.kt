@@ -11,10 +11,7 @@ import com.example.android_repo_05.ui.viewmodels.UserInfoViewModel
 class ProfileActivity : AppCompatActivity() {
     private val binding by lazy { ActivityProfileBinding.inflate(layoutInflater) }
     private val userInfoViewModel by lazy {
-        ViewModelProvider(
-            this,
-            AppViewModelFactory(githubApiRepository = TokenRepository.getInstance())
-        )[UserInfoViewModel::class.java]
+        ViewModelProvider(this, AppViewModelFactory())[UserInfoViewModel::class.java]
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
