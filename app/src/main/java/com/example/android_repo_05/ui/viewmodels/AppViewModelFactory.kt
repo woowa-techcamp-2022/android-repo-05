@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.android_repo_05.data.repositories.IssueRepository
 import com.example.android_repo_05.data.repositories.ProfileImageRepository
 import com.example.android_repo_05.data.repositories.TokenRepository
+import com.example.android_repo_05.data.repositories.UserRepository
 
 class AppViewModelFactory(
     private val githubApiRepository: TokenRepository? = TokenRepository.tokenRepo,
@@ -16,7 +17,7 @@ class AppViewModelFactory(
                 LoginViewModel(githubApiRepository!!) as T
             }
             modelClass.isAssignableFrom(UserInfoViewModel::class.java) -> {
-                UserInfoViewModel(githubApiRepository!!) as T
+                UserInfoViewModel(UserRepository.getInstance()) as T
             }
             modelClass.isAssignableFrom(MainViewModel::class.java) -> {
                 MainViewModel(profileImageRepository!!) as T

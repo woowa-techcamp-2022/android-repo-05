@@ -8,11 +8,12 @@ import com.example.android_repo_05.data.models.ResponseState
 import com.example.android_repo_05.data.models.UserModel
 import com.example.android_repo_05.data.models.StarredModel
 import com.example.android_repo_05.data.repositories.TokenRepository
+import com.example.android_repo_05.data.repositories.UserRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
-class UserInfoViewModel(private val repository: TokenRepository) : ViewModel() {
+class UserInfoViewModel(private val repository: UserRepository) : ViewModel() {
     private var _userModel: MutableLiveData<ResponseState<UserModel>> = MutableLiveData()
     val userModel: LiveData<ResponseState<UserModel>> get() = _userModel
     private var _starredCount: MutableLiveData<ResponseState<Int>> = MutableLiveData()
@@ -25,7 +26,7 @@ class UserInfoViewModel(private val repository: TokenRepository) : ViewModel() {
 
     fun getUserStarredFromRemote() = viewModelScope.launch(Dispatchers.IO) {
         _starredCount.postValue(ResponseState.Loading())
-        _starredCount.postValue(handleUserStarredResponse(repository.getUserStarred()))
+        _starredCount.postValue(handleUserStarredResponse(repository.getStarredFromRemote()))
     }
 
     private fun handleUserInfoResponse(response: Response<UserModel>): ResponseState<UserModel> {
