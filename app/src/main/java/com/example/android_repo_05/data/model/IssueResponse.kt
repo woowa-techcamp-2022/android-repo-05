@@ -15,7 +15,7 @@ data class IssueResponse(
     val repository: Repository,
     @SerializedName("number")
     val issueNumber : Int,
-    val elapsedTime : String
+    var elapsedTime : String
 )
 
 data class Repository(
