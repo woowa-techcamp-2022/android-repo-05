@@ -33,10 +33,13 @@
         app:startIconDrawable="@drawable/ic_searchbold">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tf_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_search_tf"
-            android:hint="@string/search_textField_hint" />
+            android:hint="@string/search_textField_hint">
+            <requestFocus/>
+        </com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.recyclerview.widget.RecyclerView
