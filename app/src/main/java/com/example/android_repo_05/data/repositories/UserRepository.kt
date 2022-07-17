@@ -20,11 +20,11 @@ class UserRepository {
     }
 
     suspend fun getUserInfoFromRemote() = withContext(Dispatchers.IO) {
-        return@withContext handleUserResponse(GithubApiInstance.retrofit.getUserInfo())
+        return@withContext handleUserResponse(GithubApiInstance.retrofit.getUser())
     }
 
     suspend fun getStarredFromRemote() = withContext(Dispatchers.IO) {
-        return@withContext handleStarredResponse(GithubApiInstance.retrofit.getUserStarred())
+        return@withContext handleStarredResponse(GithubApiInstance.retrofit.getStarred())
     }
 
     private fun handleUserResponse(response: Response<UserModel>): ResponseState<UserModel> {

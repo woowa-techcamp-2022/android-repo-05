@@ -21,7 +21,7 @@ interface GithubApi {
     ): Response<TokenModel>
 
     @GET("user")
-    suspend fun getUserInfo(): Response<UserModel>
+    suspend fun getUser(): Response<UserModel>
 
     @GET("user/issues")
     suspend fun getIssues(
@@ -31,7 +31,7 @@ interface GithubApi {
     ): ArrayList<IssueResponse>
 
     @GET("user/starred")
-    suspend fun getUserStarred(): Response<List<StarredModel>>
+    suspend fun getStarred(): Response<List<StarredModel>>
 
     @GET("user")
     suspend fun getProfileUrl() : Response<UserProfileResponse>
