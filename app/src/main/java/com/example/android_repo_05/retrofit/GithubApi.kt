@@ -26,7 +26,8 @@ interface GithubApi {
     suspend fun getIssues(
         @Query("page") page : Int,
         @Query("num") num : Int = 10,
-        @Query("state") state : String = "all"
+        @Query("state") state : String = "all",
+        @Query("sort") sort : String = "updated"
     ): ArrayList<IssueResponse>
 
     @GET("user")

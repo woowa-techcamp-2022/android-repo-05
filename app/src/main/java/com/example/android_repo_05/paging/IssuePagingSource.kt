@@ -4,8 +4,6 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.android_repo_05.data.model.IssueResponse
 import com.example.android_repo_05.retrofit.GithubApiInstance.retrofit
-import retrofit2.await
-import java.lang.Exception
 
 private const val STARTING_PAGE_INDEX = 1
 private const val NETWORK_PAGE_SIZE = 10
@@ -16,8 +14,7 @@ class IssuePagingSource : PagingSource<Int, IssueResponse>(){
         // TODO : 네트워크 및 데이터 에러 처리 필요.
         val pageNumber = params.key ?: STARTING_PAGE_INDEX
         val issueList = retrofit.getIssues(
-            page = pageNumber,
-            num = NETWORK_PAGE_SIZE
+            page = pageNumber
         )
         val nextKey = if (issueList.isEmpty()) {
             null
