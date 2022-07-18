@@ -8,7 +8,6 @@ import com.example.android_repo_05.data.repositories.TokenRepository
 import com.example.android_repo_05.data.repositories.UserRepository
 
 class AppViewModelFactory(
-    private val profileImageRepository: ProfileImageRepository? = ProfileImageRepository.profileRepo
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
@@ -19,7 +18,7 @@ class AppViewModelFactory(
                 UserViewModel(UserRepository.getInstance()) as T
             }
             modelClass.isAssignableFrom(MainViewModel::class.java) -> {
-                MainViewModel(profileImageRepository!!) as T
+                MainViewModel(ProfileImageRepository.getInstance()) as T
             }
             modelClass.isAssignableFrom(IssueViewModel::class.java) -> {
                 IssueViewModel(IssueRepository.getInstance()) as T

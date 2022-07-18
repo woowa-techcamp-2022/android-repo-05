@@ -26,10 +26,7 @@ import com.example.android_repo_05.ui.viewmodels.MainViewModel
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private val mainViewModel by lazy {
-        ViewModelProvider(
-            this,
-            AppViewModelFactory(profileImageRepository = ProfileImageRepository.getInstance())
-        )[MainViewModel::class.java]
+        ViewModelProvider(this, AppViewModelFactory())[MainViewModel::class.java]
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,6 +65,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 drawProfileImage(responseState.data!!.profileImageUrl)
             }
         }
+
     }
 
     private fun checkButton(id: Int) {
