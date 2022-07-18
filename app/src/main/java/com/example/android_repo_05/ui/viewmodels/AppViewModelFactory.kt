@@ -2,10 +2,8 @@ package com.example.android_repo_05.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.android_repo_05.data.repositories.IssueRepository
-import com.example.android_repo_05.data.repositories.ProfileImageRepository
-import com.example.android_repo_05.data.repositories.TokenRepository
-import com.example.android_repo_05.data.repositories.UserRepository
+import com.example.android_repo_05.data.repositories.*
+import com.example.android_repo_05.paging.NotificationPagingSource
 
 class AppViewModelFactory(
     private val profileImageRepository: ProfileImageRepository? = ProfileImageRepository.profileRepo
@@ -23,6 +21,9 @@ class AppViewModelFactory(
             }
             modelClass.isAssignableFrom(IssueViewModel::class.java) -> {
                 IssueViewModel(IssueRepository.getInstance()) as T
+            }
+            modelClass.isAssignableFrom(NotificationViewModel::class.java) -> {
+                NotificationViewModel(NotificationRepository.getInstance(NotificationPagingSource())) as T
             }
             else -> {
                 super.create(modelClass)
