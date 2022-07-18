@@ -16,4 +16,5 @@ data class NotificationModel(
     val unread: Boolean
 ) {
     val elapsedTime: String get() = Utils.calculateElapsedTime(updatedAt)
+    var commentCount: Int = 0
 }
