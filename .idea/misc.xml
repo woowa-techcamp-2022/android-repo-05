@@ -11,9 +11,11 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.15896739130434784" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.2881944444444444" />
         <entry key="app/src/main/res/layout/fragment_issue.xml" value="0.3378623188405797" />
+        <entry key="app/src/main/res/layout/fragment_notification.xml" value="0.17147922998986828" />
         <entry key="app/src/main/res/layout/issue_filtering_spinner.xml" value="0.3378623188405797" />
         <entry key="app/src/main/res/layout/item_issue.xml" value="0.3378623188405797" />
         <entry key="app/src/main/res/layout/item_issue_filter.xml" value="0.3378623188405797" />
+        <entry key="app/src/main/res/layout/item_notification.xml" value="0.1" />
         <entry key="app/src/main/res/menu/issue_filter_popup_menu.xml" value="0.4244791666666667" />
       </map>
     </option>

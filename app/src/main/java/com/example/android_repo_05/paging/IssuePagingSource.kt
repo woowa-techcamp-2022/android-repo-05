@@ -3,10 +3,9 @@ package com.example.android_repo_05.paging
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.android_repo_05.data.models.IssueResponse
+import com.example.android_repo_05.others.Constants.NETWORK_PAGE_SIZE
+import com.example.android_repo_05.others.Constants.STARTING_PAGE_INDEX
 import com.example.android_repo_05.retrofit.GithubApiInstance.retrofit
-
-private const val STARTING_PAGE_INDEX = 1
-private const val NETWORK_PAGE_SIZE = 10
 
 class IssuePagingSource : PagingSource<Int, IssueResponse>(){
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, IssueResponse> {
