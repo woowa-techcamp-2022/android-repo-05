@@ -24,6 +24,9 @@ class AppViewModelFactory(
             modelClass.isAssignableFrom(NotificationViewModel::class.java) -> {
                 NotificationViewModel(NotificationRepository.getInstance(NotificationPagingSource())) as T
             }
+            modelClass.isAssignableFrom(RepositoryViewModel::class.java) -> {
+                RepositoryViewModel(RepositoryRepository.getInstance()) as T
+            }
             else -> {
                 super.create(modelClass)
             }
