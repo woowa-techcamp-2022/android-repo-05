@@ -2,12 +2,15 @@ package com.example.android_repo_05.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.core.view.isVisible
+import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.LoadState
+import androidx.paging.PagingData
 import com.example.android_repo_05.adapters.RepositoryPagingAdapter
 import com.example.android_repo_05.databinding.ActivitySearchBinding
 import com.example.android_repo_05.ui.viewmodels.AppViewModelFactory
@@ -33,17 +36,30 @@ class SearchActivity : AppCompatActivity() {
     private fun observe() {
         this.lifecycleScope.launch {
             this@SearchActivity.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                repositoryViewModel.repositoryFlow("kotlin").collectLatest {
-                    repositoryAdapter.submitData(it)
+                launch {
+                    repositoryViewModel.searchResult.collectLatest {
+                        repositoryAdapter.submitData(it)
+                    }
                 }
-            }
-        }
 
-        this.lifecycleScope.launch {
-            this@SearchActivity.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                repositoryAdapter.loadStateFlow.collectLatest {
-                    binding.pgSearchLoading.isVisible = it.source.refresh is LoadState.Loading
-                    binding.pgSearchAppend.isVisible = it.append is LoadState.Loading
+                launch {
+                    repositoryAdapter.loadStateFlow.collectLatest {
+                        binding.pgSearchLoading.isVisible = it.source.refresh is LoadState.Loading
+                        binding.pgSearchAppend.isVisible = it.append is LoadState.Loading
+                    }
+                }
+
+                launch {
+                    repositoryViewModel.searchQuery.collectLatest { searchQuery ->
+                        if (searchQuery.isEmpty()) {
+                            repositoryAdapter.submitData(PagingData.empty())
+                            binding.lEmptyQuery.visibility = View.VISIBLE
+                            binding.rvSearchResult.visibility = View.INVISIBLE
+                        } else {
+                            binding.lEmptyQuery.visibility = View.INVISIBLE
+                            binding.rvSearchResult.visibility = View.VISIBLE
+                        }
+                    }
                 }
             }
         }
@@ -54,6 +70,11 @@ class SearchActivity : AppCompatActivity() {
             finish()
         }
         binding.rvSearchResult.adapter = repositoryAdapter
+        // TODO : 화면 재생성시 다시 데이터 가져옴..
+        binding.tfSearch.setText(repositoryViewModel.searchQuery.value)
+        binding.tfSearch.doOnTextChanged { text, start, before, count ->
+            repositoryViewModel.setSearchQuery(text.toString())
+        }
     }
 
 }
