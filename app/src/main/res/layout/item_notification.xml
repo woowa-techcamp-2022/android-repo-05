@@ -97,7 +97,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="4dp"
-                android:text="13"
+                android:text="@{Integer.toString(notification.commentCount)}"
                 android:textColor="@color/primary"
                 android:textSize="12sp" />
         </com.google.android.material.card.MaterialCardView>

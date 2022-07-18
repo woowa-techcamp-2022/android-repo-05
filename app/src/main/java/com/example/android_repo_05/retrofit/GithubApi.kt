@@ -6,6 +6,7 @@ import com.example.android_repo_05.data.models.TokenModel
 import com.example.android_repo_05.data.models.UserModel
 import com.example.android_repo_05.data.models.UserProfileResponse
 import com.example.android_repo_05.data.models.StarredModel
+import com.example.android_repo_05.data.models.notification.CommentModel
 import com.example.android_repo_05.data.models.notification.NotificationModel
 import com.example.android_repo_05.others.Constants
 import retrofit2.Response
@@ -43,4 +44,7 @@ interface GithubApi {
         @Query("per_page") resultNum: Int = 10,
         @Query("page") pageNum: Int
     ): List<NotificationModel>
+
+    @GET
+    suspend fun getIssueComments(@Url url: String): List<CommentModel>
 }

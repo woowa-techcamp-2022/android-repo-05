@@ -6,5 +6,7 @@ data class RepositoryModel(
     @SerializedName("full_name")
     val repositoryName: String,
     @SerializedName("owner")
-    val owner: OwnerModel
+    val owner: OwnerModel,
+    @SerializedName("issue_comment_url")
+    val commentsUrl: String,
 )
