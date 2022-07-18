@@ -27,16 +27,16 @@
             android:orientation="vertical"
             app:layout_constraintGuide_end="24dp" />
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_notification_org"
+            imgUrl="@{notification.repository.owner.orgImageUrl}"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_marginTop="16dp"
-            android:contentDescription="@string/notification_icon_desc"
             android:src="@drawable/ic_star"
-            imgUrl="@{notification.repository.owner.orgImageUrl}"
+            app:layout_constraintBottom_toBottomOf="@id/tv_notification_repo"
             app:layout_constraintStart_toEndOf="@id/gl_notification_begin"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@id/tv_notification_repo"
+            app:shapeAppearanceOverlay="@style/circleShape" />
 
         <TextView
             android:id="@+id/tv_notification_repo"
