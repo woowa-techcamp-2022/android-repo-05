@@ -44,6 +44,13 @@
         <item name="android:ellipsize">end</item>
     </style>
 
+    <style name="SearchActivity"/>
+
+    <style name="SearchActivity.SearchItemTextStyle" parent="TextAppearance.AppCompat">
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
     <style name="roundShape" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">14dp</item>
