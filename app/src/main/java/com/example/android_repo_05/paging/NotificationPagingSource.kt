@@ -19,6 +19,10 @@ class NotificationPagingSource : PagingSource<Int, NotificationModel>() {
         return try {
             val nextPageNumber = params.key ?: STARTING_PAGE_INDEX
             val response = GithubApiInstance.retrofit.getNotification(pageNum = nextPageNumber)
+            response.forEach {
+                it.commentCount =
+                    GithubApiInstance.retrofit.getIssueComments(it.subject.url + "/comments").size
+            }
             val prevKey = if (nextPageNumber == STARTING_PAGE_INDEX) {
                 null
             } else {
