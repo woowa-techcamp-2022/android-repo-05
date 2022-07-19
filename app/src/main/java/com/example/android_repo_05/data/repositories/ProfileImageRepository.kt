@@ -4,7 +4,7 @@ import com.example.android_repo_05.retrofit.GithubApiInstance
 
 class ProfileImageRepository {
     companion object {
-        var profileRepo: ProfileImageRepository? = null
+        private var profileRepo: ProfileImageRepository? = null
 
         fun getInstance(): ProfileImageRepository {
             return profileRepo ?: synchronized(this) {

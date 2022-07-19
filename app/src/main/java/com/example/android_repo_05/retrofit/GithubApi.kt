@@ -1,11 +1,7 @@
 package com.example.android_repo_05.retrofit
 
 import com.example.android_repo_05.BuildConfig
-import com.example.android_repo_05.data.models.IssueResponse
-import com.example.android_repo_05.data.models.TokenModel
-import com.example.android_repo_05.data.models.UserModel
-import com.example.android_repo_05.data.models.UserProfileResponse
-import com.example.android_repo_05.data.models.StarredModel
+import com.example.android_repo_05.data.models.*
 import com.example.android_repo_05.data.models.notification.CommentModel
 import com.example.android_repo_05.data.models.notification.NotificationModel
 import com.example.android_repo_05.others.Constants
@@ -32,6 +28,14 @@ interface GithubApi {
         @Query("state") state: String = "all",
         @Query("sort") sort: String = "updated"
     ): ArrayList<IssueResponse>
+
+    @GET("search/repositories")
+    suspend fun getRepositories(
+        @Query("page") page: Int,
+        @Query("num") num: Int = 10,
+        @Query("q") query : String,
+        @Query("sort") sort: String = "stars"
+    ): RepositoryResponse
 
     @GET("user/starred")
     suspend fun getStarred(): Response<List<StarredModel>>
