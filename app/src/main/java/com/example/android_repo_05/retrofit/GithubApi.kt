@@ -51,4 +51,7 @@ interface GithubApi {
 
     @GET
     suspend fun getIssueComments(@Url url: String): List<CommentModel>
+
+    @PATCH
+    suspend fun changeNotificationAsRead(@Url url: String): Response<String>
 }

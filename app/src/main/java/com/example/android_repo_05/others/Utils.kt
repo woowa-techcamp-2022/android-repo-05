@@ -2,12 +2,12 @@ package com.example.android_repo_05.others
 
 import android.content.Context
 import android.net.Uri
-import android.util.TypedValue
 import com.example.android_repo_05.BuildConfig
 import com.example.android_repo_05.others.enums.TimeUnit
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.roundToInt
 
 object Utils {
     private val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX", Locale.KOREA)
@@ -20,12 +20,9 @@ object Utils {
         .appendQueryParameter("scope", "repo,user,notifications")
         .build()
 
-    fun dpToPx(context: Context, dp: Float): Float {
-        return TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP,
-            dp,
-            context.resources.displayMetrics
-        )
+    fun dpToPx(context: Context, dp: Int): Int {
+        val density = context.resources.displayMetrics.density
+        return (dp.toFloat() * density).roundToInt()
     }
 
     fun calculateElapsedTime(updatedAt: String): String {

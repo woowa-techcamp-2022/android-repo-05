@@ -3,7 +3,6 @@ package com.example.android_repo_05.ui.viewmodels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.android_repo_05.data.repositories.*
-import com.example.android_repo_05.paging.NotificationPagingSource
 
 class AppViewModelFactory(
 ) : ViewModelProvider.Factory {
@@ -22,7 +21,7 @@ class AppViewModelFactory(
                 IssueViewModel(IssueRepository.getInstance()) as T
             }
             modelClass.isAssignableFrom(NotificationViewModel::class.java) -> {
-                NotificationViewModel(NotificationRepository.getInstance(NotificationPagingSource())) as T
+                NotificationViewModel(NotificationRepository.getInstance()) as T
             }
             modelClass.isAssignableFrom(RepositoryViewModel::class.java) -> {
                 RepositoryViewModel(RepositoryRepository.getInstance()) as T
