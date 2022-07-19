@@ -45,18 +45,18 @@ class IssueFragment : BaseFragment<FragmentIssueBinding>(R.layout.fragment_issue
     private fun observe() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                issueViewModel.filteredList.collectLatest {
-                    issueAdapter.submitData(it)
+                launch {
+                    issueViewModel.filteredList.collectLatest {
+                        issueAdapter.submitData(it)
+                    }
                 }
-            }
-        }
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                issueAdapter.loadStateFlow.collectLatest {
-                    // TODO : 데이터 바인딩으로 처리 가능?
-                    binding.pgLoading.isVisible = it.source.refresh is LoadState.Loading
-                    binding.pgAppend.isVisible = it.append is LoadState.Loading
+                launch {
+                    issueAdapter.loadStateFlow.collectLatest {
+                        // TODO : 데이터 바인딩으로 처리 가능?
+                        binding.pgLoading.isVisible = it.source.refresh is LoadState.Loading
+                        binding.pgAppend.isVisible = it.append is LoadState.Loading
+                    }
                 }
             }
         }

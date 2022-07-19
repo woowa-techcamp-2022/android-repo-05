@@ -1,6 +1,7 @@
 package com.example.android_repo_05.others
 
 import android.content.Context
+import android.graphics.Color
 import android.net.Uri
 import com.example.android_repo_05.BuildConfig
 import com.example.android_repo_05.others.enums.TimeUnit
@@ -11,6 +12,14 @@ import kotlin.math.roundToInt
 
 object Utils {
     private val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX", Locale.KOREA)
+
+    val languageColorMap : MutableMap<String, Int> = mutableMapOf(
+        "Kotlin" to Color.rgb(169,123,255),
+        "Java" to Color.rgb(176,114,25),
+        "Python" to Color.rgb(53,114,165),
+        "JavaScript" to Color.rgb(241,224,90),
+        "C++" to Color.rgb(243,75,125)
+    )
 
     fun getGithubIdentityRequestUri(): Uri = Uri.Builder().scheme("https").authority("github.com")
         .appendPath("login")
