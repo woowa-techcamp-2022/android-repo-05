@@ -44,7 +44,7 @@ class SearchActivity : AppCompatActivity() {
 
                 launch {
                     repositoryAdapter.loadStateFlow.collectLatest {
-                        binding.pgSearchLoading.isVisible = it.source.refresh is LoadState.Loading
+                        binding.pgSearchLoading.isVisible = it.refresh is LoadState.Loading
                         binding.pgSearchAppend.isVisible = it.append is LoadState.Loading
                     }
                 }
@@ -70,8 +70,6 @@ class SearchActivity : AppCompatActivity() {
             finish()
         }
         binding.rvSearchResult.adapter = repositoryAdapter
-        // TODO : 화면 재생성시 다시 데이터 가져옴..
-        binding.tfSearch.setText(repositoryViewModel.searchQuery.value)
         binding.tfSearch.doOnTextChanged { text, start, before, count ->
             repositoryViewModel.setSearchQuery(text.toString())
         }

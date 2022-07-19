@@ -16,7 +16,7 @@ class RepositoryViewModel(private val repository: RepositoryRepository) : ViewMo
         repository.getRepositoryListByPaging(query)
 
     private val _searchQuery = MutableStateFlow("")
-    val searchQuery: StateFlow<String> = _searchQuery
+    val searchQuery: Flow<String> = _searchQuery
 
     fun setSearchQuery(query: String) {
         _searchQuery.value = query
@@ -28,6 +28,6 @@ class RepositoryViewModel(private val repository: RepositoryRepository) : ViewMo
         .debounce(700)
         .flatMapLatest { query ->
             if (query.isBlank()) emptyFlow()
-            else repositoryFlow(query).cachedIn(viewModelScope)
-        }
+            else repositoryFlow(query)
+        }.cachedIn(viewModelScope)
 }
