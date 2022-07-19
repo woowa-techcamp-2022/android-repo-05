@@ -2,22 +2,25 @@ package com.example.android_repo_05.ui.fragments
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.LoadState
+import androidx.paging.filter
 import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.ItemTouchHelper.LEFT
-import androidx.recyclerview.widget.RecyclerView
 import com.example.android_repo_05.R
 import com.example.android_repo_05.adapters.NotificationAdapter
+import com.example.android_repo_05.adapters.helpers.NotificationItemHelperCallback
 import com.example.android_repo_05.base.BaseFragment
+import com.example.android_repo_05.data.models.ResponseState
 import com.example.android_repo_05.databinding.FragmentNotificationBinding
 import com.example.android_repo_05.ui.viewmodels.AppViewModelFactory
 import com.example.android_repo_05.ui.viewmodels.NotificationViewModel
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 
 class NotificationFragment :
@@ -53,29 +56,40 @@ class NotificationFragment :
                 }
             }
         }
+        notificationViewModel.changeResponse.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is ResponseState.Loading -> binding.pbNotification.isVisible = true
+                is ResponseState.Success -> binding.pbNotification.isVisible = false
+                is ResponseState.Error -> restoreItem()
+            }
+        }
     }
 
     private fun setSwipeCallback() {
-        val swipeCallback = object : ItemTouchHelper.Callback() {
-            override fun getMovementFlags(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder
-            ): Int {
-                return makeMovementFlags(0, LEFT)
-            }
-
-            override fun onMove(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
-            ): Boolean {
-                return false
-            }
-
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                // TODO("Not yet implemented")
-            }
+        val swipeCallback = NotificationItemHelperCallback(requireContext()) { position ->
+            removeItemCallback(position)
         }
         ItemTouchHelper(swipeCallback).attachToRecyclerView(binding.rvNotification)
+    }
+
+    private fun restoreItem() {
+        binding.pbNotification.isVisible = false
+        notificationViewModel.restoreItem()
+        viewLifecycleOwner.lifecycleScope.launch {
+            notificationViewModel.notificationList.collectLatest {
+                notificationAdapter.submitData(it)
+            }
+        }
+        Toast.makeText(requireContext(), "읽음 처리를 실패했습니다.", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun removeItemCallback(position: Int) {
+        notificationViewModel.changeNotificationAsRead(notificationAdapter.snapshot().items[position].url)
+        notificationViewModel.removeItem(notificationAdapter.snapshot().items[position].id)
+        viewLifecycleOwner.lifecycleScope.launch {
+            notificationViewModel.notificationList.collectLatest {
+                notificationAdapter.submitData(it)
+            }
+        }
     }
 }

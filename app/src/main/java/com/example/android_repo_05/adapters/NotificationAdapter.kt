@@ -41,7 +41,7 @@ class NotificationAdapter
         holder.bind(getItem(position))
     }
 
-    inner class NotificationViewHolder(
+    class NotificationViewHolder(
         private val binding: ItemNotificationBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(data: NotificationModel?) {

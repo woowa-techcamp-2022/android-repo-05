@@ -6,6 +6,8 @@ import com.example.android_repo_05.data.models.notification.NotificationModel
 import com.example.android_repo_05.others.Constants.NETWORK_PAGE_SIZE
 import com.example.android_repo_05.others.Constants.STARTING_PAGE_INDEX
 import com.example.android_repo_05.retrofit.GithubApiInstance
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class NotificationPagingSource : PagingSource<Int, NotificationModel>() {
     override fun getRefreshKey(state: PagingState<Int, NotificationModel>): Int? {
@@ -20,13 +22,15 @@ class NotificationPagingSource : PagingSource<Int, NotificationModel>() {
             val nextPageNumber = params.key ?: STARTING_PAGE_INDEX
             val response = GithubApiInstance.retrofit.getNotification(pageNum = nextPageNumber)
             response.forEach {
-                it.commentCount =
-                    GithubApiInstance.retrofit.getIssueComments(it.subject.url + "/comments").size
+                withContext(Dispatchers.IO) {
+                    it.commentCount =
+                        GithubApiInstance.retrofit.getIssueComments(it.subject.url + "/comments").size
+                }
             }
             val prevKey = if (nextPageNumber == STARTING_PAGE_INDEX) {
                 null
             } else {
-                nextPageNumber
+                nextPageNumber - 1
             }
             val nextKey = if (response.isEmpty()) {
                 null
