@@ -18,8 +18,10 @@
             android:layout_height="24dp"
             android:layout_marginTop="16dp"
             android:layout_marginStart="24dp"
+            app:imgUrl="@{repository.profileUrl}"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:shapeAppearanceOverlay="@style/circleShape"/>
 
         <TextView
             style="@style/SearchActivity.SearchItemTextStyle"
@@ -89,6 +91,7 @@
             android:layout_marginStart="8dp"
             android:textColor="@color/grey"
             android:background="@drawable/bg_search_language_color"
+            app:languageClr="@{repository.language}"
             android:padding="5dp"
             app:layout_constraintStart_toEndOf="@id/tv_search_star_cnt"
             app:layout_constraintTop_toTopOf="@id/iv_search_star" />
