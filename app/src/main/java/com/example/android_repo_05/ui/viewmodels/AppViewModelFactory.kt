@@ -6,7 +6,6 @@ import com.example.android_repo_05.data.repositories.*
 import com.example.android_repo_05.paging.NotificationPagingSource
 
 class AppViewModelFactory(
-    private val profileImageRepository: ProfileImageRepository? = ProfileImageRepository.profileRepo
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
@@ -17,13 +16,16 @@ class AppViewModelFactory(
                 UserViewModel(UserRepository.getInstance()) as T
             }
             modelClass.isAssignableFrom(MainViewModel::class.java) -> {
-                MainViewModel(profileImageRepository!!) as T
+                MainViewModel(ProfileImageRepository.getInstance()) as T
             }
             modelClass.isAssignableFrom(IssueViewModel::class.java) -> {
                 IssueViewModel(IssueRepository.getInstance()) as T
             }
             modelClass.isAssignableFrom(NotificationViewModel::class.java) -> {
                 NotificationViewModel(NotificationRepository.getInstance(NotificationPagingSource())) as T
+            }
+            modelClass.isAssignableFrom(RepositoryViewModel::class.java) -> {
+                RepositoryViewModel(RepositoryRepository.getInstance()) as T
             }
             else -> {
                 super.create(modelClass)

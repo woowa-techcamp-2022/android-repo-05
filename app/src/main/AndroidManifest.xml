@@ -40,7 +40,8 @@
         </activity>
         <activity
             android:name=".ui.activities.SearchActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="stateAlwaysVisible"/>
         <activity
             android:name=".ui.activities.ProfileActivity"
             android:exported="false" />
