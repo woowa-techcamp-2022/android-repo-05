@@ -1,5 +1,6 @@
 package com.example.android_repo_05.data.repositories
 
+import android.util.Log
 import com.example.android_repo_05.data.models.ResponseState
 import com.example.android_repo_05.data.models.TokenModel
 import com.example.android_repo_05.retrofit.GithubApiInstance
@@ -27,6 +28,9 @@ class TokenRepository {
     private fun handleTokenResponse(response: Response<TokenModel>): ResponseState<TokenModel> {
         if (response.isSuccessful) {
             response.body()?.let { result ->
+                if(result.accessToken.isNullOrBlank()) {
+                    return ResponseState.Error("AccessToken 획득 실패")
+                }
                 return ResponseState.Success(result)
             }
         }
