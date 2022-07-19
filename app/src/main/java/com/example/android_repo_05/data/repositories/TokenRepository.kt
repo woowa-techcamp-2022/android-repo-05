@@ -1,8 +1,12 @@
 package com.example.android_repo_05.data.repositories
 
-import android.util.Log
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.stringPreferencesKey
+import com.example.android_repo_05.base.CustomApplication
+import com.example.android_repo_05.data.datastore.dataStore
 import com.example.android_repo_05.data.models.ResponseState
 import com.example.android_repo_05.data.models.TokenModel
+import com.example.android_repo_05.others.Constants
 import com.example.android_repo_05.retrofit.GithubApiInstance
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -28,12 +32,18 @@ class TokenRepository {
     private fun handleTokenResponse(response: Response<TokenModel>): ResponseState<TokenModel> {
         if (response.isSuccessful) {
             response.body()?.let { result ->
-                if(result.accessToken.isNullOrBlank()) {
+                if (result.accessToken.isNullOrBlank()) {
                     return ResponseState.Error("AccessToken 획득 실패")
                 }
                 return ResponseState.Success(result)
             }
         }
         return ResponseState.Error(response.message())
+    }
+
+    suspend fun setAccessToken(accessToken: String) {
+        CustomApplication.instance.context.dataStore.edit { preferences ->
+            preferences[stringPreferencesKey(Constants.prefKey)] = accessToken
+        }
     }
 }
