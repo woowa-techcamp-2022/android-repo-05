@@ -6,11 +6,28 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.android_repo_05.data.models.RepositoryModel
 import com.example.android_repo_05.data.repositories.RepositoryRepository
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.*
 
 class RepositoryViewModel(private val repository: RepositoryRepository) : ViewModel() {
 
-    fun repositoryFlow(query: String): Flow<PagingData<RepositoryModel>> =
-        repository.getRepositoryListByPaging(query).cachedIn(viewModelScope)
+    private fun repositoryFlow(query: String): Flow<PagingData<RepositoryModel>> =
+        repository.getRepositoryListByPaging(query)
 
+    private val _searchQuery = MutableStateFlow("")
+    val searchQuery: Flow<String> = _searchQuery
+
+    fun setSearchQuery(query: String) {
+        _searchQuery.value = query
+    }
+
+    // TODO : 아직 debounce와 flatMapLatest는 정식 출시가 안됨..
+    @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
+    val searchResult: Flow<PagingData<RepositoryModel>> = _searchQuery
+        .debounce(700)
+        .flatMapLatest { query ->
+            if (query.isBlank()) emptyFlow()
+            else repositoryFlow(query)
+        }.cachedIn(viewModelScope)
 }
