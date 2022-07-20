@@ -13,6 +13,7 @@ import androidx.paging.LoadState
 import com.example.android_repo_05.R
 import com.example.android_repo_05.adapters.IssuePagingAdapter
 import com.example.android_repo_05.adapters.IssueSpinnerAdapter
+import com.example.android_repo_05.adapters.PagingLoadStateAdapter
 import com.example.android_repo_05.base.BaseFragment
 import com.example.android_repo_05.customviews.IssueFilteringSpinner
 import com.example.android_repo_05.databinding.FragmentIssueBinding
@@ -55,8 +56,13 @@ class IssueFragment : BaseFragment<FragmentIssueBinding>(R.layout.fragment_issue
                 launch {
                     issueAdapter.loadStateFlow.collectLatest {
                         // TODO : 데이터 바인딩으로 처리 가능?
-                        binding.pgLoading.isVisible = it.refresh is LoadState.Loading
-                        binding.pgAppend.isVisible = it.append is LoadState.Loading
+                        with(binding) {
+                            pbLoading.isVisible = it.source.refresh is LoadState.Loading
+                            srlIssue.isVisible =
+                                it.refresh !is LoadState.Loading && issueAdapter.itemCount != 0
+                            tvIssueNoResult.isVisible =
+                                it.append.endOfPaginationReached && issueAdapter.itemCount == 0
+                        }
                     }
                 }
 
@@ -77,7 +83,13 @@ class IssueFragment : BaseFragment<FragmentIssueBinding>(R.layout.fragment_issue
     }
 
     override fun initViews() {
-        binding.rvIssue.adapter = issueAdapter
+        binding.rvIssue.adapter = issueAdapter.withLoadStateFooter(
+            PagingLoadStateAdapter { issueAdapter.refresh() }
+        )
+        binding.srlIssue.setOnRefreshListener {
+            binding.srlIssue.isRefreshing = false
+            issueAdapter.refresh()
+        }
         binding.spIssueFiltering.adapter = issueSpinnerAdapter
         initDropDownEvent()
     }
@@ -96,13 +108,16 @@ class IssueFragment : BaseFragment<FragmentIssueBinding>(R.layout.fragment_issue
 
             onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
-                    adapter: AdapterView<*>?, view: View?, position: Int, id: Long
+                    adapter: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
                 ) {
                     issueViewModel.setIssueFiltering(IssueFiltering.values()[position])
                 }
 
                 override fun onNothingSelected(p0: AdapterView<*>?) {
-                    TODO("Not yet implemented")
+                    // TODO("Not yet implemented")
                 }
             }
         }

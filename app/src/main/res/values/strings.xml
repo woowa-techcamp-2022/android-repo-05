@@ -38,6 +38,8 @@
     <string name="search_empty_query_title">Find Your Stuff</string>
     <string name="search_empty_query_content">Search all of GitHub for People,\n Repositories, Organizations, Issues,\n and Pull Requests.</string>
 
-    <string name="notification_no_result">There are no notifications.</string>
     <string name="load_state_retry_desc">Retry data loading</string>
+    <string name="notification_no_result">There are no notifications.</string>
+    <string name="issue_no_result">There are no issue.</string>
+    <string name="search_no_result">Repository not found.</string>
 </resources>

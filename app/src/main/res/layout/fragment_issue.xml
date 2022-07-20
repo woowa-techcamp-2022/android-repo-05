@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="isDropDownOpened"
             type="Boolean" />
@@ -43,33 +44,40 @@
             app:layout_constraintStart_toEndOf="@id/iv_issue_filter"
             app:layout_constraintTop_toTopOf="@+id/v_issue_filter" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_issue"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/srl_issue"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="16dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/v_issue_filter"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            app:layout_constraintTop_toBottomOf="@id/v_issue_filter">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_issue"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
         <com.example.android_repo_05.customviews.IssueFilteringSpinner
             android:id="@+id/sp_issue_filtering"
             android:layout_width="148dp"
             android:layout_height="0dp"
             android:layout_marginStart="20dp"
-            android:spinnerMode="dropdown"
             android:background="@null"
+            android:dropDownVerticalOffset="10dp"
             android:overlapAnchor="false"
             android:popupBackground="@drawable/bg_issue_filter"
             android:popupTheme="@style/IssueFragment.FilterMenu"
-            android:dropDownVerticalOffset="10dp"
+            android:spinnerMode="dropdown"
             app:layout_constraintBottom_toBottomOf="@id/v_issue_filter"
             app:layout_constraintEnd_toEndOf="@id/v_issue_filter"
             app:layout_constraintTop_toTopOf="@id/v_issue_filter" />
 
-        <ProgressBar
-            android:id="@+id/pg_append"
-            style="?android:attr/progressBarStyle"
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/pb_loading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:indeterminate="true"
@@ -77,15 +85,15 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rv_issue" />
+            app:layout_constraintTop_toBottomOf="@id/v_issue_filter" />
 
-        <ProgressBar
-            android:id="@+id/pg_loading"
-            style="?android:attr/progressBarStyle"
+        <TextView
+            android:id="@+id/tv_issue_no_result"
+            style="@style/NoResultTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:indeterminate="true"
-            android:visibility="gone"
+            android:layout_marginHorizontal="24dp"
+            android:text="@string/issue_no_result"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

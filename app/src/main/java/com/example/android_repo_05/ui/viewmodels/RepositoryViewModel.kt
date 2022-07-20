@@ -29,7 +29,7 @@ class RepositoryViewModel(private val repository: RepositoryRepository) : ViewMo
         _searchQuery.value = query
     }
 
-    fun setSearchFocused(isFocused : Boolean) {
+    fun setSearchFocused(isFocused: Boolean) {
         _isSearchFocused.value = isFocused
     }
 

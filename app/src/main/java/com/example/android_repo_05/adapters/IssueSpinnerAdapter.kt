@@ -14,13 +14,13 @@ class IssueSpinnerAdapter(
 ) : BaseAdapter() {
 
     private var selectedFilter: IssueFiltering = IssueFiltering.Open
-    private var isSpinnerSelected : Boolean = false
+    private var isSpinnerSelected: Boolean = false
 
     fun setSelectedFilter(selectedFilter: IssueFiltering) {
         this.selectedFilter = selectedFilter
     }
 
-    fun setSpinnerSelected(isSpinnerSelected : Boolean) {
+    fun setSpinnerSelected(isSpinnerSelected: Boolean) {
         this.isSpinnerSelected = isSpinnerSelected
         notifyDataSetChanged()
     }
@@ -35,7 +35,8 @@ class IssueSpinnerAdapter(
         데이터 바인딩 적용시 깜빡거림 현상이 있어 뷰바인딩 적용!
      */
     override fun getView(position: Int, view: View?, viewGroup: ViewGroup?): View {
-        val binding = ItemIssueFilterHeadBinding.inflate(LayoutInflater.from(context), viewGroup, false)
+        val binding =
+            ItemIssueFilterHeadBinding.inflate(LayoutInflater.from(context), viewGroup, false)
         binding.tvFilterHead.text = IssueFiltering.values()[position].filterName
         binding.ivFilterHead.scaleY = if (this.isSpinnerSelected) -1F else 1F
         return binding.root
@@ -47,5 +48,4 @@ class IssueSpinnerAdapter(
         binding.selectedFilter = this.selectedFilter
         return binding.root
     }
-
 }

@@ -8,8 +8,8 @@ class IssueFilteringSpinner @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyle: Int = 0
 ) : AppCompatSpinner(context, attrs, defStyle) {
 
-    private var onDropDownEventsListener : OnDropDownEventsListener? = null
-    private var isDropDownOpened : Boolean = false
+    private var onDropDownEventsListener: OnDropDownEventsListener? = null
+    private var isDropDownOpened: Boolean = false
 
     fun setOnDropDownListener(listener: OnDropDownEventsListener) {
         onDropDownEventsListener = listener

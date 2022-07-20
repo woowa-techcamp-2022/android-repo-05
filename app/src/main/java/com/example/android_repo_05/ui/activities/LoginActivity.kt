@@ -36,20 +36,12 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    /*
-       사용자의 Github identity 요청 메소드
-    */
     private fun getGithubAccessCode() {
         Utils.getGithubIdentityRequestUri().run {
             startActivity(Intent(Intent.ACTION_VIEW, this))
         }
     }
 
-    /*
-       getGithubAccessCode() 메소드 호출로 사용자의 Github identity 요청 작업을 완료하면
-       액티비티가 재실행 되면서 실행하게 로직을 담당하는 메소드
-       access code를 획득하고 accessToken 획득 작업을 실행함
-     */
     private fun checkAccessCode() {
         intent?.data?.getQueryParameter("code")?.let { code ->
             tokenViewModel.getAccessTokenFromRemote(code)
@@ -66,15 +58,8 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    /*
-        remote에서 access token을 성공적으로 받아 온 경우, 혹은 data store에 저장된 access token값을
-        성공적으로 불러온 경우를 처리하는 메소드
-        data store에서 access token 값을 불러온 경우 response.tokenType이 blanck로 설정됨
-        즉, response.tokenType이 blanck가 아니면 remote에서 access token을 받아 온 것이기 때문에
-        data store에 저장해야 함
-    */
     private fun handleLoginSuccess(state: ResponseState<TokenModel>) {
-        binding.cpiLogin.visibility = View.INVISIBLE
+        binding.pbLogin.visibility = View.INVISIBLE
         state.data?.let { response ->
             if (!response.accessToken.isNullOrEmpty()) {
                 tokenViewModel.setAccessTokenToDataStore(response.accessToken)
@@ -85,13 +70,13 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun handleLoginFailure() {
-        binding.cpiLogin.visibility = View.INVISIBLE
+        binding.pbLogin.visibility = View.INVISIBLE
         binding.btnLogin.isClickable = true
         Toast.makeText(this, R.string.login_login_failure, Snackbar.LENGTH_SHORT).show()
     }
 
     private fun handleLoginLoading() {
-        binding.cpiLogin.visibility = View.VISIBLE
+        binding.pbLogin.visibility = View.VISIBLE
         binding.btnLogin.isClickable = false
     }
 }

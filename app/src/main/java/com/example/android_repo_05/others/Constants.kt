@@ -5,7 +5,7 @@ object Constants {
     const val githubApiBaseUrl = "https://api.github.com/"
 
     const val STARTING_PAGE_INDEX = 1
-    const val NETWORK_PAGE_SIZE = 10
+    const val NOTIFICATION_PAGE_SIZE = 10
     const val SEARCH_PAGE_SIZE = 10
     const val ISSUE_PAGE_SIZE = 10
 
