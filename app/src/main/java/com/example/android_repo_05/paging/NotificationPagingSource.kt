@@ -13,10 +13,7 @@ import java.io.IOException
 
 class NotificationPagingSource : PagingSource<Int, NotificationModel>() {
     override fun getRefreshKey(state: PagingState<Int, NotificationModel>): Int? {
-        return state.anchorPosition?.let { anchorPosition ->
-            state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
-                ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
-        }
+        return null
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, NotificationModel> {
