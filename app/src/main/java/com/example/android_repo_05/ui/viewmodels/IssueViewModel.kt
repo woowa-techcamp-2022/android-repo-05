@@ -19,9 +19,9 @@ class IssueViewModel(repository: IssueRepository) : ViewModel() {
     private val _isDropDownOpened = MutableStateFlow(false)
     val isDropDownOpened: StateFlow<Boolean> = _isDropDownOpened
 
-    val filteredList = issueList.combine(issueFiltering) { issues, filterings ->
+    val filteredList = issueList.combine(issueFiltering) { issues, issueFilter ->
         issues.filter { issue ->
-            issue.state in filterings.filterList
+            issue.state in issueFilter.filterList
         }
     }
 

@@ -14,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.LoadState
 import androidx.paging.PagingData
+import com.example.android_repo_05.adapters.PagingLoadStateAdapter
 import com.example.android_repo_05.adapters.RepositoryPagingAdapter
 import com.example.android_repo_05.databinding.ActivitySearchBinding
 import com.example.android_repo_05.ui.viewmodels.AppViewModelFactory
@@ -48,7 +49,6 @@ class SearchActivity : AppCompatActivity() {
                     repositoryAdapter.loadStateFlow.collectLatest {
                         with(binding) {
                             pbSearchLoading.isVisible = it.refresh is LoadState.Loading
-                            pbSearchAppend.isVisible = it.append is LoadState.Loading
                             rvSearchResult.isVisible =
                                 it.refresh !is LoadState.Loading && repositoryAdapter.itemCount != 0
                             tvSearchNoResult.isVisible = !tfSearch.text.isNullOrEmpty() &&
@@ -86,7 +86,9 @@ class SearchActivity : AppCompatActivity() {
         binding.tbSearch.setNavigationOnClickListener {
             finish()
         }
-        binding.rvSearchResult.adapter = repositoryAdapter
+        binding.rvSearchResult.adapter = repositoryAdapter.withLoadStateFooter(
+            PagingLoadStateAdapter { repositoryAdapter.refresh() }
+        )
 
         binding.tfSearch.doOnTextChanged { text, _, _, _ ->
             repositoryViewModel.setSearchQuery(text.toString())

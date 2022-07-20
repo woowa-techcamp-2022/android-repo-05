@@ -13,6 +13,7 @@ import androidx.paging.LoadState
 import com.example.android_repo_05.R
 import com.example.android_repo_05.adapters.IssuePagingAdapter
 import com.example.android_repo_05.adapters.IssueSpinnerAdapter
+import com.example.android_repo_05.adapters.PagingLoadStateAdapter
 import com.example.android_repo_05.base.BaseFragment
 import com.example.android_repo_05.customviews.IssueFilteringSpinner
 import com.example.android_repo_05.databinding.FragmentIssueBinding
@@ -57,7 +58,6 @@ class IssueFragment : BaseFragment<FragmentIssueBinding>(R.layout.fragment_issue
                         // TODO : 데이터 바인딩으로 처리 가능?
                         with(binding) {
                             pbLoading.isVisible = it.source.refresh is LoadState.Loading
-                            pbAppend.isVisible = it.append is LoadState.Loading
                             rvIssue.isVisible =
                                 it.refresh !is LoadState.Loading && issueAdapter.itemCount != 0
                             tvIssueNoResult.isVisible =
@@ -83,7 +83,9 @@ class IssueFragment : BaseFragment<FragmentIssueBinding>(R.layout.fragment_issue
     }
 
     override fun initViews() {
-        binding.rvIssue.adapter = issueAdapter
+        binding.rvIssue.adapter = issueAdapter.withLoadStateFooter(
+            PagingLoadStateAdapter { issueAdapter.refresh() }
+        )
         binding.spIssueFiltering.adapter = issueSpinnerAdapter
         initDropDownEvent()
     }

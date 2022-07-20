@@ -24,7 +24,7 @@ interface GithubApi {
     @GET("user/issues")
     suspend fun getIssues(
         @Query("page") page: Int,
-        @Query("num") num: Int = 10,
+        @Query("num") num: Int = Constants.ISSUE_PAGE_SIZE,
         @Query("state") state: String = "all",
         @Query("sort") sort: String = "updated"
     ): ArrayList<IssueResponse>
@@ -32,7 +32,7 @@ interface GithubApi {
     @GET("search/repositories")
     suspend fun getRepositories(
         @Query("page") page: Int,
-        @Query("num") num: Int = 10,
+        @Query("num") num: Int = Constants.SEARCH_PAGE_SIZE,
         @Query("q") query: String,
         @Query("sort") sort: String = "stars"
     ): RepositoryResponse
@@ -45,7 +45,7 @@ interface GithubApi {
 
     @GET("notifications")
     suspend fun getNotification(
-        @Query("per_page") resultNum: Int = Constants.NETWORK_PAGE_SIZE,
+        @Query("per_page") resultNum: Int = Constants.NOTIFICATION_PAGE_SIZE,
         @Query("page") pageNum: Int
     ): List<NotificationModel>
 
