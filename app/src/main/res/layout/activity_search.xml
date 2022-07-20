@@ -34,12 +34,13 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tf_search"
-            android:freezesText="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_search_tf"
+            android:freezesText="true"
             android:hint="@string/search_textField_hint">
-            <requestFocus/>
+
+            <requestFocus />
         </com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -87,22 +88,34 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.progressindicator.CircularProgressIndicator
-        android:id="@+id/pg_search_loading"
+        android:id="@+id/pb_search_loading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:indeterminate="true"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/rv_search_result"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:visibility="gone" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/rv_search_result" />
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
-        android:id="@+id/pg_search_append"
+        android:id="@+id/pb_search_append"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:indeterminate="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_search_no_result"
+        style="@style/NoResultTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:text="@string/search_no_result"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:visibility="gone" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/l_tf_search" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

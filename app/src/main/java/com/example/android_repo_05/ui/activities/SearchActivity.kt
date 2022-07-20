@@ -1,8 +1,7 @@
 package com.example.android_repo_05.ui.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Lifecycle
@@ -15,13 +14,12 @@ import com.example.android_repo_05.adapters.RepositoryPagingAdapter
 import com.example.android_repo_05.databinding.ActivitySearchBinding
 import com.example.android_repo_05.ui.viewmodels.AppViewModelFactory
 import com.example.android_repo_05.ui.viewmodels.RepositoryViewModel
-import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class SearchActivity : AppCompatActivity() {
     private val binding by lazy { ActivitySearchBinding.inflate(layoutInflater) }
     private val repositoryAdapter by lazy { RepositoryPagingAdapter() }
-
     private val repositoryViewModel by lazy {
         ViewModelProvider(this, AppViewModelFactory())[RepositoryViewModel::class.java]
     }
@@ -44,20 +42,29 @@ class SearchActivity : AppCompatActivity() {
 
                 launch {
                     repositoryAdapter.loadStateFlow.collectLatest {
-                        binding.pgSearchLoading.isVisible = it.refresh is LoadState.Loading
-                        binding.pgSearchAppend.isVisible = it.append is LoadState.Loading
+                        with(binding) {
+                            pbSearchLoading.isVisible = it.refresh is LoadState.Loading
+                            pbSearchAppend.isVisible = it.append is LoadState.Loading
+                            rvSearchResult.isVisible =
+                                it.refresh !is LoadState.Loading && repositoryAdapter.itemCount != 0
+                            tvSearchNoResult.isVisible = !tfSearch.text.isNullOrEmpty() &&
+                                    it.append.endOfPaginationReached && repositoryAdapter.itemCount == 0
+                        }
                     }
                 }
 
                 launch {
                     repositoryViewModel.searchQuery.collectLatest { searchQuery ->
-                        if (searchQuery.isEmpty()) {
-                            repositoryAdapter.submitData(PagingData.empty())
-                            binding.lEmptyQuery.visibility = View.VISIBLE
-                            binding.rvSearchResult.visibility = View.INVISIBLE
-                        } else {
-                            binding.lEmptyQuery.visibility = View.INVISIBLE
-                            binding.rvSearchResult.visibility = View.VISIBLE
+                        with(binding) {
+                            if (searchQuery.isEmpty()) {
+                                repositoryAdapter.submitData(PagingData.empty())
+                                lEmptyQuery.isVisible = true
+                                rvSearchResult.isVisible = false
+                                binding.tvSearchNoResult.isVisible = false
+                            } else {
+                                lEmptyQuery.isVisible = false
+                                rvSearchResult.isVisible = true
+                            }
                         }
                     }
                 }
@@ -72,6 +79,8 @@ class SearchActivity : AppCompatActivity() {
         binding.rvSearchResult.adapter = repositoryAdapter
         binding.tfSearch.doOnTextChanged { text, start, before, count ->
             repositoryViewModel.setSearchQuery(text.toString())
+            binding.tvSearchNoResult.isVisible =
+                !text.isNullOrEmpty() && repositoryAdapter.itemCount == 0
         }
     }
 

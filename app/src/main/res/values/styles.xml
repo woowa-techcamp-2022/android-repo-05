@@ -74,4 +74,9 @@
         <item name="android:maxLines">1</item>
         <item name="android:ellipsize">end</item>
     </style>
+
+    <style name="NoResultTextStyle" parent="">
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:textSize">20sp</item>
+    </style>
 </resources>

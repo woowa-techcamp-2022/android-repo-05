@@ -74,7 +74,7 @@ class LoginActivity : AppCompatActivity() {
         data store에 저장해야 함
     */
     private fun handleLoginSuccess(state: ResponseState<TokenModel>) {
-        binding.cpiLogin.visibility = View.INVISIBLE
+        binding.pbLogin.visibility = View.INVISIBLE
         state.data?.let { response ->
             if (!response.accessToken.isNullOrEmpty()) {
                 tokenViewModel.setAccessTokenToDataStore(response.accessToken)
@@ -85,13 +85,13 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun handleLoginFailure() {
-        binding.cpiLogin.visibility = View.INVISIBLE
+        binding.pbLogin.visibility = View.INVISIBLE
         binding.btnLogin.isClickable = true
         Toast.makeText(this, R.string.login_login_failure, Snackbar.LENGTH_SHORT).show()
     }
 
     private fun handleLoginLoading() {
-        binding.cpiLogin.visibility = View.VISIBLE
+        binding.pbLogin.visibility = View.VISIBLE
         binding.btnLogin.isClickable = false
     }
 }
