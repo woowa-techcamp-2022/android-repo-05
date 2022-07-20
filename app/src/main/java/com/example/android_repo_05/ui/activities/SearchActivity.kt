@@ -2,6 +2,10 @@ package com.example.android_repo_05.ui.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import android.content.Context
+import android.view.MotionEvent
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Lifecycle
@@ -68,6 +72,12 @@ class SearchActivity : AppCompatActivity() {
                         }
                     }
                 }
+
+                launch {
+                    repositoryViewModel.isStartIconEnabled.collectLatest {
+                        binding.isStartIconEnabled = it
+                    }
+                }
             }
         }
     }
@@ -77,11 +87,25 @@ class SearchActivity : AppCompatActivity() {
             finish()
         }
         binding.rvSearchResult.adapter = repositoryAdapter
-        binding.tfSearch.doOnTextChanged { text, start, before, count ->
+
+        binding.tfSearch.doOnTextChanged { text, _, _, _ ->
             repositoryViewModel.setSearchQuery(text.toString())
             binding.tvSearchNoResult.isVisible =
                 !text.isNullOrEmpty() && repositoryAdapter.itemCount == 0
         }
+
+        binding.tfSearch.setOnFocusListener { isFocused ->
+            repositoryViewModel.setSearchFocused(isFocused)
+        }
     }
 
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        if (currentFocus is EditText && ev?.action == MotionEvent.ACTION_DOWN) {
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+            imm?.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
+            currentFocus!!.clearFocus()
+        }
+
+        return super.dispatchTouchEvent(ev)
+    }
 }

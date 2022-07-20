@@ -14,6 +14,7 @@ import com.example.android_repo_05.R
 import com.example.android_repo_05.adapters.IssuePagingAdapter
 import com.example.android_repo_05.adapters.IssueSpinnerAdapter
 import com.example.android_repo_05.base.BaseFragment
+import com.example.android_repo_05.customviews.IssueFilteringSpinner
 import com.example.android_repo_05.databinding.FragmentIssueBinding
 import com.example.android_repo_05.ui.viewmodels.AppViewModelFactory
 import com.example.android_repo_05.ui.viewmodels.IssueViewModel
@@ -64,6 +65,19 @@ class IssueFragment : BaseFragment<FragmentIssueBinding>(R.layout.fragment_issue
                         }
                     }
                 }
+
+                launch {
+                    issueViewModel.issueFiltering.collectLatest {
+                        issueSpinnerAdapter.setSelectedFilter(it)
+                    }
+                }
+
+                launch {
+                    issueViewModel.isDropDownOpened.collectLatest {
+                        issueSpinnerAdapter.setSpinnerSelected(it)
+                        binding.isDropDownOpened = it
+                    }
+                }
             }
         }
     }
@@ -71,8 +85,22 @@ class IssueFragment : BaseFragment<FragmentIssueBinding>(R.layout.fragment_issue
     override fun initViews() {
         binding.rvIssue.adapter = issueAdapter
         binding.spIssueFiltering.adapter = issueSpinnerAdapter
-        binding.spIssueFiltering.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
+        initDropDownEvent()
+    }
+
+    private fun initDropDownEvent() {
+        with(binding.spIssueFiltering) {
+            setOnDropDownListener(object : IssueFilteringSpinner.OnDropDownEventsListener {
+                override fun dropDownOpen() {
+                    issueViewModel.setIsDropDownOpened(true)
+                }
+
+                override fun dropDownClose() {
+                    issueViewModel.setIsDropDownOpened(false)
+                }
+            })
+
+            onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
                     adapter: AdapterView<*>?,
                     view: View?,
@@ -80,13 +108,13 @@ class IssueFragment : BaseFragment<FragmentIssueBinding>(R.layout.fragment_issue
                     id: Long
                 ) {
                     issueViewModel.setIssueFiltering(IssueFiltering.values()[position])
-                    issueSpinnerAdapter.setSelectedFilter(IssueFiltering.values()[position])
                 }
 
                 override fun onNothingSelected(p0: AdapterView<*>?) {
-                    TODO("Not yet implemented")
+                    // TODO("Not yet implemented")
                 }
             }
+        }
     }
 }
 

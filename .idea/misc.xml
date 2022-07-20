@@ -5,6 +5,7 @@
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.14547595021863438" />
         <entry key="app/src/main/res/drawable/bg_issue_filter.xml" value="0.287" />
+        <entry key="app/src/main/res/drawable/bg_issue_unselected_filter.xml" value="0.309" />
         <entry key="app/src/main/res/drawable/gradient_black.xml" value="0.127" />
         <entry key="app/src/main/res/drawable/ic_arrow_left.xml" value="0.287" />
         <entry key="app/src/main/res/drawable/ic_error.xml" value="0.309" />
@@ -14,7 +15,7 @@
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.31567028985507245" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.15896739130434784" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.2601994560290118" />
-        <entry key="app/src/main/res/layout/activity_search.xml" value="0.14145424153781863" />
+        <entry key="app/src/main/res/layout/activity_search.xml" value="0.34605934407688116" />
         <entry key="app/src/main/res/layout/fragment_issue.xml" value="0.3378623188405797" />
         <entry key="app/src/main/res/layout/fragment_notification.xml" value="0.22331695556640627" />
         <entry key="app/src/main/res/layout/issue_filtering_spinner.xml" value="0.3378623188405797" />
