@@ -5,10 +5,12 @@
     tools:context=".ui.activities.ProfileActivity">
 
     <data>
-
         <variable
             name="userViewModel"
             type="com.example.android_repo_05.ui.viewmodels.UserViewModel" />
+        <variable
+            name="responseState"
+            type="com.example.android_repo_05.data.models.ResponseState"/>
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -40,7 +42,7 @@
                 android:id="@+id/l_profile_success"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone">
+                app:hideOnLoading="@{responseState}">
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/gl_profile_begin"
@@ -363,7 +365,7 @@
             android:id="@+id/l_profile_error"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone"
+            app:showOnError="@{responseState}"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <TextView
@@ -387,6 +389,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:indeterminate="true" />
+            android:indeterminate="true"
+            app:showOnLoading="@{responseState}"/>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

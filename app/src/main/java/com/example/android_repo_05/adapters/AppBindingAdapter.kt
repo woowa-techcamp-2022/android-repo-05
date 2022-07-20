@@ -13,6 +13,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.example.android_repo_05.R
+import com.example.android_repo_05.data.models.ResponseState
 import com.example.android_repo_05.others.GlideApp
 import com.example.android_repo_05.others.Utils.dpToPx
 import com.example.android_repo_05.others.Utils.languageColorMap
@@ -71,4 +72,19 @@ fun loadBitmapFromUrl(toolbar: MaterialToolbar, url: String?) {
                 toolbar.menu.findItem(R.id.menu_profile).icon = placeholder
             }
         })
+}
+
+@BindingAdapter("hideOnLoading")
+fun hideOnLoading(view : View, responseState: ResponseState<*>?) {
+    view.visibility = if (responseState is ResponseState.Success) View.VISIBLE else View.GONE
+}
+
+@BindingAdapter("showOnLoading")
+fun showOnLoading(view : View, responseState: ResponseState<*>?) {
+    view.visibility = if (responseState is ResponseState.Loading) View.VISIBLE else View.GONE
+}
+
+@BindingAdapter("showOnError")
+fun showError(view : View, responseState: ResponseState<*>?) {
+    view.visibility = if (responseState is ResponseState.Error) View.VISIBLE else View.GONE
 }
