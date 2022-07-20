@@ -14,6 +14,7 @@ import com.example.android_repo_05.R
 import com.example.android_repo_05.adapters.IssuePagingAdapter
 import com.example.android_repo_05.adapters.IssueSpinnerAdapter
 import com.example.android_repo_05.base.BaseFragment
+import com.example.android_repo_05.customviews.IssueFilteringSpinner
 import com.example.android_repo_05.databinding.FragmentIssueBinding
 import com.example.android_repo_05.ui.viewmodels.AppViewModelFactory
 import com.example.android_repo_05.ui.viewmodels.IssueViewModel
@@ -28,9 +29,9 @@ class IssueFragment : BaseFragment<FragmentIssueBinding>(R.layout.fragment_issue
         )[IssueViewModel::class.java]
     }
 
-    private lateinit var activityContext : Context
+    private lateinit var activityContext: Context
     private val issueAdapter by lazy { IssuePagingAdapter() }
-    private val issueSpinnerAdapter by lazy {IssueSpinnerAdapter(activityContext)}
+    private val issueSpinnerAdapter by lazy { IssueSpinnerAdapter(activityContext) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -54,8 +55,21 @@ class IssueFragment : BaseFragment<FragmentIssueBinding>(R.layout.fragment_issue
                 launch {
                     issueAdapter.loadStateFlow.collectLatest {
                         // TODO : 데이터 바인딩으로 처리 가능?
-                        binding.pgLoading.isVisible = it.source.refresh is LoadState.Loading
+                        binding.pgLoading.isVisible = it.refresh is LoadState.Loading
                         binding.pgAppend.isVisible = it.append is LoadState.Loading
+                    }
+                }
+
+                launch {
+                    issueViewModel.issueFiltering.collectLatest {
+                        issueSpinnerAdapter.setSelectedFilter(it)
+                    }
+                }
+
+                launch {
+                    issueViewModel.isDropDownOpened.collectLatest {
+                        issueSpinnerAdapter.setSpinnerSelected(it)
+                        binding.isDropDownOpened = it
                     }
                 }
             }
@@ -65,20 +79,38 @@ class IssueFragment : BaseFragment<FragmentIssueBinding>(R.layout.fragment_issue
     override fun initViews() {
         binding.rvIssue.adapter = issueAdapter
         binding.spIssueFiltering.adapter = issueSpinnerAdapter
-        binding.spIssueFiltering.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(adapter: AdapterView<*>?, view : View?, position: Int, id: Long) {
-                issueViewModel.setIssueFiltering(IssueFiltering.values()[position])
-                issueSpinnerAdapter.setSelectedFilter(IssueFiltering.values()[position])
-            }
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
+        initDropDownEvent()
+    }
+
+    private fun initDropDownEvent() {
+        with(binding.spIssueFiltering) {
+            setOnDropDownListener(object : IssueFilteringSpinner.OnDropDownEventsListener {
+                override fun dropDownOpen() {
+                    issueViewModel.setIsDropDownOpened(true)
+                }
+
+                override fun dropDownClose() {
+                    issueViewModel.setIsDropDownOpened(false)
+                }
+            })
+
+            onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    adapter: AdapterView<*>?, view: View?, position: Int, id: Long
+                ) {
+                    issueViewModel.setIssueFiltering(IssueFiltering.values()[position])
+                }
+
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+                    TODO("Not yet implemented")
+                }
             }
         }
     }
 }
 
-enum class IssueFiltering(val filterName : String, val filterList : List<String>) {
+enum class IssueFiltering(val filterName: String, val filterList: List<String>) {
     Open("Open", listOf("open")),
-    Close("Close",listOf("closed")),
-    All("All",listOf("open","closed"))
+    Close("Close", listOf("closed")),
+    All("All", listOf("open", "closed"))
 }

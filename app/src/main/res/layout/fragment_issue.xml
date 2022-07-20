@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="isDropDownOpened"
+            type="Boolean" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -13,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginHorizontal="24dp"
-            android:background="@drawable/bg_issue_filter"
+            android:background="@{isDropDownOpened ? @drawable/bg_issue_filter : @drawable/bg_issue_unselected_filter}"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
@@ -46,7 +52,7 @@
             app:layout_constraintTop_toBottomOf="@id/v_issue_filter"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-        <Spinner
+        <com.example.android_repo_05.customviews.IssueFilteringSpinner
             android:id="@+id/sp_issue_filtering"
             android:layout_width="148dp"
             android:layout_height="0dp"
