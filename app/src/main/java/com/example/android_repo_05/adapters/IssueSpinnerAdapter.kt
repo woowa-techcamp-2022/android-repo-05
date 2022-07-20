@@ -37,9 +37,7 @@ class IssueSpinnerAdapter(
     override fun getView(position: Int, view: View?, viewGroup: ViewGroup?): View {
         val binding = ItemIssueFilterHeadBinding.inflate(LayoutInflater.from(context), viewGroup, false)
         binding.tvFilterHead.text = IssueFiltering.values()[position].filterName
-        binding.ivFilterHead.scaleY =
-            if (this.isSpinnerSelected) -1F
-            else 1F
+        binding.ivFilterHead.scaleY = if (this.isSpinnerSelected) -1F else 1F
         return binding.root
     }
 
