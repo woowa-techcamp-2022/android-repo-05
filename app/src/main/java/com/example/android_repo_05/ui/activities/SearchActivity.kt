@@ -49,7 +49,7 @@ class SearchActivity : AppCompatActivity() {
                     repositoryAdapter.loadStateFlow.collectLatest {
                         with(binding) {
                             pbSearchLoading.isVisible = it.refresh is LoadState.Loading
-                            rvSearchResult.isVisible =
+                            srlSearch.isVisible =
                                 it.refresh !is LoadState.Loading && repositoryAdapter.itemCount != 0
                             tvSearchNoResult.isVisible = !tfSearch.text.isNullOrEmpty() &&
                                     it.append.endOfPaginationReached && repositoryAdapter.itemCount == 0
@@ -63,11 +63,11 @@ class SearchActivity : AppCompatActivity() {
                             if (searchQuery.isEmpty()) {
                                 repositoryAdapter.submitData(PagingData.empty())
                                 lEmptyQuery.isVisible = true
-                                rvSearchResult.isVisible = false
+                                srlSearch.isVisible = false
                                 binding.tvSearchNoResult.isVisible = false
                             } else {
                                 lEmptyQuery.isVisible = false
-                                rvSearchResult.isVisible = true
+                                srlSearch.isVisible = true
                             }
                         }
                     }
@@ -86,6 +86,7 @@ class SearchActivity : AppCompatActivity() {
         binding.tbSearch.setNavigationOnClickListener {
             finish()
         }
+
         binding.rvSearchResult.adapter = repositoryAdapter.withLoadStateFooter(
             PagingLoadStateAdapter { repositoryAdapter.refresh() }
         )
@@ -98,6 +99,11 @@ class SearchActivity : AppCompatActivity() {
 
         binding.tfSearch.setOnFocusListener { isFocused ->
             repositoryViewModel.setSearchFocused(isFocused)
+        }
+
+        binding.srlSearch.setOnRefreshListener {
+            binding.srlSearch.isRefreshing = false
+            repositoryAdapter.refresh()
         }
     }
 

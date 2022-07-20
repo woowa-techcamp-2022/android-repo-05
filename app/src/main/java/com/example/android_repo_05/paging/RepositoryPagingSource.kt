@@ -36,9 +36,6 @@ class RepositoryPagingSource(
     }
 
     override fun getRefreshKey(state: PagingState<Int, RepositoryModel>): Int? {
-        return state.anchorPosition?.let { anchorPosition ->
-            state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
-                ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
-        }
+        return null
     }
 }

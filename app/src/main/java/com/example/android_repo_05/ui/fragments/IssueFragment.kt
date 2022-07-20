@@ -58,7 +58,7 @@ class IssueFragment : BaseFragment<FragmentIssueBinding>(R.layout.fragment_issue
                         // TODO : 데이터 바인딩으로 처리 가능?
                         with(binding) {
                             pbLoading.isVisible = it.source.refresh is LoadState.Loading
-                            rvIssue.isVisible =
+                            srlIssue.isVisible =
                                 it.refresh !is LoadState.Loading && issueAdapter.itemCount != 0
                             tvIssueNoResult.isVisible =
                                 it.append.endOfPaginationReached && issueAdapter.itemCount == 0
@@ -86,6 +86,10 @@ class IssueFragment : BaseFragment<FragmentIssueBinding>(R.layout.fragment_issue
         binding.rvIssue.adapter = issueAdapter.withLoadStateFooter(
             PagingLoadStateAdapter { issueAdapter.refresh() }
         )
+        binding.srlIssue.setOnRefreshListener {
+            binding.srlIssue.isRefreshing = false
+            issueAdapter.refresh()
+        }
         binding.spIssueFiltering.adapter = issueSpinnerAdapter
         initDropDownEvent()
     }
