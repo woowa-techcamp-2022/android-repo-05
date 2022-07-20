@@ -1,8 +1,10 @@
 package com.example.android_repo_05.ui.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.example.android_repo_05.data.models.ResponseState
 import com.example.android_repo_05.databinding.ActivityProfileBinding
 import com.example.android_repo_05.ui.viewmodels.AppViewModelFactory
 import com.example.android_repo_05.ui.viewmodels.UserViewModel
@@ -35,19 +37,12 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun setObservers() {
-        userViewModel.userModel.observe(this) { responseState ->
-            /*when (responseState) {
-                is ResponseState.Success -> Toast.makeText(this, responseState.data?.displayName, Toast.LENGTH_SHORT).show()
-                is ResponseState.Error -> Toast.makeText(this, "error", Toast.LENGTH_SHORT).show()
-                is ResponseState.Loading -> Toast.makeText(this, "loading", Toast.LENGTH_SHORT).show()
-            }*/
-        }
-        userViewModel.starredCount.observe(this) { responseState ->
-            /*when (responseState) {
-                is ResponseState.Success -> Toast.makeText(this, responseState.data, Toast.LENGTH_SHORT).show()
-                is ResponseState.Error -> Toast.makeText(this, "error", Toast.LENGTH_SHORT).show()
-                is ResponseState.Loading -> Toast.makeText(this, "loading", Toast.LENGTH_SHORT).show()
-            }*/
+        userViewModel.userData.observe(this) { state ->
+            when (state) {
+                is ResponseState.Success -> handleSuccess()
+                is ResponseState.Error -> handleError()
+                is ResponseState.Loading -> handleLoading()
+            }
         }
     }
 
@@ -56,4 +51,21 @@ class ProfileActivity : AppCompatActivity() {
         userViewModel.getUserStarredFromRemote()
     }
 
+    private fun handleSuccess() {
+        binding.lProfileSuccess.visibility = View.VISIBLE
+        binding.cpiProfile.visibility = View.GONE
+        binding.lProfileError.visibility = View.GONE
+    }
+
+    private fun handleError() {
+        binding.lProfileSuccess.visibility = View.GONE
+        binding.cpiProfile.visibility = View.GONE
+        binding.lProfileError.visibility = View.VISIBLE
+    }
+
+    private fun handleLoading() {
+        binding.lProfileSuccess.visibility = View.GONE
+        binding.cpiProfile.visibility = View.VISIBLE
+        binding.lProfileError.visibility = View.GONE
+    }
 }

@@ -45,7 +45,7 @@ interface GithubApi {
 
     @GET("notifications")
     suspend fun getNotification(
-        @Query("per_page") resultNum: Int = 10,
+        @Query("per_page") resultNum: Int = Constants.NETWORK_PAGE_SIZE,
         @Query("page") pageNum: Int
     ): List<NotificationModel>
 

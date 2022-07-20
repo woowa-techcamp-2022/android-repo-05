@@ -9,10 +9,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.LoadState
-import androidx.paging.filter
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.example.android_repo_05.R
 import com.example.android_repo_05.adapters.NotificationAdapter
+import com.example.android_repo_05.adapters.PagingLoadStateAdapter
 import com.example.android_repo_05.adapters.helpers.NotificationItemHelperCallback
 import com.example.android_repo_05.base.BaseFragment
 import com.example.android_repo_05.data.models.ResponseState
@@ -20,7 +20,6 @@ import com.example.android_repo_05.databinding.FragmentNotificationBinding
 import com.example.android_repo_05.ui.viewmodels.AppViewModelFactory
 import com.example.android_repo_05.ui.viewmodels.NotificationViewModel
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 
 class NotificationFragment :
@@ -42,50 +41,68 @@ class NotificationFragment :
     }
 
     override fun initViews() {
-        notificationAdapter.addLoadStateListener { state ->
-            binding.pbNotification.isVisible = state.source.refresh is LoadState.Loading
+        binding.rvNotification.adapter = notificationAdapter.withLoadStateFooter(
+            PagingLoadStateAdapter { notificationAdapter.retry() }
+        )
+        binding.srlNotification.setOnRefreshListener {
+            binding.srlNotification.isRefreshing = false
+            notificationAdapter.refresh()
         }
-        binding.rvNotification.adapter = notificationAdapter
     }
 
     private fun setObserver() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                notificationViewModel.notificationList.collectLatest {
-                    notificationAdapter.submitData(it)
+                launch {
+                    notificationViewModel.notificationList.collectLatest {
+                        notificationAdapter.submitData(it)
+                    }
+                }
+
+                launch {
+                    notificationAdapter.loadStateFlow.collectLatest {
+                        with(binding) {
+                            pbNotification.isVisible = it.refresh is LoadState.Loading
+                            srlNotification.isVisible =
+                                it.refresh !is LoadState.Loading && notificationAdapter.itemCount != 0
+                            tvNotificationNoResult.isVisible =
+                                it.append.endOfPaginationReached && notificationAdapter.itemCount == 0
+                        }
+                    }
                 }
             }
         }
         notificationViewModel.changeResponse.observe(viewLifecycleOwner) { state ->
             when (state) {
-                is ResponseState.Loading -> binding.pbNotification.isVisible = true
-                is ResponseState.Success -> binding.pbNotification.isVisible = false
+                is ResponseState.Loading -> binding.pbNotificationAppend.isVisible = true
+                is ResponseState.Success -> binding.pbNotificationAppend.isVisible = false
                 is ResponseState.Error -> restoreItem()
             }
         }
     }
 
     private fun setSwipeCallback() {
-        val swipeCallback = NotificationItemHelperCallback(requireContext()) { position ->
-            removeItemCallback(position)
-        }
-        ItemTouchHelper(swipeCallback).attachToRecyclerView(binding.rvNotification)
+        ItemTouchHelper(
+            NotificationItemHelperCallback(requireContext()) { position ->
+                removeItemCallback(position)
+            }
+        ).attachToRecyclerView(binding.rvNotification)
     }
 
     private fun restoreItem() {
-        binding.pbNotification.isVisible = false
+        binding.pbNotificationAppend.isVisible = false
         notificationViewModel.restoreItem()
-        viewLifecycleOwner.lifecycleScope.launch {
-            notificationViewModel.notificationList.collectLatest {
-                notificationAdapter.submitData(it)
-            }
-        }
+        applyChangeToAdapter()
         Toast.makeText(requireContext(), "읽음 처리를 실패했습니다.", Toast.LENGTH_SHORT).show()
     }
 
     private fun removeItemCallback(position: Int) {
         notificationViewModel.changeNotificationAsRead(notificationAdapter.snapshot().items[position].url)
         notificationViewModel.removeItem(notificationAdapter.snapshot().items[position].id)
+        applyChangeToAdapter()
+    }
+
+    private fun applyChangeToAdapter() {
         viewLifecycleOwner.lifecycleScope.launch {
             notificationViewModel.notificationList.collectLatest {
                 notificationAdapter.submitData(it)

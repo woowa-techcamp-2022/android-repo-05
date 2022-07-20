@@ -31,10 +31,13 @@
     <string name="profile_following">Following</string>
     <string name="profile_repositories">Repositories</string>
     <string name="profile_starred">Starred</string>
-
+    <string name="profile_fail_load">Failed to load user data.</string>
 
     <string name="search_toolbar_title">Search</string>
     <string name="search_textField_hint">Search GitHub</string>
     <string name="search_empty_query_title">Find Your Stuff</string>
     <string name="search_empty_query_content">Search all of GitHub for People,\n Repositories, Organizations, Issues,\n and Pull Requests.</string>
+
+    <string name="notification_no_result">There are no notifications.</string>
+    <string name="load_state_retry_desc">Retry data loading</string>
 </resources>
