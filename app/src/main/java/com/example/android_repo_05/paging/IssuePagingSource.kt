@@ -6,29 +6,36 @@ import com.example.android_repo_05.data.models.IssueResponse
 import com.example.android_repo_05.others.Constants.ISSUE_PAGE_SIZE
 import com.example.android_repo_05.others.Constants.STARTING_PAGE_INDEX
 import com.example.android_repo_05.retrofit.GithubApiInstance.retrofit
+import retrofit2.HttpException
+import java.io.IOException
 
-class IssuePagingSource : PagingSource<Int, IssueResponse>(){
+class IssuePagingSource : PagingSource<Int, IssueResponse>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, IssueResponse> {
-        // TODO : 네트워크 및 데이터 에러 처리 필요.
-        val pageNumber = params.key ?: STARTING_PAGE_INDEX
-        val issueList = retrofit.getIssues(
-            page = pageNumber,
-            num = ISSUE_PAGE_SIZE
-        )
-        val nextKey = if (issueList.isEmpty()) {
-            null
-        } else {
-            pageNumber + (params.loadSize / ISSUE_PAGE_SIZE)
+        return try {
+            val nextPageNumber = params.key ?: STARTING_PAGE_INDEX
+            val response = retrofit.getIssues(page = nextPageNumber, num = ISSUE_PAGE_SIZE)
+
+            val prevKey = if (nextPageNumber == STARTING_PAGE_INDEX) {
+                null
+            } else {
+                nextPageNumber - 1
+            }
+
+            val nextKey = if (response.isEmpty()) {
+                null
+            } else {
+                nextPageNumber + (params.loadSize / ISSUE_PAGE_SIZE)
+            }
+
+            LoadResult.Page(response, prevKey, nextKey)
+        } catch (e: IOException) {
+            LoadResult.Error(e)
+        } catch (e: HttpException) {
+            LoadResult.Error(e)
+        } catch (e: Exception) {
+            LoadResult.Error(e)
         }
-        return LoadResult.Page(
-            data = issueList,
-            prevKey = when (pageNumber) {
-                STARTING_PAGE_INDEX -> null
-                else -> pageNumber - 1
-            },
-            nextKey = nextKey
-        )
     }
 
     override fun getRefreshKey(state: PagingState<Int, IssueResponse>): Int? {
