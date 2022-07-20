@@ -7,6 +7,7 @@ import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android_repo_05.databinding.ItemLoadStateBinding
 import retrofit2.HttpException
+import java.io.IOException
 
 class PagingLoadStateAdapter(
     private val retry: () -> Unit
@@ -36,15 +37,13 @@ class PagingLoadStateAdapter(
         fun bind(state: LoadState) {
             binding.btnLoadState.setOnClickListener { retry() }
             binding.isLoading = state is LoadState.Loading
+            binding.isError = state is LoadState.Error
             if (state is LoadState.Error) {
-                if (state.error is HttpException) {
-                    binding.isError = (state.error as HttpException).code() != 404
-                } else {
-                    binding.isError = true
+                when (state.error) {
+                    is HttpException -> binding.errorMessage = "HTTP Error!!"
+                    is IOException -> binding.errorMessage = "I/O Error!!"
+                    else -> binding.errorMessage = "Error!!"
                 }
-                binding.errorMessage = (state as? LoadState.Error)?.error?.message ?: ""
-            } else {
-                binding.isError = false
             }
         }
     }

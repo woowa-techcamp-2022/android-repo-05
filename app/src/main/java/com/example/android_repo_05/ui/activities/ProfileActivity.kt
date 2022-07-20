@@ -53,19 +53,19 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun handleSuccess() {
         binding.lProfileSuccess.visibility = View.VISIBLE
-        binding.cpiProfile.visibility = View.GONE
+        binding.pbProfile.visibility = View.GONE
         binding.lProfileError.visibility = View.GONE
     }
 
     private fun handleError() {
         binding.lProfileSuccess.visibility = View.GONE
-        binding.cpiProfile.visibility = View.GONE
+        binding.pbProfile.visibility = View.GONE
         binding.lProfileError.visibility = View.VISIBLE
     }
 
     private fun handleLoading() {
         binding.lProfileSuccess.visibility = View.GONE
-        binding.cpiProfile.visibility = View.VISIBLE
+        binding.pbProfile.visibility = View.VISIBLE
         binding.lProfileError.visibility = View.GONE
     }
 }
