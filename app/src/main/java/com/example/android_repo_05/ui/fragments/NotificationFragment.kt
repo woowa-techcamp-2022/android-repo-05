@@ -10,10 +10,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.android_repo_05.R
 import com.example.android_repo_05.adapters.NotificationAdapter
+import com.example.android_repo_05.adapters.PagingLoadStateAdapter
 import com.example.android_repo_05.adapters.helpers.NotificationItemHelperCallback
 import com.example.android_repo_05.base.BaseFragment
 import com.example.android_repo_05.data.models.ResponseState
@@ -42,22 +41,13 @@ class NotificationFragment :
     }
 
     override fun initViews() {
-        binding.rvNotification.adapter = notificationAdapter
-        binding.rvNotification.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
-                if (layoutManager.findLastVisibleItemPosition() >= layoutManager.itemCount - 1) {
-                    viewLifecycleOwner.lifecycleScope.launch {
-                        notificationAdapter.loadStateFlow.collectLatest {
-                            binding.pbNotificationAppend.isVisible = it.append is LoadState.Loading
-                        }
-                    }
-                } else {
-                    binding.pbNotificationAppend.isVisible = false
-                }
-            }
-        })
+        binding.rvNotification.adapter = notificationAdapter.withLoadStateFooter(
+            PagingLoadStateAdapter { notificationAdapter.retry() }
+        )
+        binding.srlNotification.setOnRefreshListener {
+            binding.srlNotification.isRefreshing = false
+            notificationAdapter.refresh()
+        }
     }
 
     private fun setObserver() {
@@ -73,7 +63,7 @@ class NotificationFragment :
                     notificationAdapter.loadStateFlow.collectLatest {
                         with(binding) {
                             pbNotification.isVisible = it.refresh is LoadState.Loading
-                            rvNotification.isVisible =
+                            srlNotification.isVisible =
                                 it.refresh !is LoadState.Loading && notificationAdapter.itemCount != 0
                             tvNotificationNoResult.isVisible =
                                 it.append.endOfPaginationReached && notificationAdapter.itemCount == 0

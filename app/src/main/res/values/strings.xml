@@ -39,4 +39,5 @@
     <string name="search_empty_query_content">Search all of GitHub for People,\n Repositories, Organizations, Issues,\n and Pull Requests.</string>
 
     <string name="notification_no_result">There are no notifications.</string>
+    <string name="load_state_retry_desc">Retry data loading</string>
 </resources>

@@ -8,6 +8,8 @@ import com.example.android_repo_05.others.Constants.STARTING_PAGE_INDEX
 import com.example.android_repo_05.retrofit.GithubApiInstance
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import retrofit2.HttpException
+import java.io.IOException
 
 class NotificationPagingSource : PagingSource<Int, NotificationModel>() {
     override fun getRefreshKey(state: PagingState<Int, NotificationModel>): Int? {
@@ -38,7 +40,11 @@ class NotificationPagingSource : PagingSource<Int, NotificationModel>() {
                 nextPageNumber + (params.loadSize / NETWORK_PAGE_SIZE)
             }
             LoadResult.Page(response, prevKey, nextKey)
-        } catch (e: Exception) {
+        } catch (e: IOException) {
+            LoadResult.Error(e)
+        } catch (e: HttpException) {
+            LoadResult.Error(e)
+        } catch(e: Exception) {
             LoadResult.Error(e)
         }
     }
