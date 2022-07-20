@@ -37,4 +37,6 @@
     <string name="search_textField_hint">Search GitHub</string>
     <string name="search_empty_query_title">Find Your Stuff</string>
     <string name="search_empty_query_content">Search all of GitHub for People,\n Repositories, Organizations, Issues,\n and Pull Requests.</string>
+
+    <string name="notification_no_result">There are no notifications.</string>
 </resources>
