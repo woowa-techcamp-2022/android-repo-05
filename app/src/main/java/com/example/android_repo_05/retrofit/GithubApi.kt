@@ -33,7 +33,7 @@ interface GithubApi {
     suspend fun getRepositories(
         @Query("page") page: Int,
         @Query("num") num: Int = 10,
-        @Query("q") query : String,
+        @Query("q") query: String,
         @Query("sort") sort: String = "stars"
     ): RepositoryResponse
 
@@ -50,7 +50,7 @@ interface GithubApi {
     ): List<NotificationModel>
 
     @GET
-    suspend fun getIssueComments(@Url url: String): List<CommentModel>
+    suspend fun getComments(@Url url: String): CommentModel
 
     @PATCH
     suspend fun changeNotificationAsRead(@Url url: String): Response<String>

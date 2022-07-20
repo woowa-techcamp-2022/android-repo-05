@@ -3,7 +3,6 @@ package com.example.android_repo_05.paging
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.android_repo_05.data.models.notification.NotificationModel
-import com.example.android_repo_05.others.Constants.NETWORK_PAGE_SIZE
 import com.example.android_repo_05.others.Constants.STARTING_PAGE_INDEX
 import com.example.android_repo_05.retrofit.GithubApiInstance
 import kotlinx.coroutines.Dispatchers
@@ -25,9 +24,11 @@ class NotificationPagingSource : PagingSource<Int, NotificationModel>() {
                 GithubApiInstance.retrofit.getNotification(pageNum = nextPageNumber).onEach {
                     launch {
                         // comment list 불러오는 작업을 각기 다른 코루틴에서 수행하도록 launch
-                        it.commentCount = GithubApiInstance.retrofit.getIssueComments(
-                            it.subject.url + "/comments"
-                        ).size
+                        if (it.subject.url != null) {
+                            GithubApiInstance.retrofit.getComments(it.subject.url).apply {
+                                it.commentCount = this.comments
+                            }
+                        }
                     }
                 }
             }
@@ -40,7 +41,7 @@ class NotificationPagingSource : PagingSource<Int, NotificationModel>() {
             val nextKey = if (response.isEmpty()) {
                 null
             } else {
-                nextPageNumber + (params.loadSize / NETWORK_PAGE_SIZE)
+                nextPageNumber + 1
             }
             LoadResult.Page(response, prevKey, nextKey)
         } catch (e: IOException) {
