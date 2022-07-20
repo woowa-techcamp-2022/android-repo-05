@@ -11,10 +11,13 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 
 class IssueViewModel(repository : IssueRepository) : ViewModel() {
-    val issueList = repository.getStockDataByPaging().cachedIn(viewModelScope)
+    private val issueList = repository.getStockDataByPaging().cachedIn(viewModelScope)
 
-    private val _issueFiltering = MutableStateFlow<IssueFiltering>(IssueFiltering.Open)
+    private val _issueFiltering = MutableStateFlow(IssueFiltering.Open)
     val issueFiltering : StateFlow<IssueFiltering> = _issueFiltering
+
+    private val _isDropDownOpened = MutableStateFlow(false)
+    val isDropDownOpened : StateFlow<Boolean> = _isDropDownOpened
 
     val filteredList = issueList.combine(issueFiltering) { issueList, issueFiltering ->
         issueList.filter { issue ->
@@ -24,6 +27,10 @@ class IssueViewModel(repository : IssueRepository) : ViewModel() {
 
     fun setIssueFiltering(filtering : IssueFiltering) {
         _issueFiltering.value = filtering
+    }
+
+    fun setIsDropDownOpened(isSpinnerSelected : Boolean) {
+        _isDropDownOpened.value = isSpinnerSelected
     }
 
 }
