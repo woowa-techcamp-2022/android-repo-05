@@ -3,15 +3,16 @@ package com.example.android_repo_05.ui.activities
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.android_repo_05.R
-import com.example.android_repo_05.data.models.TokenModel
 import com.example.android_repo_05.data.models.ResponseState
+import com.example.android_repo_05.data.models.TokenModel
 import com.example.android_repo_05.databinding.ActivityLoginBinding
 import com.example.android_repo_05.others.Utils
-import com.example.android_repo_05.ui.viewmodels.TokenViewModel
 import com.example.android_repo_05.ui.viewmodels.AppViewModelFactory
+import com.example.android_repo_05.ui.viewmodels.TokenViewModel
 import com.google.android.material.snackbar.Snackbar
 
 class LoginActivity : AppCompatActivity() {
@@ -30,6 +31,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun initView() {
         binding.btnLogin.setOnClickListener {
+            it.isClickable = false
             getGithubAccessCode()
         }
     }
@@ -74,7 +76,7 @@ class LoginActivity : AppCompatActivity() {
     private fun handleLoginSuccess(state: ResponseState<TokenModel>) {
         binding.cpiLogin.visibility = View.INVISIBLE
         state.data?.let { response ->
-            if (response.tokenType.isNotBlank()) {
+            if (!response.accessToken.isNullOrEmpty()) {
                 tokenViewModel.setAccessTokenToDataStore(response.accessToken)
             }
             startActivity(Intent(this, MainActivity::class.java))
@@ -84,10 +86,12 @@ class LoginActivity : AppCompatActivity() {
 
     private fun handleLoginFailure() {
         binding.cpiLogin.visibility = View.INVISIBLE
-        Snackbar.make(binding.root, R.string.login_login_failure, Snackbar.LENGTH_SHORT).show()
+        binding.btnLogin.isClickable = true
+        Toast.makeText(this, R.string.login_login_failure, Snackbar.LENGTH_SHORT).show()
     }
 
     private fun handleLoginLoading() {
         binding.cpiLogin.visibility = View.VISIBLE
+        binding.btnLogin.isClickable = false
     }
 }

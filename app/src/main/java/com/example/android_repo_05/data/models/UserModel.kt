@@ -27,4 +27,5 @@ data class UserModel(
     val privateReposCount: Int
 ) {
     val totalReposCount: Int get() = publicReposCount + privateReposCount
+    var starredCount: Int = 0
 }

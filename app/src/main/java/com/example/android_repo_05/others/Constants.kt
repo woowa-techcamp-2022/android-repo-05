@@ -9,4 +9,5 @@ object Constants {
     const val SEARCH_PAGE_SIZE = 10
     const val ISSUE_PAGE_SIZE = 10
 
+    const val prefKey = "ACCESS_TOKEN"
 }
