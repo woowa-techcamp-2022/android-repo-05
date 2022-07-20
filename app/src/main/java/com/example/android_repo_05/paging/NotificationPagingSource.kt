@@ -7,6 +7,7 @@ import com.example.android_repo_05.others.Constants.NETWORK_PAGE_SIZE
 import com.example.android_repo_05.others.Constants.STARTING_PAGE_INDEX
 import com.example.android_repo_05.retrofit.GithubApiInstance
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import java.io.IOException
@@ -19,13 +20,18 @@ class NotificationPagingSource : PagingSource<Int, NotificationModel>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, NotificationModel> {
         return try {
             val nextPageNumber = params.key ?: STARTING_PAGE_INDEX
-            val response = GithubApiInstance.retrofit.getNotification(pageNum = nextPageNumber)
-            response.forEach {
-                withContext(Dispatchers.IO) {
-                    it.commentCount =
-                        GithubApiInstance.retrofit.getIssueComments(it.subject.url + "/comments").size
+            val response = withContext(Dispatchers.IO) {
+                // IO 작업을 위한 IODispatcher 블럭 생성
+                GithubApiInstance.retrofit.getNotification(pageNum = nextPageNumber).onEach {
+                    launch {
+                        // comment list 불러오는 작업을 각기 다른 코루틴에서 수행하도록 launch
+                        it.commentCount = GithubApiInstance.retrofit.getIssueComments(
+                            it.subject.url + "/comments"
+                        ).size
+                    }
                 }
             }
+
             val prevKey = if (nextPageNumber == STARTING_PAGE_INDEX) {
                 null
             } else {
@@ -41,7 +47,7 @@ class NotificationPagingSource : PagingSource<Int, NotificationModel>() {
             LoadResult.Error(e)
         } catch (e: HttpException) {
             LoadResult.Error(e)
-        } catch(e: Exception) {
+        } catch (e: Exception) {
             LoadResult.Error(e)
         }
     }
