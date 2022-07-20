@@ -8,7 +8,6 @@ import com.example.android_repo_05.others.Constants
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
@@ -23,7 +22,7 @@ class AuthInterceptor : Interceptor {
                     if (exception is IOException) emit(emptyPreferences()) else throw exception
                 }.map { preferences ->
                     preferences[stringPreferencesKey(Constants.prefKey)] ?: ""
-                }.flowOn(Dispatchers.IO).first()
+                }.first()
         }
         val req = chain.request().newBuilder()
             .addHeader("Accept", "application/vnd.github+json")
