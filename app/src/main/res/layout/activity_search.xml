@@ -51,6 +51,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_search_tf"
                 android:freezesText="true"
+                android:inputType="text"
                 android:hint="@string/search_textField_hint">
 
                 <requestFocus />
