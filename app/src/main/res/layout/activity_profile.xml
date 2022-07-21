@@ -367,13 +367,12 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <TextView
+                style="@style/NoResultTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="24dp"
                 android:drawablePadding="8dp"
                 android:text="@string/profile_fail_load"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-                android:textColor="@color/grey"
                 app:drawableStartCompat="@drawable/ic_error"
                 app:drawableTint="@color/grey"
                 app:layout_constraintBottom_toBottomOf="parent"
