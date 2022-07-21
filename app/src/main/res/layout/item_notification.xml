@@ -40,18 +40,34 @@
 
         <TextView
             android:id="@+id/tv_notification_repo"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="20dp"
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@{notification.repository.repositoryName}"
             android:textColor="@color/grey"
             android:textSize="14sp"
-            app:layout_constraintEnd_toStartOf="@+id/tv_notification_date"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintEnd_toStartOf="@+id/tv_notification_number"
+            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toEndOf="@id/iv_notification_org"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_notification_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:maxLines="1"
+            android:text="@{notification.number}"
+            android:textColor="@color/grey"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@id/tv_notification_date"
+            app:layout_constraintStart_toEndOf="@id/tv_notification_repo"
+            app:layout_constraintTop_toTopOf="@id/tv_notification_repo" />
 
         <TextView
             android:id="@+id/tv_notification_date"
