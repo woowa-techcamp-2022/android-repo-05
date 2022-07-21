@@ -1,25 +1,24 @@
 package com.example.android_repo_05.ui.activities
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.content.Context
+import android.os.Bundle
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import androidx.core.view.isVisible
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.LoadState
-import androidx.paging.PagingData
 import com.example.android_repo_05.adapters.PagingLoadStateAdapter
 import com.example.android_repo_05.adapters.RepositoryPagingAdapter
 import com.example.android_repo_05.databinding.ActivitySearchBinding
 import com.example.android_repo_05.ui.viewmodels.AppViewModelFactory
 import com.example.android_repo_05.ui.viewmodels.RepositoryViewModel
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 
 class SearchActivity : AppCompatActivity() {
@@ -32,8 +31,8 @@ class SearchActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        initViews()
         observe()
+        initViews()
     }
 
     private fun observe() {
@@ -46,30 +45,18 @@ class SearchActivity : AppCompatActivity() {
                 }
 
                 launch {
-                    repositoryAdapter.loadStateFlow.collectLatest {
-                        with(binding) {
-                            pbSearchLoading.isVisible = it.refresh is LoadState.Loading
-                            srlSearch.isVisible =
-                                it.refresh !is LoadState.Loading && repositoryAdapter.itemCount != 0
-                            tvSearchNoResult.isVisible = !tfSearch.text.isNullOrEmpty() &&
-                                    it.append.endOfPaginationReached && repositoryAdapter.itemCount == 0
+                    repositoryAdapter.loadStateFlow.combine(repositoryViewModel.searchQuery) { loadState, searchQuery ->
+                        if (searchQuery.isEmpty()) {
+                            SearchType.NoQuery
+                        } else if (loadState.refresh is LoadState.Loading) {
+                            SearchType.Loading
+                        } else if (loadState.append.endOfPaginationReached && repositoryAdapter.itemCount == 0) {
+                            SearchType.NoResult
+                        } else {
+                            SearchType.Result
                         }
-                    }
-                }
-
-                launch {
-                    repositoryViewModel.searchQuery.collectLatest { searchQuery ->
-                        with(binding) {
-                            if (searchQuery.isEmpty()) {
-                                repositoryAdapter.submitData(PagingData.empty())
-                                lEmptyQuery.isVisible = true
-                                srlSearch.isVisible = false
-                                binding.tvSearchNoResult.isVisible = false
-                            } else {
-                                lEmptyQuery.isVisible = false
-                                srlSearch.isVisible = true
-                            }
-                        }
+                    }.collectLatest {
+                        binding.searchState = it
                     }
                 }
 
@@ -83,6 +70,12 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
+        binding.lifecycleOwner = this
+
+        if (binding.tfSearch.text.isNullOrEmpty()) {
+            binding.searchState = SearchType.NoQuery
+        }
+
         binding.tbSearch.setNavigationOnClickListener {
             finish()
         }
@@ -93,8 +86,6 @@ class SearchActivity : AppCompatActivity() {
 
         binding.tfSearch.doOnTextChanged { text, _, _, _ ->
             repositoryViewModel.setSearchQuery(text.toString())
-            binding.tvSearchNoResult.isVisible =
-                !text.isNullOrEmpty() && repositoryAdapter.itemCount == 0
         }
 
         binding.tfSearch.setOnFocusListener { isFocused ->
@@ -116,4 +107,8 @@ class SearchActivity : AppCompatActivity() {
 
         return super.dispatchTouchEvent(ev)
     }
+}
+
+enum class SearchType {
+    NoQuery, Loading, Result, NoResult
 }
