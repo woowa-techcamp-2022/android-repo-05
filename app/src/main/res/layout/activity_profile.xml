@@ -42,7 +42,7 @@
                 android:id="@+id/l_profile_success"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:hideOnLoading="@{responseState}">
+                app:showOnSuccess="@{responseState}">
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/gl_profile_begin"

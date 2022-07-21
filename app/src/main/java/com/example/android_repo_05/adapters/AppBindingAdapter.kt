@@ -74,8 +74,8 @@ fun loadBitmapFromUrl(toolbar: MaterialToolbar, url: String?) {
         })
 }
 
-@BindingAdapter("hideOnLoading")
-fun hideOnLoading(view : View, responseState: ResponseState<*>?) {
+@BindingAdapter("showOnSuccess")
+fun showOnSuccess(view : View, responseState: ResponseState<*>?) {
     view.visibility = if (responseState is ResponseState.Success) View.VISIBLE else View.GONE
 }
 
