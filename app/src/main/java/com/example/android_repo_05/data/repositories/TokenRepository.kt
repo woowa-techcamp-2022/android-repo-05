@@ -25,8 +25,11 @@ class TokenRepository {
     }
 
     suspend fun getAccessTokenFromRemote(code: String) = withContext(Dispatchers.IO) {
-        val response = GithubApiInstance.retrofit.getAccessToken(accessCode = code)
-        return@withContext handleTokenResponse(response)
+        return@withContext try {
+            handleTokenResponse(GithubApiInstance.retrofit.getAccessToken(accessCode = code))
+        } catch (e: Exception) {
+            ResponseState.Error(e.message ?: "error")
+        }
     }
 
     private fun handleTokenResponse(response: Response<TokenModel>): ResponseState<TokenModel> {

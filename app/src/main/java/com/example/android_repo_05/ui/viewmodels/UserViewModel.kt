@@ -27,9 +27,9 @@ class UserViewModel(private val repository: UserRepository) : ViewModel() {
     private fun setUserData(): ResponseState<UserModel> {
         return when {
             user.value is ResponseState.Success && starred.value is ResponseState.Success -> {
-                ResponseState.Success(user.value!!.data!!.apply {
-                    starredCount = starred.value!!.data!!
-                })
+                ResponseState.Success(
+                    user.value!!.data!!.apply { starredCount = starred.value!!.data!! }
+                )
             }
             user.value is ResponseState.Error || starred.value is ResponseState.Error -> {
                 ResponseState.Error("유저 정보 획득 실패")
