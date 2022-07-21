@@ -25,6 +25,8 @@ class NotificationPagingSource : PagingSource<Int, NotificationModel>() {
                         if (it.subject.url != null) {
                             GithubApiInstance.retrofit.getComments(it.subject.url).apply {
                                 it.commentCount = this.comments
+                                it.number =
+                                    if (this.number == null || this.number == 0) "" else "#${this.number}"
                             }
                         }
                     }
