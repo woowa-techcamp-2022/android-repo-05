@@ -23,7 +23,11 @@ class NotificationRepository {
     fun getNotificationFromRemote() = Pager(PagingConfig(10)) { NotificationPagingSource() }.flow
 
     suspend fun changeNotificationAsRead(url: String) = withContext(Dispatchers.IO) {
-        return@withContext handleResponse(retrofit.changeNotificationAsRead(url))
+        return@withContext try {
+            handleResponse(retrofit.changeNotificationAsRead(url))
+        } catch (e: Exception) {
+            ResponseState.Error(e.message ?: "error")
+        }
     }
 
     private fun handleResponse(response: Response<String>): ResponseState<String> {
