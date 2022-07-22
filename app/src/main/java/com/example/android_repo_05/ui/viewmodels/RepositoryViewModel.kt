@@ -6,17 +6,16 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.android_repo_05.data.models.RepositoryModel
 import com.example.android_repo_05.data.repositories.RepositoryRepository
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 
 class RepositoryViewModel(private val repository: RepositoryRepository) : ViewModel() {
 
-    private fun repositoryFlow(query: String): Flow<PagingData<RepositoryModel>> =
-        repository.getRepositoryListByPaging(query)
+    private val _searchResult = MutableStateFlow<PagingData<RepositoryModel>>(PagingData.empty())
+    val searchResult = _searchResult
 
     private val _searchQuery = MutableStateFlow("")
-    val searchQuery: Flow<String> = _searchQuery
+    val searchQuery: StateFlow<String> = _searchQuery
 
     private val _isSearchFocused = MutableStateFlow(true)
     private val isSearchFocused: Flow<Boolean> = _isSearchFocused
@@ -34,11 +33,30 @@ class RepositoryViewModel(private val repository: RepositoryRepository) : ViewMo
     }
 
     // TODO : 아직 debounce와 flatMapLatest는 정식 출시가 안됨..
-    @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
-    val searchResult: Flow<PagingData<RepositoryModel>> = _searchQuery
-        .debounce(700)
-        .flatMapLatest { query ->
-            if (query.isBlank()) emptyFlow()
-            else repositoryFlow(query)
-        }.cachedIn(viewModelScope)
+//    @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
+//    val searchResult: Flow<PagingData<RepositoryModel>> = _searchQuery
+//        .debounce(700)
+//        .flatMapLatest { query ->
+//            if (query.isBlank()) emptyFlow()
+//            else repositoryFlow(query)
+//        }.cachedIn(viewModelScope)
+
+    var searchJob: Job? = null
+    private fun cancelSearchJob() = searchJob?.cancel()
+
+    fun searchResult() {
+        cancelSearchJob()
+        searchJob = viewModelScope.launch {
+            delay(700)
+            if (_searchQuery.value.isEmpty()) {
+                _searchResult.emit(PagingData.empty())
+            } else {
+                repository.getRepositoryListByPaging(_searchQuery.value).cachedIn(viewModelScope)
+                    .collectLatest {
+                        _searchResult.emit(it)
+                    }
+            }
+        }
+    }
+
 }
