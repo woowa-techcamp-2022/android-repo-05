@@ -86,6 +86,7 @@ class SearchActivity : AppCompatActivity() {
 
         binding.tfSearch.doOnTextChanged { text, _, _, _ ->
             repositoryViewModel.setSearchQuery(text.toString())
+            repositoryViewModel.searchResult()
         }
 
         binding.tfSearch.setOnFocusListener { isFocused ->
@@ -104,7 +105,6 @@ class SearchActivity : AppCompatActivity() {
             imm?.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
             currentFocus!!.clearFocus()
         }
-
         return super.dispatchTouchEvent(ev)
     }
 }
