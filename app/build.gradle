@@ -1,10 +1,19 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
 android {
     compileSdk 32
+
+    buildFeatures {
+        viewBinding = true
+        dataBinding = true
+    }
 
     defaultConfig {
         applicationId "com.example.android_repo_05"
@@ -14,6 +23,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "GITHUB_CLIENT_ID", properties["GITHUB_CLIENT_ID"]
+        buildConfigField "String", "GITHUB_CLIENT_SECRETS", properties["GITHUB_CLIENT_SECRETS"]
     }
 
     buildTypes {
@@ -32,11 +43,39 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.activity:activity-ktx:1.5.0'
+    implementation 'androidx.fragment:fragment-ktx:1.5.0'
+    implementation 'com.google.android.material:material:1.7.0-alpha02'
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.4.2'
-    implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    // Retrofit and Gson
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.google.code.gson:gson:2.9.0'
+
+    // Coroutine
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
+
+    // ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0-alpha01"
+
+    // DataStore
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
+    implementation 'androidx.datastore:datastore-core:1.0.0'
+
+    // Glide
+    implementation 'com.github.bumptech.glide:glide:4.13.2'
+    kapt 'com.github.bumptech.glide:compiler:4.13.2'
+
+    // Paging
+    implementation "androidx.paging:paging-runtime:3.1.1"
+    implementation 'androidx.paging:paging-common-ktx:3.1.1'
+
+    // SwipeRefreshLayout
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 }

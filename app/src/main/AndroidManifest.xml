@@ -3,7 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.android_repo_05">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
+        android:name=".base.CustomApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -14,14 +17,37 @@
         android:theme="@style/Theme.Android_repo_05"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.activities.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <!-- Github 인증 후 앱으로 돌아오기 위한 intent-filter -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <!-- Github 인증 후 받을 데이터 -->
+                <data
+                    android:host="github-auth"
+                    android:scheme="androidrepo05" />
+            </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.activities.SearchActivity"
+            android:exported="false"
+            android:windowSoftInputMode="stateAlwaysVisible"/>
+        <activity
+            android:name=".ui.activities.ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.MainActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

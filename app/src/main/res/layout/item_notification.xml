@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="notification"
+            type="com.example.android_repo_05.data.models.notification.NotificationModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="85dp">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_notification_begin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="24dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_notification_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="24dp" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_notification_org"
+            imgUrl="@{notification.repository.owner.orgImageUrl}"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_star"
+            app:layout_constraintBottom_toBottomOf="@id/tv_notification_repo"
+            app:layout_constraintStart_toEndOf="@id/gl_notification_begin"
+            app:layout_constraintTop_toTopOf="@id/tv_notification_repo"
+            app:shapeAppearanceOverlay="@style/circleShape" />
+
+        <TextView
+            android:id="@+id/tv_notification_repo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{notification.repository.repositoryName}"
+            android:textColor="@color/grey"
+            android:textSize="14sp"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintEnd_toStartOf="@+id/tv_notification_number"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toEndOf="@id/iv_notification_org"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_notification_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:maxLines="1"
+            android:text="@{notification.number}"
+            android:textColor="@color/grey"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@id/tv_notification_date"
+            app:layout_constraintStart_toEndOf="@id/tv_notification_repo"
+            app:layout_constraintTop_toTopOf="@id/tv_notification_repo" />
+
+        <TextView
+            android:id="@+id/tv_notification_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{notification.elapsedTime}"
+            android:textColor="@color/grey"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@id/gl_notification_end"
+            app:layout_constraintTop_toTopOf="@id/tv_notification_repo" />
+
+        <TextView
+            android:id="@+id/tv_notification_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{notification.subject.title}"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@id/cv_notification_comment"
+            app:layout_constraintStart_toStartOf="@id/tv_notification_repo"
+            app:layout_constraintTop_toBottomOf="@id/tv_notification_repo" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_notification_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/white"
+            android:minWidth="24dp"
+            android:minHeight="24dp"
+            app:cardCornerRadius="3dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toStartOf="@id/gl_notification_end"
+            app:layout_constraintTop_toBottomOf="@id/tv_notification_date">
+
+            <TextView
+                android:id="@+id/tv_notification_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="4dp"
+                android:text="@{Integer.toString(notification.commentCount)}"
+                android:textColor="@color/primary"
+                android:textSize="12sp" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/navy"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/gl_notification_begin" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

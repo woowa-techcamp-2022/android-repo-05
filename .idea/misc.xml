@@ -1,5 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.14547595021863438" />
+        <entry key="app/src/main/res/drawable/bg_issue_filter.xml" value="0.287" />
+        <entry key="app/src/main/res/drawable/bg_issue_unselected_filter.xml" value="0.309" />
+        <entry key="app/src/main/res/drawable/gradient_black.xml" value="0.127" />
+        <entry key="app/src/main/res/drawable/ic_arrow_left.xml" value="0.287" />
+        <entry key="app/src/main/res/drawable/ic_error.xml" value="0.309" />
+        <entry key="app/src/main/res/drawable/ic_refresh.xml" value="0.309" />
+        <entry key="app/src/main/res/drawable/ic_variant10.xml" value="0.309" />
+        <entry key="app/src/main/res/drawable/ic_variant16.xml" value="0.309" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.31567028985507245" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.15896739130434784" />
+        <entry key="app/src/main/res/layout/activity_profile.xml" value="0.2601994560290118" />
+        <entry key="app/src/main/res/layout/activity_search.xml" value="0.34605934407688116" />
+        <entry key="app/src/main/res/layout/fragment_issue.xml" value="0.3378623188405797" />
+        <entry key="app/src/main/res/layout/fragment_notification.xml" value="0.22331695556640627" />
+        <entry key="app/src/main/res/layout/issue_filtering_spinner.xml" value="0.3378623188405797" />
+        <entry key="app/src/main/res/layout/item_issue.xml" value="0.3378623188405797" />
+        <entry key="app/src/main/res/layout/item_issue_filter.xml" value="0.3378623188405797" />
+        <entry key="app/src/main/res/layout/item_load_state.xml" value="0.26198883056640626" />
+        <entry key="app/src/main/res/layout/item_notification.xml" value="0.5153366088867188" />
+        <entry key="app/src/main/res/menu/issue_filter_popup_menu.xml" value="0.4244791666666667" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

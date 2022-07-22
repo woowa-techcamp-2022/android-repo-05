@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="isDropDownOpened"
+            type="Boolean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.fragments.IssueFragment">
+
+        <View
+            android:id="@+id/v_issue_filter"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="24dp"
+            android:background="@{isDropDownOpened ? @drawable/bg_issue_filter : @drawable/bg_issue_unselected_filter}"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_issue_filter"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/ic_filter"
+            app:layout_constraintBottom_toBottomOf="@+id/v_issue_filter"
+            app:layout_constraintStart_toStartOf="@id/v_issue_filter"
+            app:layout_constraintTop_toTopOf="@+id/v_issue_filter" />
+
+        <TextView
+            android:id="@+id/tv_issue_filter_label"
+            style="@style/IssueFragment.Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@string/issue_filter_label"
+            app:layout_constraintBottom_toBottomOf="@+id/v_issue_filter"
+            app:layout_constraintStart_toEndOf="@id/iv_issue_filter"
+            app:layout_constraintTop_toTopOf="@+id/v_issue_filter" />
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/srl_issue"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/v_issue_filter">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_issue"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+        <com.example.android_repo_05.customviews.IssueFilteringSpinner
+            android:id="@+id/sp_issue_filtering"
+            android:layout_width="148dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="20dp"
+            android:background="@null"
+            android:dropDownVerticalOffset="10dp"
+            android:overlapAnchor="false"
+            android:popupBackground="@drawable/bg_issue_filter"
+            android:popupTheme="@style/IssueFragment.FilterMenu"
+            android:spinnerMode="dropdown"
+            app:layout_constraintBottom_toBottomOf="@id/v_issue_filter"
+            app:layout_constraintEnd_toEndOf="@id/v_issue_filter"
+            app:layout_constraintTop_toTopOf="@id/v_issue_filter" />
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/pb_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/v_issue_filter" />
+
+        <TextView
+            android:id="@+id/tv_issue_no_result"
+            style="@style/NoResultTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:text="@string/issue_no_result"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/v_issue_filter" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
