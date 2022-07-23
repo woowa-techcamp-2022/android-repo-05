@@ -25,7 +25,6 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         initView()
-        checkAccessCode()
         setObserver()
     }
 
@@ -39,12 +38,6 @@ class LoginActivity : AppCompatActivity() {
     private fun getGithubAccessCode() {
         GithubApiInstance.getGithubIdentityRequestUri().run {
             startActivity(Intent(Intent.ACTION_VIEW, this))
-        }
-    }
-
-    private fun checkAccessCode() {
-        intent?.data?.getQueryParameter("code")?.let { code ->
-            tokenViewModel.getAccessTokenFromRemote(code)
         }
     }
 
@@ -78,5 +71,17 @@ class LoginActivity : AppCompatActivity() {
     private fun handleLoginLoading() {
         binding.pbLogin.visibility = View.VISIBLE
         binding.btnLogin.isClickable = false
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        intent?.data?.getQueryParameter("code")?.let { code ->
+            tokenViewModel.getAccessTokenFromRemote(code)
+        }
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        binding.btnLogin.isClickable = true
     }
 }
