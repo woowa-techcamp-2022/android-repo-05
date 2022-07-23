@@ -7,8 +7,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.android_repo_05.R
-import com.example.android_repo_05.data.models.ResponseState
-import com.example.android_repo_05.data.models.TokenModel
+import com.example.android_repo_05.data.network.ResponseState
+import com.example.android_repo_05.data.login.models.TokenModel
 import com.example.android_repo_05.databinding.ActivityLoginBinding
 import com.example.android_repo_05.others.Utils
 import com.example.android_repo_05.ui.common.AppViewModelFactory

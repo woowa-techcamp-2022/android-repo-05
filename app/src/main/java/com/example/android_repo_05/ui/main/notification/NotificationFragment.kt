@@ -15,7 +15,7 @@ import com.example.android_repo_05.ui.main.notification.adapters.NotificationAda
 import com.example.android_repo_05.ui.common.adapters.PagingLoadStateAdapter
 import com.example.android_repo_05.ui.main.notification.helpers.NotificationItemHelperCallback
 import com.example.android_repo_05.ui.common.BaseFragment
-import com.example.android_repo_05.data.models.ResponseState
+import com.example.android_repo_05.data.network.ResponseState
 import com.example.android_repo_05.databinding.FragmentNotificationBinding
 import com.example.android_repo_05.ui.common.AppViewModelFactory
 import kotlinx.coroutines.flow.collectLatest

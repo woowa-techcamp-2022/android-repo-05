@@ -5,7 +5,7 @@
     <data>
         <variable
             name="repository"
-            type="com.example.android_repo_05.data.models.RepositoryModel" />
+            type="com.example.android_repo_05.data.search.models.RepositoryModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

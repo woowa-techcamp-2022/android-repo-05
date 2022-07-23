@@ -2,7 +2,12 @@ package com.example.android_repo_05.ui.common
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.android_repo_05.data.repositories.*
+import com.example.android_repo_05.data.main.issue.IssueRepository
+import com.example.android_repo_05.data.main.ProfileImageRepository
+import com.example.android_repo_05.data.login.TokenRepository
+import com.example.android_repo_05.data.main.notification.NotificationRepository
+import com.example.android_repo_05.data.profile.UserRepository
+import com.example.android_repo_05.data.search.RepositoryRepository
 import com.example.android_repo_05.ui.login.TokenViewModel
 import com.example.android_repo_05.ui.main.issue.IssueViewModel
 import com.example.android_repo_05.ui.main.MainViewModel

@@ -5,9 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.android_repo_05.R
-import com.example.android_repo_05.data.models.ResponseState
-import com.example.android_repo_05.data.models.UserProfileResponse
-import com.example.android_repo_05.data.repositories.ProfileImageRepository
+import com.example.android_repo_05.data.network.ResponseState
+import com.example.android_repo_05.data.main.models.UserProfileResponse
+import com.example.android_repo_05.data.main.ProfileImageRepository
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val repository: ProfileImageRepository) : ViewModel() {

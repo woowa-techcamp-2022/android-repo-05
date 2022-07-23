@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.android_repo_05.data.models.IssueResponse
+import com.example.android_repo_05.data.main.issue.models.IssueResponse
 import com.example.android_repo_05.databinding.ItemIssueBinding
 
 class IssuePagingAdapter :

@@ -10,7 +10,7 @@
             type="com.example.android_repo_05.ui.profile.UserViewModel" />
         <variable
             name="responseState"
-            type="com.example.android_repo_05.data.models.ResponseState"/>
+            type="com.example.android_repo_05.data.network.ResponseState"/>
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

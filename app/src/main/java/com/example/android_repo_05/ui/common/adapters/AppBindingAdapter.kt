@@ -13,7 +13,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.example.android_repo_05.R
-import com.example.android_repo_05.data.models.ResponseState
+import com.example.android_repo_05.data.network.ResponseState
 import com.example.android_repo_05.others.GlideApp
 import com.example.android_repo_05.others.Utils.dpToPx
 import com.example.android_repo_05.others.Utils.languageColorMap

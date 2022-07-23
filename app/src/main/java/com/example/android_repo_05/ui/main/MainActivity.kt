@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.android_repo_05.R
 import com.example.android_repo_05.ui.main.custom.MainTabButton
-import com.example.android_repo_05.data.models.ResponseState
+import com.example.android_repo_05.data.network.ResponseState
 import com.example.android_repo_05.databinding.ActivityMainBinding
 import com.example.android_repo_05.ui.profile.ProfileActivity
 import com.example.android_repo_05.ui.main.notification.NotificationFragment

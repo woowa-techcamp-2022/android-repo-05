@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.example.android_repo_05.data.models.RepositoryModel
-import com.example.android_repo_05.data.repositories.RepositoryRepository
+import com.example.android_repo_05.data.search.models.RepositoryModel
+import com.example.android_repo_05.data.search.RepositoryRepository
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 

@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.android_repo_05.data.models.notification.NotificationModel
+import com.example.android_repo_05.data.main.notification.models.NotificationModel
 import com.example.android_repo_05.databinding.ItemNotificationBinding
 
 class NotificationAdapter

@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import androidx.paging.filter
-import com.example.android_repo_05.data.models.ResponseState
-import com.example.android_repo_05.data.repositories.NotificationRepository
+import com.example.android_repo_05.data.network.ResponseState
+import com.example.android_repo_05.data.main.notification.NotificationRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine

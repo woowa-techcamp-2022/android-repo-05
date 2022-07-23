@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.android_repo_05.data.models.ResponseState
-import com.example.android_repo_05.data.models.TokenModel
-import com.example.android_repo_05.data.repositories.TokenRepository
+import com.example.android_repo_05.data.network.ResponseState
+import com.example.android_repo_05.data.login.models.TokenModel
+import com.example.android_repo_05.data.login.TokenRepository
 import kotlinx.coroutines.launch
 
 class TokenViewModel(private val repository: TokenRepository) : ViewModel() {

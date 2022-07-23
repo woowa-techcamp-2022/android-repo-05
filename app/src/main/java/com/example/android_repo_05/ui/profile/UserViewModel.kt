@@ -1,9 +1,9 @@
 package com.example.android_repo_05.ui.profile
 
 import androidx.lifecycle.*
-import com.example.android_repo_05.data.models.ResponseState
-import com.example.android_repo_05.data.models.UserModel
-import com.example.android_repo_05.data.repositories.UserRepository
+import com.example.android_repo_05.data.network.ResponseState
+import com.example.android_repo_05.data.profile.models.UserModel
+import com.example.android_repo_05.data.profile.UserRepository
 import kotlinx.coroutines.launch
 
 class UserViewModel(private val repository: UserRepository) : ViewModel() {
