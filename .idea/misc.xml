@@ -21,8 +21,11 @@
         <entry key="app/src/main/res/layout/issue_filtering_spinner.xml" value="0.3378623188405797" />
         <entry key="app/src/main/res/layout/item_issue.xml" value="0.3378623188405797" />
         <entry key="app/src/main/res/layout/item_issue_filter.xml" value="0.3378623188405797" />
+        <entry key="app/src/main/res/layout/item_issue_filter_head.xml" value="0.2894399315946986" />
         <entry key="app/src/main/res/layout/item_load_state.xml" value="0.26198883056640626" />
         <entry key="app/src/main/res/layout/item_notification.xml" value="0.5153366088867188" />
+        <entry key="app/src/main/res/layout/item_repository.xml" value="0.2894399315946986" />
+        <entry key="app/src/main/res/menu/home_toolbar_menu.xml" value="0.2894399315946986" />
         <entry key="app/src/main/res/menu/issue_filter_popup_menu.xml" value="0.4244791666666667" />
       </map>
     </option>

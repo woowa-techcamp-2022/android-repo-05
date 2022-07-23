@@ -6,7 +6,7 @@
 
         <variable
             name="notification"
-            type="com.example.android_repo_05.data.models.notification.NotificationModel" />
+            type="com.example.android_repo_05.data.main.notification.models.NotificationModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

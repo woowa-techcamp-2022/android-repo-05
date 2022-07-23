@@ -4,15 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.example.android_repo_05.ui.activities.SearchType"/>
-        <import type="android.view.View"/>
+
+        <import type="com.example.android_repo_05.ui.search.SearchType" />
+
+        <import type="android.view.View" />
+
         <variable
             name="isStartIconEnabled"
             type="Boolean" />
 
         <variable
             name="searchState"
-            type="com.example.android_repo_05.ui.activities.SearchType" />
+            type="com.example.android_repo_05.ui.search.SearchType" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -50,17 +53,17 @@
             app:layout_constraintTop_toBottomOf="@id/l_tb_search"
             app:startIconDrawable="@{isStartIconEnabled ? @drawable/ic_searchbold : null}">
 
-            <com.example.android_repo_05.customviews.SearchTextInputEditText
+            <com.example.android_repo_05.ui.search.custom.SearchTextInputEditText
                 android:id="@+id/tf_search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_search_tf"
                 android:freezesText="true"
-                android:inputType="text"
-                android:hint="@string/search_textField_hint">
+                android:hint="@string/search_textField_hint"
+                android:inputType="text">
 
                 <requestFocus />
-            </com.example.android_repo_05.customviews.SearchTextInputEditText>
+            </com.example.android_repo_05.ui.search.custom.SearchTextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -129,8 +132,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
-            android:visibility="@{searchState == SearchType.NoResult ? View.VISIBLE : View.INVISIBLE}"
             android:text="@string/search_no_result"
+            android:visibility="@{searchState == SearchType.NoResult ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

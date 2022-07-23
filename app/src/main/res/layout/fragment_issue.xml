@@ -13,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragments.IssueFragment">
+        tools:context=".ui.main.fragments.IssueFragment">
 
         <View
             android:id="@+id/v_issue_filter"
@@ -61,7 +61,7 @@
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
-        <com.example.android_repo_05.customviews.IssueFilteringSpinner
+        <com.example.android_repo_05.ui.main.issue.custom.IssueFilteringSpinner
             android:id="@+id/sp_issue_filtering"
             android:layout_width="148dp"
             android:layout_height="0dp"
