@@ -2,12 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.activities.ProfileActivity">
+    tools:context=".ui.profile.ProfileActivity">
 
     <data>
         <variable
             name="userViewModel"
-            type="com.example.android_repo_05.ui.viewmodels.UserViewModel" />
+            type="com.example.android_repo_05.ui.profile.UserViewModel" />
         <variable
             name="responseState"
             type="com.example.android_repo_05.data.models.ResponseState"/>
