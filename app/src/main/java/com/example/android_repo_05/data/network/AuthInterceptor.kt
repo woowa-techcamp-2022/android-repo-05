@@ -4,7 +4,7 @@ import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.example.android_repo_05.CustomApplication
 import com.example.android_repo_05.data.datastore.dataStore
-import com.example.android_repo_05.others.Constants
+import com.example.android_repo_05.utils.Constants
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.first

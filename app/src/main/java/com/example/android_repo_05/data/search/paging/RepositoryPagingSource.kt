@@ -3,8 +3,8 @@ package com.example.android_repo_05.data.search.paging
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.android_repo_05.data.search.models.RepositoryModel
-import com.example.android_repo_05.others.Constants.SEARCH_PAGE_SIZE
-import com.example.android_repo_05.others.Constants.STARTING_PAGE_INDEX
+import com.example.android_repo_05.utils.Constants.SEARCH_PAGE_SIZE
+import com.example.android_repo_05.utils.Constants.STARTING_PAGE_INDEX
 import com.example.android_repo_05.data.network.GithubApiInstance
 import retrofit2.HttpException
 import java.io.IOException

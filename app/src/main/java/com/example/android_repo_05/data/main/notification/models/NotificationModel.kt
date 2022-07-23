@@ -1,6 +1,6 @@
 package com.example.android_repo_05.data.main.notification.models
 
-import com.example.android_repo_05.others.Utils
+import com.example.android_repo_05.utils.TimeUtils
 import com.google.gson.annotations.SerializedName
 
 data class NotificationModel(
@@ -17,7 +17,7 @@ data class NotificationModel(
     @SerializedName("url")
     val url: String
 ) {
-    val elapsedTime: String get() = Utils.calculateElapsedTime(updatedAt)
+    val elapsedTime: String get() = TimeUtils.calculateElapsedTime(updatedAt)
     var commentCount: Int = 0
     var number: String = ""
 }

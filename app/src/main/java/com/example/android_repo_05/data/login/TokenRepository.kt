@@ -6,7 +6,7 @@ import com.example.android_repo_05.CustomApplication
 import com.example.android_repo_05.data.datastore.dataStore
 import com.example.android_repo_05.data.network.ResponseState
 import com.example.android_repo_05.data.login.models.TokenModel
-import com.example.android_repo_05.others.Constants
+import com.example.android_repo_05.utils.Constants
 import com.example.android_repo_05.data.network.GithubApiInstance
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

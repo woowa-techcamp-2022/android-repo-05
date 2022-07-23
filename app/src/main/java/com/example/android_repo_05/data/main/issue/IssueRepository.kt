@@ -18,7 +18,7 @@ class IssueRepository {
         }
     }
 
-    fun getStockDataByPaging() : Flow<PagingData<IssueResponse>> {
+    fun getStockDataByPaging(): Flow<PagingData<IssueResponse>> {
         return Pager(PagingConfig(pageSize = 10)) {
             IssuePagingSource()
         }.flow

@@ -1,4 +1,4 @@
-package com.example.android_repo_05.others.enums
+package com.example.android_repo_05.utils.enums
 
 enum class TimeUnit(val timeUnit: Int) {
     Second(60),

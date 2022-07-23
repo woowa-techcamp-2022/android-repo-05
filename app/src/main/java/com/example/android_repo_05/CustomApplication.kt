@@ -2,7 +2,7 @@ package com.example.android_repo_05
 
 import android.app.Application
 import android.content.Context
-import com.example.android_repo_05.others.GlideApp
+import com.example.android_repo_05.utils.modules.GlideApp
 
 class CustomApplication : Application() {
     companion object {

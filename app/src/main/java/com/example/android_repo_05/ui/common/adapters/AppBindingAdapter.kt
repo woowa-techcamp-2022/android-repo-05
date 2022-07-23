@@ -14,9 +14,9 @@ import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.example.android_repo_05.R
 import com.example.android_repo_05.data.network.ResponseState
-import com.example.android_repo_05.others.GlideApp
-import com.example.android_repo_05.others.Utils.dpToPx
-import com.example.android_repo_05.others.Utils.languageColorMap
+import com.example.android_repo_05.utils.ColorUtils.languageColorMap
+import com.example.android_repo_05.utils.DimenUtils.dpToPx
+import com.example.android_repo_05.utils.modules.GlideApp
 import com.google.android.material.appbar.MaterialToolbar
 import java.util.*
 

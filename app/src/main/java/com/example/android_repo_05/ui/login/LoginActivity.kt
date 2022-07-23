@@ -9,8 +9,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.android_repo_05.R
 import com.example.android_repo_05.data.network.ResponseState
 import com.example.android_repo_05.data.login.models.TokenModel
+import com.example.android_repo_05.data.network.GithubApiInstance
 import com.example.android_repo_05.databinding.ActivityLoginBinding
-import com.example.android_repo_05.others.Utils
 import com.example.android_repo_05.ui.common.AppViewModelFactory
 import com.example.android_repo_05.ui.main.MainActivity
 import com.google.android.material.snackbar.Snackbar
@@ -37,7 +37,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun getGithubAccessCode() {
-        Utils.getGithubIdentityRequestUri().run {
+        GithubApiInstance.getGithubIdentityRequestUri().run {
             startActivity(Intent(Intent.ACTION_VIEW, this))
         }
     }

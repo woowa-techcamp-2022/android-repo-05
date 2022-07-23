@@ -1,4 +1,4 @@
-package com.example.android_repo_05.others
+package com.example.android_repo_05.utils.modules
 
 import android.content.Context
 import com.bumptech.glide.GlideBuilder

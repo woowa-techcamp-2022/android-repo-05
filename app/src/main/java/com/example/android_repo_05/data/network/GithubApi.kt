@@ -9,7 +9,7 @@ import com.example.android_repo_05.data.main.notification.models.NotificationMod
 import com.example.android_repo_05.data.profile.models.StarredModel
 import com.example.android_repo_05.data.profile.models.UserModel
 import com.example.android_repo_05.data.search.models.RepositoryResponse
-import com.example.android_repo_05.others.Constants
+import com.example.android_repo_05.utils.Constants
 import retrofit2.Response
 import retrofit2.http.*
 

@@ -1,6 +1,6 @@
 package com.example.android_repo_05.data.main.issue.models
 
-import com.example.android_repo_05.others.Utils
+import com.example.android_repo_05.utils.TimeUtils
 import com.google.gson.annotations.SerializedName
 
 data class IssueResponse(
@@ -17,7 +17,7 @@ data class IssueResponse(
     @SerializedName("number")
     val issueNumber: Int
 ) {
-    val elapsedTime: String get() = Utils.calculateElapsedTime(updatedAt)
+    val elapsedTime: String get() = TimeUtils.calculateElapsedTime(updatedAt)
 }
 
 data class Repository(

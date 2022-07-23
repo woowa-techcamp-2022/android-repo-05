@@ -3,8 +3,8 @@ package com.example.android_repo_05.data.main.issue.paging
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.android_repo_05.data.main.issue.models.IssueResponse
-import com.example.android_repo_05.others.Constants.ISSUE_PAGE_SIZE
-import com.example.android_repo_05.others.Constants.STARTING_PAGE_INDEX
+import com.example.android_repo_05.utils.Constants.ISSUE_PAGE_SIZE
+import com.example.android_repo_05.utils.Constants.STARTING_PAGE_INDEX
 import com.example.android_repo_05.data.network.GithubApiInstance.retrofit
 import retrofit2.HttpException
 import java.io.IOException

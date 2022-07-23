@@ -8,7 +8,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android_repo_05.R
-import com.example.android_repo_05.others.Utils
+import com.example.android_repo_05.utils.DimenUtils.dpToPx
 
 class NotificationItemHelperCallback(
     private val context: Context,
@@ -43,7 +43,7 @@ class NotificationItemHelperCallback(
                     }
                 )
             }
-            val margin = Utils.dpToPx(context, 48)
+            val margin = dpToPx(context, 48)
             ContextCompat.getDrawable(context, R.drawable.ic_check)?.let {
                 if (dX < -margin - it.intrinsicWidth) {
                     it.bounds = Rect(

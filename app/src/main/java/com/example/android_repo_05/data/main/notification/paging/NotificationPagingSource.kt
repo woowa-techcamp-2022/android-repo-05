@@ -3,8 +3,8 @@ package com.example.android_repo_05.data.main.notification.paging
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.android_repo_05.data.main.notification.models.NotificationModel
-import com.example.android_repo_05.others.Constants
-import com.example.android_repo_05.others.Constants.STARTING_PAGE_INDEX
+import com.example.android_repo_05.utils.Constants
+import com.example.android_repo_05.utils.Constants.STARTING_PAGE_INDEX
 import com.example.android_repo_05.data.network.GithubApiInstance
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
