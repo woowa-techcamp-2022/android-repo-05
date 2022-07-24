@@ -4,24 +4,23 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.example.android_repo_05.R
 import com.example.android_repo_05.ui.main.custom.MainTabButton
 import com.example.android_repo_05.data.network.ResponseState
 import com.example.android_repo_05.databinding.ActivityMainBinding
 import com.example.android_repo_05.ui.profile.ProfileActivity
 import com.example.android_repo_05.ui.main.notification.NotificationFragment
-import com.example.android_repo_05.ui.common.AppViewModelFactory
 import com.example.android_repo_05.ui.main.issue.IssueFragment
 import com.example.android_repo_05.ui.search.SearchActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
-    private val mainViewModel by lazy {
-        ViewModelProvider(this, AppViewModelFactory())[MainViewModel::class.java]
-    }
+    private val mainViewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
