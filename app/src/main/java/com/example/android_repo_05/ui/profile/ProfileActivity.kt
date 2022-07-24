@@ -1,16 +1,15 @@
 package com.example.android_repo_05.ui.profile
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.example.android_repo_05.databinding.ActivityProfileBinding
-import com.example.android_repo_05.ui.common.AppViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ProfileActivity : AppCompatActivity() {
     private val binding by lazy { ActivityProfileBinding.inflate(layoutInflater) }
-    private val userViewModel by lazy {
-        ViewModelProvider(this, AppViewModelFactory())[UserViewModel::class.java]
-    }
+    private val userViewModel: UserViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

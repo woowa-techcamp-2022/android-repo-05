@@ -5,27 +5,26 @@ import android.os.Bundle
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.LoadState
+import com.example.android_repo_05.databinding.ActivitySearchBinding
 import com.example.android_repo_05.ui.common.adapters.PagingLoadStateAdapter
 import com.example.android_repo_05.ui.search.adapters.RepositoryPagingAdapter
-import com.example.android_repo_05.databinding.ActivitySearchBinding
-import com.example.android_repo_05.ui.common.AppViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class SearchActivity : AppCompatActivity() {
     private val binding by lazy { ActivitySearchBinding.inflate(layoutInflater) }
     private val repositoryAdapter by lazy { RepositoryPagingAdapter() }
-    private val repositoryViewModel by lazy {
-        ViewModelProvider(this, AppViewModelFactory())[RepositoryViewModel::class.java]
-    }
+    private val repositoryViewModel: RepositoryViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

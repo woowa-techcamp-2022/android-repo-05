@@ -4,22 +4,22 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.example.android_repo_05.R
-import com.example.android_repo_05.data.network.ResponseState
 import com.example.android_repo_05.data.login.models.TokenModel
 import com.example.android_repo_05.data.network.GithubApiInstance
+import com.example.android_repo_05.data.network.ResponseState
 import com.example.android_repo_05.databinding.ActivityLoginBinding
-import com.example.android_repo_05.ui.common.AppViewModelFactory
 import com.example.android_repo_05.ui.main.MainActivity
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
     private val binding by lazy { ActivityLoginBinding.inflate(layoutInflater) }
-    private val tokenViewModel by lazy {
-        ViewModelProvider(this, AppViewModelFactory())[TokenViewModel::class.java]
-    }
+
+    private val tokenViewModel: TokenViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

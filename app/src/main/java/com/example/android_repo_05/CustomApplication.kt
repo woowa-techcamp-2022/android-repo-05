@@ -3,7 +3,9 @@ package com.example.android_repo_05
 import android.app.Application
 import android.content.Context
 import com.example.android_repo_05.utils.modules.GlideApp
+import dagger.hilt.android.HiltAndroidApp
 
+@HiltAndroidApp
 class CustomApplication : Application() {
     companion object {
         lateinit var instance: CustomApplication
