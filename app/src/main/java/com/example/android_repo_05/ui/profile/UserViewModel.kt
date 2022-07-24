@@ -4,9 +4,14 @@ import androidx.lifecycle.*
 import com.example.android_repo_05.data.network.ResponseState
 import com.example.android_repo_05.data.profile.models.UserModel
 import com.example.android_repo_05.data.profile.UserRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class UserViewModel(private val repository: UserRepository) : ViewModel() {
+@HiltViewModel
+class UserViewModel @Inject constructor(
+    private val repository: UserRepository
+) : ViewModel() {
     private var user: MutableLiveData<ResponseState<UserModel>> = MutableLiveData()
     private var starred: MutableLiveData<ResponseState<Int>> = MutableLiveData()
     val userData = MediatorLiveData<ResponseState<UserModel>>().apply {

@@ -4,33 +4,29 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.example.android_repo_05.R
-import com.example.android_repo_05.ui.main.notification.adapters.NotificationAdapter
-import com.example.android_repo_05.ui.common.adapters.PagingLoadStateAdapter
-import com.example.android_repo_05.ui.main.notification.helpers.NotificationItemHelperCallback
-import com.example.android_repo_05.ui.common.BaseFragment
 import com.example.android_repo_05.data.network.ResponseState
 import com.example.android_repo_05.databinding.FragmentNotificationBinding
-import com.example.android_repo_05.ui.common.AppViewModelFactory
+import com.example.android_repo_05.ui.common.BaseFragment
+import com.example.android_repo_05.ui.common.adapters.PagingLoadStateAdapter
+import com.example.android_repo_05.ui.main.notification.adapters.NotificationAdapter
+import com.example.android_repo_05.ui.main.notification.helpers.NotificationItemHelperCallback
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class NotificationFragment :
     BaseFragment<FragmentNotificationBinding>(R.layout.fragment_notification) {
 
     private val notificationAdapter by lazy { NotificationAdapter() }
-    private val notificationViewModel by lazy {
-        ViewModelProvider(
-            this,
-            AppViewModelFactory()
-        )[NotificationViewModel::class.java]
-    }
+    private val notificationViewModel: NotificationViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

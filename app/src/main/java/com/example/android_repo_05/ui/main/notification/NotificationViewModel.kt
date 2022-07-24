@@ -8,12 +8,17 @@ import androidx.paging.cachedIn
 import androidx.paging.filter
 import com.example.android_repo_05.data.network.ResponseState
 import com.example.android_repo_05.data.main.notification.NotificationRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class NotificationViewModel(private val repository: NotificationRepository) : ViewModel() {
+@HiltViewModel
+class NotificationViewModel @Inject constructor(
+    private val repository: NotificationRepository
+) : ViewModel() {
     private val _removeItemFlow = MutableStateFlow(mutableListOf<String>())
     private val removeItemFlow: Flow<MutableList<String>> get() = _removeItemFlow
 

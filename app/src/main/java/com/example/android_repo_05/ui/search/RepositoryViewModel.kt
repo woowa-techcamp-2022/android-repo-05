@@ -5,11 +5,16 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.android_repo_05.data.search.models.RepositoryModel
-import com.example.android_repo_05.data.search.RepositoryRepository
+import com.example.android_repo_05.data.search.RepositoryRepositoryImpl
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
+import javax.inject.Inject
 
-class RepositoryViewModel(private val repository: RepositoryRepository) : ViewModel() {
+@HiltViewModel
+class RepositoryViewModel @Inject constructor(
+    private val repository: RepositoryRepositoryImpl
+) : ViewModel() {
 
     private val _searchResult = MutableStateFlow<PagingData<RepositoryModel>>(PagingData.empty())
     val searchResult = _searchResult

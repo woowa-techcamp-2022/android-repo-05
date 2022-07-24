@@ -8,9 +8,14 @@ import com.example.android_repo_05.R
 import com.example.android_repo_05.data.network.ResponseState
 import com.example.android_repo_05.data.main.models.UserProfileResponse
 import com.example.android_repo_05.data.main.ProfileImageRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainViewModel(private val repository: ProfileImageRepository) : ViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(
+    private val repository: ProfileImageRepository
+) : ViewModel() {
     private val _currentTabFragment = MutableLiveData(MainTabType.ISSUE)
     val currentTabFragment: LiveData<MainTabType> = _currentTabFragment
 

@@ -5,29 +5,25 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.LoadState
 import com.example.android_repo_05.R
+import com.example.android_repo_05.databinding.FragmentIssueBinding
+import com.example.android_repo_05.ui.common.BaseFragment
+import com.example.android_repo_05.ui.common.adapters.PagingLoadStateAdapter
 import com.example.android_repo_05.ui.main.issue.adapters.IssuePagingAdapter
 import com.example.android_repo_05.ui.main.issue.adapters.IssueSpinnerAdapter
-import com.example.android_repo_05.ui.common.adapters.PagingLoadStateAdapter
-import com.example.android_repo_05.ui.common.BaseFragment
 import com.example.android_repo_05.ui.main.issue.custom.IssueFilteringSpinner
-import com.example.android_repo_05.databinding.FragmentIssueBinding
-import com.example.android_repo_05.ui.common.AppViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class IssueFragment : BaseFragment<FragmentIssueBinding>(R.layout.fragment_issue) {
-    private val issueViewModel by lazy {
-        ViewModelProvider(
-            this,
-            AppViewModelFactory()
-        )[IssueViewModel::class.java]
-    }
+    private val issueViewModel: IssueViewModel by viewModels()
 
     private lateinit var activityContext: Context
     private val issueAdapter by lazy { IssuePagingAdapter() }

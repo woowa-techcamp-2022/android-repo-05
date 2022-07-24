@@ -7,9 +7,14 @@ import androidx.lifecycle.viewModelScope
 import com.example.android_repo_05.data.network.ResponseState
 import com.example.android_repo_05.data.login.models.TokenModel
 import com.example.android_repo_05.data.login.TokenRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class TokenViewModel(private val repository: TokenRepository) : ViewModel() {
+@HiltViewModel
+class TokenViewModel @Inject constructor(
+    private val repository: TokenRepository
+) : ViewModel() {
     private var _tokenModel: MutableLiveData<ResponseState<TokenModel>> = MutableLiveData()
     val tokenModel: LiveData<ResponseState<TokenModel>> get() = _tokenModel
 
