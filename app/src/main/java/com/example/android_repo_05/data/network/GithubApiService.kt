@@ -10,10 +10,13 @@ import com.example.android_repo_05.data.profile.models.StarredModel
 import com.example.android_repo_05.data.profile.models.UserModel
 import com.example.android_repo_05.data.search.models.RepositoryResponse
 import com.example.android_repo_05.utils.Constants
+import okhttp3.OkHttpClient
 import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 
-interface GithubApi {
+interface GithubApiService {
     @FormUrlEncoded
     @POST(Constants.authBaseUrl + "/login/oauth/access_token")
     @Headers("Accept: application/json")
@@ -59,4 +62,17 @@ interface GithubApi {
 
     @PATCH
     suspend fun changeNotificationAsRead(@Url url: String): Response<String>
+
+    companion object {
+        fun create() : GithubApiService {
+            val client = OkHttpClient.Builder().addInterceptor(AuthInterceptor()).build()
+
+            return Retrofit.Builder()
+                .baseUrl(Constants.githubApiBaseUrl)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client)
+                .build()
+                .create(GithubApiService::class.java)
+        }
+    }
 }
