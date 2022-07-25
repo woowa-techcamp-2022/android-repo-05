@@ -9,8 +9,8 @@
             name="profileUrl"
             type="String" />
         <variable
-            name="mainActivity"
-            type="com.example.android_repo_05.ui.activities.MainActivity" />
+            name="mainViewModel"
+            type="com.example.android_repo_05.ui.main.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -46,26 +46,27 @@
             android:layout_width="match_parent"
             android:layout_height="32dp"
             android:layout_marginHorizontal="24dp"
+            app:checkTabButton="@{mainViewModel.currentTabFragment.id}"
             app:layout_constraintTop_toBottomOf="@id/l_tb_main">
 
-            <com.example.android_repo_05.customviews.MainTabButton
+            <com.example.android_repo_05.ui.main.custom.MainTabButton
                 android:id="@+id/tab_btn_issue"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="16dp"
                 android:text="@string/issue"
                 android:textSize="14sp"
-                android:onClick="@{mainActivity::onClick}"
+                app:clickTabButton="@{mainViewModel}"
                 app:layout_constraintEnd_toStartOf="@id/tab_btn_notification"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <com.example.android_repo_05.customviews.MainTabButton
+            <com.example.android_repo_05.ui.main.custom.MainTabButton
                 android:id="@+id/tab_btn_notification"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:text="@string/notification"
                 android:textSize="14sp"
-                android:onClick="@{mainActivity::onClick}"
+                app:clickTabButton="@{mainViewModel}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tab_btn_issue" />
         </androidx.constraintlayout.widget.ConstraintLayout>

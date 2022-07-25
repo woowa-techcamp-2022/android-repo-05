@@ -8,11 +8,11 @@
 
         <variable
             name="selectedFilter"
-            type="com.example.android_repo_05.ui.fragments.IssueFiltering" />
+            type="com.example.android_repo_05.ui.main.issue.IssueFiltering" />
 
         <variable
             name="issueFilter"
-            type="com.example.android_repo_05.ui.fragments.IssueFiltering" />
+            type="com.example.android_repo_05.ui.main.issue.IssueFiltering" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

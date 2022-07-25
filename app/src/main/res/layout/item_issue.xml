@@ -5,7 +5,7 @@
     <data>
         <variable
             name="issue"
-            type="com.example.android_repo_05.data.models.IssueResponse" />
+            type="com.example.android_repo_05.data.main.issue.models.IssueResponse" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
