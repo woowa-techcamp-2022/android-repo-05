@@ -4,16 +4,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.example.android_repo_05.data.search.RepositoryRepository
 import com.example.android_repo_05.data.search.models.RepositoryModel
-import com.example.android_repo_05.data.search.RepositoryRepositoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class RepositoryViewModel @Inject constructor(
-    private val repository: RepositoryRepositoryImpl
+    private val repository: RepositoryRepository
 ) : ViewModel() {
 
     private val _searchResult = MutableStateFlow<PagingData<RepositoryModel>>(PagingData.empty())
@@ -29,15 +31,11 @@ class RepositoryViewModel @Inject constructor(
         searchQuery.isEmpty() && !isSearchFocused
     }
 
-    fun setSearchQuery(query: String) {
-        _searchQuery.value = query
-    }
-
     fun setSearchFocused(isFocused: Boolean) {
         _isSearchFocused.value = isFocused
     }
 
-    // TODO : 아직 debounce와 flatMapLatest는 정식 출시가 안됨..
+    // 아직 debounce와 flatMapLatest는 정식 출시가 안됨..
 //    @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
 //    val searchResult: Flow<PagingData<RepositoryModel>> = _searchQuery
 //        .debounce(700)
@@ -49,14 +47,16 @@ class RepositoryViewModel @Inject constructor(
     var searchJob: Job? = null
     private fun cancelSearchJob() = searchJob?.cancel()
 
-    fun searchResult() {
+    fun searchResult(query: String) {
         cancelSearchJob()
         searchJob = viewModelScope.launch {
-            delay(700)
-            if (_searchQuery.value.isEmpty()) {
+            if (query.isEmpty()) {
+                _searchQuery.value = query
                 _searchResult.emit(PagingData.empty())
             } else {
-                repository.getRepositoryListByPaging(_searchQuery.value).cachedIn(viewModelScope)
+                delay(700)
+                _searchQuery.value = query
+                repository.getRepositoryListByPaging(query).cachedIn(viewModelScope)
                     .collectLatest {
                         _searchResult.emit(it)
                     }
