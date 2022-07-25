@@ -83,8 +83,8 @@ class SearchActivity : AppCompatActivity() {
         )
 
         binding.tfSearch.doOnTextChanged { text, _, _, _ ->
-            repositoryViewModel.setSearchQuery(text.toString())
-            repositoryViewModel.searchResult()
+            //repositoryViewModel.setSearchQuery(text.toString())
+            repositoryViewModel.searchResult(text.toString())
         }
 
         binding.tfSearch.setOnFocusListener { isFocused ->

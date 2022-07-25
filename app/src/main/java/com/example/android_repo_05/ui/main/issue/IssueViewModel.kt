@@ -2,9 +2,12 @@ package com.example.android_repo_05.ui.main.issue
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.filter
 import com.example.android_repo_05.data.main.issue.IssueRepository
+import com.example.android_repo_05.data.main.issue.IssueRepositoryImpl
+import com.example.android_repo_05.data.main.issue.models.IssueResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -13,9 +16,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class IssueViewModel @Inject constructor(
-    repository: IssueRepository
+    private val repository: IssueRepository
 ) : ViewModel() {
-    private val issueList = repository.getStockDataByPaging().cachedIn(viewModelScope)
+    val issueList = repository.getIssueByPaging().cachedIn(viewModelScope)
 
     private val _issueFiltering = MutableStateFlow(IssueFiltering.Open)
     val issueFiltering: StateFlow<IssueFiltering> = _issueFiltering

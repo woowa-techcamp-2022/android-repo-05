@@ -6,6 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface IssueRepository {
 
-    fun getStockDataByPaging(): Flow<PagingData<IssueResponse>>
+    fun getIssueByPaging() : Flow<PagingData<IssueResponse>>
 
 }

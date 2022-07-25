@@ -2,17 +2,16 @@ package com.example.android_repo_05.data.search.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.example.android_repo_05.data.network.GithubApiService
 import com.example.android_repo_05.data.search.models.RepositoryModel
 import com.example.android_repo_05.utils.Constants.SEARCH_PAGE_SIZE
 import com.example.android_repo_05.utils.Constants.STARTING_PAGE_INDEX
-import com.example.android_repo_05.data.network.GithubApiInstance
-import com.example.android_repo_05.data.network.GithubApiService
 import retrofit2.HttpException
 import java.io.IOException
 
 class RepositoryPagingSource(
     private val query: String,
-    private val service : GithubApiService
+    private val service: GithubApiService
 ) : PagingSource<Int, RepositoryModel>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, RepositoryModel> {
@@ -35,7 +34,8 @@ class RepositoryPagingSource(
             val nextKey = if (response.isEmpty()) {
                 null
             } else {
-                nextPageNumber + (params.loadSize / SEARCH_PAGE_SIZE)
+                //nextPageNumber + (params.loadSize / SEARCH_PAGE_SIZE)
+                nextPageNumber + 1
             }
 
             LoadResult.Page(response, prevKey, nextKey)

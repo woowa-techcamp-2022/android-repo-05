@@ -3,9 +3,7 @@ package com.example.android_repo_05.data.main.notification.paging
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.android_repo_05.data.main.notification.models.NotificationModel
-import com.example.android_repo_05.data.network.GithubApiInstance
 import com.example.android_repo_05.data.network.GithubApiService
-import com.example.android_repo_05.utils.Constants
 import com.example.android_repo_05.utils.Constants.STARTING_PAGE_INDEX
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -45,7 +43,8 @@ class NotificationPagingSource(
             val nextKey = if (response.isEmpty()) {
                 null
             } else {
-                nextPageNumber + (params.loadSize / Constants.NOTIFICATION_PAGE_SIZE)
+                //nextPageNumber + (params.loadSize / Constants.NOTIFICATION_PAGE_SIZE)
+                nextPageNumber + 1
             }
 
             LoadResult.Page(response, prevKey, nextKey)
