@@ -1,24 +1,21 @@
 package com.example.android_repo_05.ui.main
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
-import androidx.core.view.children
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.android_repo_05.R
-import com.example.android_repo_05.ui.main.custom.MainTabButton
 import com.example.android_repo_05.data.network.ResponseState
 import com.example.android_repo_05.databinding.ActivityMainBinding
-import com.example.android_repo_05.ui.profile.ProfileActivity
-import com.example.android_repo_05.ui.main.notification.NotificationFragment
 import com.example.android_repo_05.ui.main.issue.IssueFragment
+import com.example.android_repo_05.ui.main.notification.NotificationFragment
+import com.example.android_repo_05.ui.profile.ProfileActivity
 import com.example.android_repo_05.ui.search.SearchActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private val mainViewModel: MainViewModel by viewModels()
 
@@ -32,7 +29,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun initViews() {
         binding.lifecycleOwner = this
-        binding.mainActivity = this
+        binding.mainViewModel = mainViewModel
 
         binding.tbMain.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
@@ -45,7 +42,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun observe() {
         mainViewModel.currentTabFragment.observe(this) {
-            checkButton(it.id)
             changeFragment(it)
         }
 
@@ -54,19 +50,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 binding.profileUrl = responseState.data!!.profileImageUrl
             }
         }
-    }
-
-    private fun checkButton(id: Int) {
-        binding.tabBtnGroup.children.forEach { view ->
-            if (view is MainTabButton) {
-                view.isChecked = view.id == id
-            }
-        }
-    }
-
-    override fun onClick(view: View) {
-        checkButton(view.id)
-        mainViewModel.setCurrentTab(view.id)
     }
 
     private fun getFragment(mainTabType: MainTabType): Fragment =
