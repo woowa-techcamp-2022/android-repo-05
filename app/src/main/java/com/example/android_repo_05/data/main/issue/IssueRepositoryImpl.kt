@@ -14,7 +14,7 @@ class IssueRepositoryImpl @Inject constructor(
     private val service: GithubApiService
 ) : IssueRepository {
 
-    override fun getStockDataByPaging(): Flow<PagingData<IssueResponse>> {
+    override fun getIssueByPaging(): Flow<PagingData<IssueResponse>> {
         return Pager(PagingConfig(pageSize = ISSUE_PAGE_SIZE)) {
             IssuePagingSource(service)
         }.flow

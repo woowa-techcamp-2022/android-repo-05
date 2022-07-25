@@ -50,7 +50,6 @@ class IssueFragment : BaseFragment<FragmentIssueBinding>(R.layout.fragment_issue
 
                 launch {
                     issueAdapter.loadStateFlow.collectLatest {
-                        // TODO : 데이터 바인딩으로 처리 가능?
                         with(binding) {
                             pbLoading.isVisible = it.source.refresh is LoadState.Loading
                             srlIssue.isVisible =
